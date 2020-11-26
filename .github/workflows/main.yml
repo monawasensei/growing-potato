@@ -11,6 +11,6 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        server: ftp://holedigging.club
+        server: ftp.holedigging.club
         username: potatoroot
         password: ${{ secrets.password }}
