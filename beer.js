@@ -2,8 +2,8 @@
 // and to sphingonotus for the BEE gif
 // HACKED BY CHINESE
 var Tension = -4
-var right = "https://fufufu.moe/static/kraftyuu_right.png"
-var left = "https://fufufu.moe/static/kraftyuu_left.png"
+var right = "https://holedigging.club/static/kraftyuu_right.png"
+var left = "https://holedigging.club/static/kraftyuu_left.png"
 
 function randomCoord() {
 	var x=document.body.scrollLeft||document.documentElement.scrollLeft;
