@@ -80,7 +80,7 @@ span {font-size: 250%;}
     function step() {
         window.requestAnimationFrame(step);
 
-        if(counter < 50) {
+        if(counter < 100) {
             counter++;
             return;
         }
@@ -91,8 +91,8 @@ span {font-size: 250%;}
         y += vy;
         chiito.style.top = y + "px";
 
-        if((x < 0) || (x + chiito.width > window.innerWidth)) { vx *= -1; setVelocityToRandom(); }
-        if((y < 0) || (y + chiito.height > window.innerHeight)) { vy *= -1; setVelocityToRandom(); }
+        if((x < 0) || (x + chiito.width > window.innerWidth)) { vx *= -1; x += 3 * vx; setVelocityToRandom(); }
+        if((y < 0) || (y + chiito.height > window.innerHeight)) { vy *= -1; y += 3 * vy; setVelocityToRandom(); }
     }
 
     step();
@@ -115,7 +115,7 @@ span {font-size: 250%;}
 <marquee behavior="scroll" direction="left" scrollamount="20"><h3> <a href="https://cytu.be/r/potatofields">stream</a> <a href="https://www.yourworldoftext.com/tkmiz">YWOT</a> <a href="https://daredakke.neocities.org/ywot-archive.html">[A]</a> <a href="https://dynasty-scans.com/series/shimeji_simulation">Shimeji Sumultaioron</a> <a href="https://drive.google.com/drive/folders/1NOClhA0WUPXTSE9FCsNsDP27uH612rLo">Archive</a> <a href="ircs://irc.rizon.net/#tkmiz">irc</a></h3></marquee>
 </div>
 <img src="images/image.gif" style="float: right;">
-<img src="images/4.png" style="position:absolute; top:0px; left:0px; z-index:5;" id="bouncing_chiito" />
+<a href="cooler"><img src="images/4.png" style="position:absolute; top:0px; left:0px; z-index:5;" id="bouncing_chiito" /></a>
 
 
 <iframe src="https://www.youtube.com/embed/Vv_9kgnoFSM?autoplay=1">
