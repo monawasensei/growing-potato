@@ -32,8 +32,6 @@ span {font-size: 250%;}
  from { transform: scale(1,1); } to { transform: scale(.001,.001); }
 }
 #holedigger {
-
-  background: url(img_navsprites.gif) -91px 0px repeat;
 	-moz-animation: infinite-spinning 9s forwards linear infinite;
 	-webkit-animation: infinite-spinning  9s forwards linear infinite;
 	-ms-animation: infinite-spinning  9s forwards linear infinite;
@@ -47,15 +45,24 @@ span {font-size: 250%;}
   margin-left: auto;
   margin-right: auto;
     z-index: 2;
-    -moz-animation: shrink 400s forwards linear ;
-	-webkit-animation: shrink  400s forwards linear ;
-	-ms-animation: shrink  400s forwards linear ;
-	animation: shrink  400s forwards linear ;
+    -moz-animation: shrink 80s forwards linear ;
+	-webkit-animation: shrink  80s forwards linear ;
+	-ms-animation: shrink  80s forwards linear ;
+	animation: shrink  80s forwards linear ;
   
 	}
     
   </style>
 </head>
+<center>
+  <div style="position: absolute; left: 35%; top: 25%; ">
+
+    <img id="hole" src="images/holedug.png" >
+<div id="hddiv" >
+  <img  src="images/holedigger.png" id="holedigger">
+  </div>    
+  </div>
+</center>
 <img src="images/5.png" style="z-index;-100; position:absolute; left:75%;">
 <div>
 <marquee behavior="scroll" direction="up" scrollamount="6"><img src="images/1.png"></marquee>
@@ -66,12 +73,5 @@ span {font-size: 250%;}
 <img src="images/image.gif" style="float: right;">
 
 <iframe src="https://www.youtube.com/embed/Vv_9kgnoFSM?autoplay=1">
-  <div style="position: absolute; left: 50%; top: 50%;">
-    <img id="hole" src="images/holedug.png"></img>
-<div id="hddiv" >
-  <img id="digger" src="images/holedigger.png"></img>
-    </div>
-    
-    
-  </div>
+
 </html>
