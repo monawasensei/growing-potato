@@ -5,7 +5,64 @@
 span {font-size: 250%;}
 </style>
 <style>* { cursor:url(images/fish2.png), auto;}</style>
+  <style>
+    @keyframes infinite-spinning {
+ from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+}
+@-moz-keyframes infinite-spinning {
+ from { transform: rotate(0deg); background-position: 0 100%; } to { transform: rotate(360deg); background-position: 100% 0; }
+}
+@-webkit-keyframes infinite-spinning {
+ from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+}
+@-ms-keyframes infinite-spinning {
+ from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+}
+
+@keyframes shrink{
+ from { transform: scale(1,1); } to { transform: scale(.001,.001); }
+}
+@-moz-keyframes shrink {
+ from { transform: scale(1,1); } to { transform: scale(.001,.001); }
+}
+@-webkit-keyframes shrink {
+ from { transform: scale(1,1); } to { transform: scale(.001,.001); }
+}
+@-ms-keyframes shrink {
+ from { transform: scale(1,1); } to { transform: scale(.001,.001); }
+}
+#holedigger {
+	-moz-animation: infinite-spinning 9s forwards linear infinite;
+	-webkit-animation: infinite-spinning  9s forwards linear infinite;
+	-ms-animation: infinite-spinning  9s forwards linear infinite;
+	animation: infinite-spinning  9s forwards linear infinite;
+
+}
+#hddiv {
+	position: absolute;
+    top:0;
+    left:0;
+  margin-left: auto;
+  margin-right: auto;
+    z-index: 2;
+    -moz-animation: shrink 80s forwards linear ;
+	-webkit-animation: shrink  80s forwards linear ;
+	-ms-animation: shrink  80s forwards linear ;
+	animation: shrink  80s forwards linear ;
+  
+	}
+    
+  </style>
 </head>
+<center>
+  <div style="position: absolute; left: 35%; top: 25%; ">
+
+    <img id="hole" src="images/holedug.png" >
+<div id="hddiv" >
+  <img  src="images/holedigger.png" id="holedigger">
+  </div>    
+  </div>
+</center>
 <img src="images/5.png" style="z-index;-100; position:absolute; left:75%;">
 <div>
 <marquee behavior="scroll" direction="up" scrollamount="6"><img src="images/1.png"></marquee>
@@ -16,4 +73,5 @@ span {font-size: 250%;}
 <img src="images/image.gif" style="float: right;">
 
 <iframe src="https://www.youtube.com/embed/Vv_9kgnoFSM?autoplay=1">
+
 </html>
