@@ -15,12 +15,12 @@ jobs:
         username: potatoroot
         password: ${{ secrets.password }}
         dry-run: true 
-        exclude: *.git*
-        - *.html
-        - *.md
-        - *.ico
-        - /audio
-        - /contribute
-        - /cooler      
-        - /coolest
-        - /images
+        exclude: .git
+            - /audio
+          -  /contribute
+          - /cooler
+          - /coolest
+          - /images
+          - .html
+          - README.md
+          - index.html
