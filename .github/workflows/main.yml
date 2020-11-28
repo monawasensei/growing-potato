@@ -24,3 +24,4 @@ jobs:
           - .html
           - README.md
           - index.html
+          -/archive
