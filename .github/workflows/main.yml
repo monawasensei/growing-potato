@@ -14,3 +14,14 @@ jobs:
         server: ftp.holedigging.club
         username: potatoroot
         password: ${{ secrets.password }}
+        dry-run: true 
+        exclude: .git
+            - /audio
+          -  /contribute
+          - /cooler
+          - /coolest
+          - /images
+          - .html
+          - README.md
+          - index.html
+          -/archive
