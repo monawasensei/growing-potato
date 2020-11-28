@@ -1,0 +1,2 @@
+.jpg filter=lfs diff=lfs merge=lfs -text
+.cbr filter=lfs diff=lfs merge=lfs -text
