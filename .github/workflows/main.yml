@@ -14,4 +14,4 @@ jobs:
         server: ftp.holedigging.club
         username: potatoroot
         password: ${{ secrets.password }}
-        state-name:  syncStates/.ftp-Archive-EXAMPLE-sync-state.json
+        state-name:  syncStates/.ftp-Main-Archive-Indeces-sync-state.json
