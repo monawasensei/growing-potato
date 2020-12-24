@@ -7,6 +7,16 @@
 <script>
 var fileName
 for (fileName = 1; fileName <= 20; fileName++){
+	createImageAnchor(fileName);
+}
+
+function createImageAnchor(fileName){
+	var anchor = document.createElement("A");
+	
+	anchor.setAttribute("id","Anchor"+fileName);
+	anchor.setAttribute("href","https://holedigging.club/archive/pics/images1/"+fileName+".jpg");
+	document.body.appendChild(anchor);
+	
 	createImage(fileName);
 }
 	
@@ -16,7 +26,7 @@ function createImage(fileName) {
 	img.setAttribute("src","images1/"+fileName+".jpg");
 	img.style.margin = "10px";
 	img.style.maxHeight = "200px";
-	document.body.appendChild(img);
+	document.getElementByID("Anchor"+fileName).appendChild(img);
 }
 
 /*function getSize(fileName) {
