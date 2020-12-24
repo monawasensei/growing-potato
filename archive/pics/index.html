@@ -6,6 +6,15 @@
 <body>
 <script>
 	
+var anchorTest = document.createElement("A");
+	anchorTest.setAttribute("id","anchorTest");
+	anchorTest.setAttribute("href","https://holedigging.club/archive/pics/images1/1.jpg");
+	document.body.appendChild(anchorTest);
+var imgTest = document.createElement("IMG");
+	imageTest.src = "images1/1.jpg";
+	img.style.maxHeight = "200px";
+	document.getElementByID("anchorTest").appendChild(imgTest);
+
 var fileName
 for (fileName = 1; fileName <= 20; fileName++){
 	createImage(fileName);
