@@ -8,6 +8,7 @@
 var fileName
 for (fileName = 1; fileName <= 20; fileName++){
 	createImageAnchor(fileName);
+	createImage(fileName);
 }
 
 function createImageAnchor(fileName){
@@ -16,8 +17,6 @@ function createImageAnchor(fileName){
 	anchor.setAttribute("id","Anchor"+fileName);
 	anchor.setAttribute("href","https://holedigging.club/archive/pics/images1/"+fileName+".jpg");
 	document.body.appendChild(anchor);
-	
-	createImage(fileName);
 }
 	
 function createImage(fileName) {
