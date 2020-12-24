@@ -20,8 +20,10 @@ function createImage(fileName) {
 	var img = document.createElement("IMG");
 
 	img.setAttribute("src","images1/"+fileName+".jpg");
-	img.setAttribute("height","300");
-	img.setAttribute("width","300");
+	img.setAttribute("style","border : 10px lightgrey");
+	img.setAttribute("style","max-width : 300px");
+	/*img.setAttribute("height","300");
+	img.setAttribute("width","300");*/
 	document.body.appendChild(img);
 }
 
