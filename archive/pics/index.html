@@ -8,12 +8,12 @@
 var fileName
 for (fileName = 1; fileName <= 20; fileName++){
 	var img = document.createElement("IMG");
-	var dimensions = getSize(fileName);
+	//var dimensions = getSize(fileName);
 
 	img.setAttribute("src","images1/"+fileName+".jpg");
 	img.setAttribute("height","300");
 	img.setAttribute("width","300");
-	img.setAtribute("href","https://holedigging.club/archive/pics/images1/"+fileName+".jpg");
+	img.setAttribute("href","https://holedigging.club/archive/pics/images1/"+fileName+".jpg");
 	document.body.appendChild(img);
 }
 
