@@ -5,13 +5,10 @@
 </head>
 <body>
 <script>
+	
 var fileName
 for (fileName = 1; fileName <= 20; fileName++){
 	createImageAnchor(fileName);
-}
-
-for (fileName = 1; fileName <=20; fileName++){
-	createImage(fileName);
 }
 
 function createImageAnchor(fileName){
@@ -22,7 +19,15 @@ function createImageAnchor(fileName){
 	document.body.appendChild(anchor);
 }
 	
-function createImage(fileName) {
+</script>
+<script>
+	
+	var fileName
+for (fileName = 1; fileName <= 20; fileName++){
+	createImage(fileName);
+}
+	
+	function createImage(fileName) {
 	var img = document.createElement("IMG");
 
 	img.src = "images1/"+fileName+".jpg";
@@ -30,15 +35,7 @@ function createImage(fileName) {
 	img.style.maxHeight = "200px";
 	document.getElementByID("anchor"+fileName).appendChild(img);
 }
-
-/*function getSize(fileName) {
-	//var imagePage = "https://www.holedigging.club/archive/pics/images1/"+fileName+".jpg".getElementsByTagName("img");
-	var imageSpecs = {
-		height : 300,
-		width : 300
-	};
-	return imageSpecs;
-}*/
+	
 </script>
 </body>
 </html>
