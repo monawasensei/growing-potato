@@ -7,12 +7,22 @@
 <script>
 var fileName
 for (fileName = 1; fileName <= 20; fileName++){
-var img = document.createElement("IMG");
+	var img = document.createElement("IMG");
+	var dimensions = getSize(fileName);
+
 	img.setAttribute("src","images1/"+fileName+".jpg");
-	img.setAttribute("width","300");
-	img.setAttribute("height","300");
-	img.setAttribute("href","https://www.holedigging.club/archive/pics/images1/"+fileName+".jpg");
+	img.setAttribute("height","dimensions.height");
+	img.setAttribute("width","dimensions.width");
 	document.body.appendChild(img);
+}
+
+function getSize(fileName) {
+	var imagePage = "https://www.holedigging.club/archive/pics/images1/"+fileName+".jpg".getElementsByTagName("img");
+	var imageSpecs = {
+		height : imagePage[0].getAttribute("height"),
+		width : imagePage[0].getAttribute("width")
+	};
+	return imageSpecs;
 }
 </script>
 </body>
