@@ -25,7 +25,7 @@ function createImage(fileName) {
 	img.setAttribute("src","images1/"+fileName+".jpg");
 	img.style.margin = "10px";
 	img.style.maxHeight = "200px";
-	document.getElementByID("Anchor"+fileName).appendChild(img);
+	document.body.appendChild(img);
 }
 
 /*function getSize(fileName) {
