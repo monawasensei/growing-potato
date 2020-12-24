@@ -8,28 +8,25 @@
 	
 var fileName
 for (fileName = 1; fileName <= 20; fileName++){
-	createImageAnchor(fileName);
+	createImage(fileName);
 }
 
-function createImageAnchor(fileName){
+/*function createImageAnchor(fileName){
 	var anchor = document.createElement("A");
 	
 	anchor.setAttribute("id","Anchor"+fileName);
 	anchor.setAttribute("href","https://holedigging.club/archive/pics/images1/"+fileName+".jpg");
 	document.body.appendChild(anchor);
-}
+}*/
 	
-</script>
-<script>
-	
-	var fileName
-for (fileName = 1; fileName <= 20; fileName++){
-	createImage(fileName);
-}
-	
-	function createImage(fileName) {
+function createImage(fileName) {
+	var anchor = document.createElement("A");
 	var img = document.createElement("IMG");
-
+	
+	anchor.setAttribute("id","anchor"+fileName);
+	anchor.setAttribute("href","https://holedigging.club/archive/pics/images1/"+fileName+".jpg");
+	document.body.appendChild(anchor);
+	
 	img.src = "images1/"+fileName+".jpg";
 	img.style.margin = "10px";
 	img.style.maxHeight = "200px";
