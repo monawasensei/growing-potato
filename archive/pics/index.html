@@ -17,10 +17,10 @@ for (fileName = 1; fileName <= 20; fileName++){
 }
 
 function getSize(fileName) {
-	var imagePage = "https://www.holedigging.club/archive/pics/images1/"+fileName+".jpg".getElementsByTagName("img");
+	//var imagePage = "https://www.holedigging.club/archive/pics/images1/"+fileName+".jpg".getElementsByTagName("img");
 	var imageSpecs = {
-		height : imagePage[0].getAttribute("height"),
-		width : imagePage[0].getAttribute("width")
+		height : 300,
+		width : 300
 	};
 	return imageSpecs;
 }
