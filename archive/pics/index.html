@@ -4,11 +4,11 @@
 <title>pics main page</title>
 </head>
 <body>
-<"imgDisplay()">
 <script>
-function imgDisplay() {
+var fileName
+for (fileName = 1; fileName <= 950; fileName++){
 var img = document.createElement("IMG");
-	img.setAttribute("src","images1/1.jpg");
+	img.setAttribute("src","images1/"+fileName+".jpg");
 	img.setAttribute("width","300");
 	img.setAttribute("height","300");
 	document.body.appendChild(img);
