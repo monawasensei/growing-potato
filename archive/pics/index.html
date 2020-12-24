@@ -4,8 +4,7 @@
 <title>pics main page</title>
 </head>
 <body>
-	<div>
-		uhh test
+	<div id="imageDiv">
 	</div>
 <script>
 var fileName
@@ -19,7 +18,7 @@ function createImage(fileName) {
 	img.setAttribute("src","images1/"+fileName+".jpg");
 	img.style.margin = "10px";
 	img.style.maxHeight = "200px";
-	document.body.appendChild(img);
+	document.getElementByID("imageDiv").appendChild(img);
 }
 
 /*function getSize(fileName) {
