@@ -8,6 +8,9 @@
 var fileName
 for (fileName = 1; fileName <= 20; fileName++){
 	createImageAnchor(fileName);
+}
+
+for (fileName = 1; fileName <=20; fileName++){
 	createImage(fileName);
 }
 
@@ -22,10 +25,10 @@ function createImageAnchor(fileName){
 function createImage(fileName) {
 	var img = document.createElement("IMG");
 
-	img.setAttribute("src","images1/"+fileName+".jpg");
+	img.src = "images1/"+fileName+".jpg";
 	img.style.margin = "10px";
 	img.style.maxHeight = "200px";
-	document.body.appendChild(img);
+	document.getElementByID("anchor"+fileName).appendChild(img);
 }
 
 /*function getSize(fileName) {
