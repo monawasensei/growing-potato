@@ -12,9 +12,7 @@
 	<div id = "loadMoreDiv">
 	</div>
 <script>
-var pageString = location.search;
-var pageValue = pageString.substr(pageString.lastIndexOf("page="),2);
-pageValue=pageValue-1;
+var pageValue = getPageValue();
 document.getElementById("debug").innerHTML = pageValue;
 var fileName
 var folderName
@@ -38,6 +36,20 @@ function createImage(folderName,fileName) {
 	img.style.margin = "2px";
 	img.style.maxHeight = "60px";
 	document.getElementById("anchor_"+folderName+"_"+fileName).appendChild(img);
+}
+
+function getPageValue() {
+	var pageString = locaion.search;
+	var pageValue = pageString.substr(queryStringPos(pageString,"page="),2);
+	pageValue = pageValue-1;
+	return pageValue;
+}
+	
+function queryStringPos(string,searchString){
+	var start = string.search(searchString);
+	var searchStringLength = searchString.length;
+	var endPosition = start + searchStringLength;
+	return endPosition;
 }
 	
 	
