@@ -20,6 +20,7 @@ function createImage(folderName,fileName) {
 	
 	anchor.setAttribute("id","anchor_"+folderName+"_"+fileName);
 	anchor.setAttribute("href","https://holedigging.club/archive/pics/images"+folderName+"/"+fileName+".jpg");
+	anchor.setAttribute("target","_blank");
 	document.body.appendChild(anchor);
 	var appendLocation = document.getElementById("anchor_"+folderName+"_"+fileName);
 	
