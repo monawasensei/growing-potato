@@ -24,8 +24,6 @@
 <title>pics main page</title>
 </head>
 <body>
-	<div id = "debug">
-	</div>
 	<div class="pagination">
   <a href="#">&laquo;</a>
   <a href="https://holedigging.club/archive/pics?page=1">1</a>
@@ -44,11 +42,11 @@
 <script>
 var pageString = location.search;
 var pageValue = pageString.subs(pageString.lastIndexOf("page="),2);
-document.getElementById("debug").innerHTML = pageValue;
+pageValue=pageValue-1;
 var fileName
 var folderName
 for (folderName = 1; folderName <= 2; folderName++){
-	for (fileName = 1; fileName <= 950; fileName++){
+	for (fileName = ((100*pageValue)+1); fileName <= ((100*pageValue)+100); fileName++){
 		createImage(folderName,fileName);
 	}
 }
