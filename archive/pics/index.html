@@ -22,7 +22,7 @@ var absoluteCount = ((pageValue*100)+1);
 var folderName = getFolderName(absoluteCount);
 	document.getElementById("debug2").innerHTML = folderName; //debugging text flag
 	
-for (fileName = ((100*pageValue)+1); fileName <= ((100*pageValue)+100); fileNameIncrement(fileName)) {
+for (fileName = ((100*pageValue)+1); fileName <= ((100*pageValue)+100); fileName = fileNameIncrement(fileName)) {
 	createImageAndLink(folderName,fileName);
 	absoluteCount++;
 	//folderName = getFolderName(absoluteCount);
