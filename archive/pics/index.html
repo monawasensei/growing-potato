@@ -4,6 +4,10 @@
 <title>pics main page</title>
 </head>
 <body>
+	<div class = "pagination">
+		<p onclick="loadPageOne()">1</p>
+		<p onlick="loadPageTwo()">2</p>
+	</div>
 	<div id = "imageDiv">
 		
 	</div>
@@ -35,6 +39,7 @@ function createImage(folderName,fileName) {
 	img.style.maxHeight = "60px";
 	document.getElementById("anchor_"+folderName+"_"+fileName).appendChild(img);
 }
+	
 	
 </script>
 </body>
