@@ -4,6 +4,8 @@
 <title>pics main page</title>
 </head>
 <body>
+	<div id = "debug">
+	</div>
 	<div id = "imageDiv">
 		
 	</div>
@@ -13,6 +15,7 @@
 var pageString = location.search;
 var pageValue = pageString.substr(pageString.lastIndexOf("page="),2);
 pageValue=pageValue-1;
+document.getElementById("debug").innerHTML = pageValue;
 var fileName
 var folderName
 for (folderName = 1; folderName <= 2; folderName++){
