@@ -4,6 +4,12 @@
 <title>pics main page</title>
 </head>
 <body>
+	<div id = "imageDiv">
+		
+	</div>
+	<div id = "loadMoreDiv">
+		loadMoar
+	</div>
 <script>
 
 var fileName
@@ -21,14 +27,13 @@ function createImage(folderName,fileName) {
 	anchor.setAttribute("id","anchor_"+folderName+"_"+fileName);
 	anchor.setAttribute("href","https://holedigging.club/archive/pics/images"+folderName+"/"+fileName+".jpg");
 	anchor.setAttribute("target","_blank");
-	document.body.appendChild(anchor);
-	var appendLocation = document.getElementById("anchor_"+folderName+"_"+fileName);
+	document.getElementById("imageDiv").appendChild(anchor);
 	
 	img.src = "images"+folderName+"/"+fileName+".jpg";
 	img.setAttribute("loading","lazy");
 	img.style.margin = "2px";
 	img.style.maxHeight = "60px";
-	appendLocation.appendChild(img);
+	document.getElementById("anchor_"+folderName+"_"+fileName).appendChild(img);
 }
 	
 </script>
