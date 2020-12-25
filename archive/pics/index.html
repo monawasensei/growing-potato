@@ -41,7 +41,7 @@
 	</div>
 <script>
 var pageString = location.search;
-var pageValue = pageString.subs(pageString.lastIndexOf("page="),2);
+var pageValue = pageString.substr(pageString.lastIndexOf("page="),2);
 pageValue=pageValue-1;
 var fileName
 var folderName
