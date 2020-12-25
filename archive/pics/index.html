@@ -4,28 +4,11 @@
 <title>pics main page</title>
 </head>
 <body>
-	<div id="divTest">
-		test
-	</div>
 <script>
-var appendLocation = document.getElementById("divTest");
 
-var imgTest = document.createElement("IMG");
-	imgTest.src = "images1/1.jpg";
-	imgTest.style.maxHeight = "200px";
-	appendLocation.appendChild(imgTest);
-
-/*var fileName
+var fileName
 for (fileName = 1; fileName <= 20; fileName++){
 	createImage(fileName);
-}
-
-/*function createImageAnchor(fileName){
-	var anchor = document.createElement("A");
-	
-	anchor.setAttribute("id","Anchor"+fileName);
-	anchor.setAttribute("href","https://holedigging.club/archive/pics/images1/"+fileName+".jpg");
-	document.body.appendChild(anchor);
 }
 	
 function createImage(fileName) {
@@ -35,12 +18,13 @@ function createImage(fileName) {
 	anchor.setAttribute("id","anchor"+fileName);
 	anchor.setAttribute("href","https://holedigging.club/archive/pics/images1/"+fileName+".jpg");
 	document.body.appendChild(anchor);
+	var appendLocation = document.getElementById("anchor"+fileName);
 	
 	img.src = "images1/"+fileName+".jpg";
 	img.style.margin = "10px";
 	img.style.maxHeight = "200px";
-	document.body.appendChild(img);
-}*/
+	appendLocation.appendChild(img);
+}
 	
 </script>
 </body>
