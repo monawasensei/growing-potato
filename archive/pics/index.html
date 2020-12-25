@@ -60,7 +60,7 @@ function queryStringPos(string,searchString) {
 	
 function getFolderName(absoluteCount) {
 	var folderName = absoluteCount/950;
-	folderName = math.ceil(folderName);
+	folderName = (folderName.toFixed(0))+1;
 	return folderName;
 }
 	
