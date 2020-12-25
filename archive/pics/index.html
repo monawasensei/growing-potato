@@ -6,23 +6,29 @@
 <body>
 	<div id = "debug">
 	</div>
+	<div id = "debug2">
+	</div>
 	<div id = "imageDiv">
 		
 	</div>
 	<div id = "loadMoreDiv">
 	</div>
 <script>
+	
+var fileName	
 var pageValue = getPageValue();
-document.getElementById("debug").innerHTML = pageValue;
-var fileName
-var folderName
-for (folderName = 1; folderName <= 2; folderName++){
-	for (fileName = ((100*pageValue)+1); fileName <= ((100*pageValue)+100); fileName++){
-		createImage(folderName,fileName);
-	}
+	document.getElementById("debug").innerHTML = pageValue; //debugging text flag
+var absoluteCount = ((pageValue*100)+1);
+var folderName = getFolderName(absoluteCount);
+	document.getElementById("debug2").innerHTML = folderName; //debugging text flag
+	
+for (fileName = ((100*pageValue)+1); fileName <= ((100*pageValue)+100); fileNameIncrement(fileName)) {
+	createImageAndLink(folderName,fileName);
+	absoluteCount++;
+	folderName = getFolderName(absoluteCount);
 }
 	
-function createImage(folderName,fileName) {
+function createImageAndLink(folderName,fileName) {
 	var anchor = document.createElement("A");
 	var img = document.createElement("IMG");
 	
@@ -45,12 +51,27 @@ function getPageValue() {
 	return pageValue;
 }
 	
-function queryStringPos(string,searchString){
+function queryStringPos(string,searchString) {
 	var start = string.search(searchString);
 	var searchStringLength = searchString.length;
 	var endPosition = start + searchStringLength;
 	return endPosition;
 }
+	
+function getFolderName(absoluteCount) {
+	var folderName = absoluteCount/950;
+	folderName = math.ceil(folderName);
+	return folderName;
+}
+	
+function fileNameIncrement(fileName) {
+	fileName++;
+	if (fileName > 950) {
+		fileName = 1;
+	}
+	return fileName;
+}
+	
 	
 	
 </script>
