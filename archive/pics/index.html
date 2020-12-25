@@ -19,10 +19,11 @@ var fileName
 var pageValue = getPageValue();
 	document.getElementById("debug").innerHTML = pageValue; //debugging text flag
 var absoluteCount = ((pageValue*100)+1);
+var absoluteCountEndBound = (100*pageValue)+100;
 var folderName = getFolderName(absoluteCount);
 	document.getElementById("debug2").innerHTML = folderName; //debugging text flag
 	
-for (fileName = ((100*pageValue)+1); fileName <= ((100*pageValue)+100); fileName = fileNameIncrement(fileName)) {
+for (fileName = setFileName(absoluteCount); fileName <= (absoluteCountEndBound); fileName = fileNameIncrement(fileName)) {
 	createImageAndLink(folderName,fileName);
 	absoluteCount++;
 	//folderName = getFolderName(absoluteCount);
@@ -70,6 +71,14 @@ function fileNameIncrement(fileName) {
 	fileName++;
 	if (fileName > 950) {
 		fileName = 1;
+	}
+	return fileName;
+}
+	
+function setFileName(absoluteName) {
+	var fileName = absoluteName;
+	while (fileName > 950) {
+		fileName = fileName - 950;
 	}
 	return fileName;
 }
