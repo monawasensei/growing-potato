@@ -40,7 +40,8 @@
 	<div id = "loadMoreDiv">
 	</div>
 <script>
-
+var pageString = location.search;
+var pageValue = pageString.subs(pageString.lastIndexOf("page="),2);
 var fileName
 var folderName
 for (folderName = 1; folderName <= 2; folderName++){
