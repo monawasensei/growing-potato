@@ -39,7 +39,7 @@ function createImage(folderName,fileName) {
 }
 
 function getPageValue() {
-	var pageString = locaion.search;
+	var pageString = location.search;
 	var pageValue = pageString.substr(queryStringPos(pageString,"page="),2);
 	pageValue = pageValue-1;
 	return pageValue;
