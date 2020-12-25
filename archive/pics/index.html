@@ -24,6 +24,8 @@
 <title>pics main page</title>
 </head>
 <body>
+	<div id = "debug">
+	</div>
 	<div class="pagination">
   <a href="#">&laquo;</a>
   <a href="https://holedigging.club/archive/pics?page=1">1</a>
@@ -42,6 +44,7 @@
 <script>
 var pageString = location.search;
 var pageValue = pageString.subs(pageString.lastIndexOf("page="),2);
+document.getElementById("debug").innerHTML = pageValue;
 var fileName
 var folderName
 for (folderName = 1; folderName <= 2; folderName++){
