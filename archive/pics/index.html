@@ -19,11 +19,12 @@ var fileName
 var pageValue = getPageValue();
 	document.getElementById("debug").innerHTML = pageValue; //debugging text flag
 var absoluteCount = ((pageValue*100)+1);
+var absoluteCountBeginningBound = absoluteCount;
 var absoluteCountEndBound = (100*pageValue)+100;
 var folderName = getFolderName(absoluteCount);
 	document.getElementById("debug2").innerHTML = folderName; //debugging text flag
 	
-for (fileName = setFileName(absoluteCount); fileName <= (absoluteCountEndBound); fileName = fileNameIncrement(fileName)) {
+for (fileName = setFileName(absoluteCountBeginningBound); fileName <= (absoluteCountEndBound); fileName = fileNameIncrement(fileName)) {
 	createImageAndLink(folderName,fileName);
 	absoluteCount++;
 	//folderName = getFolderName(absoluteCount);
