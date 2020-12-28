@@ -4,12 +4,7 @@
 <title>pics main page</title>
 </head>
 <body>
-	<div id = "debug">
-	</div>
-	<div id = "debug2">
-	</div>
 	<div id = "imageDiv">
-		
 	</div>
 	<div id = "loadMoreDiv">
 	</div>
@@ -17,9 +12,9 @@
 	
 var fileName	
 
-var absoluteCount = ((pageValue*100)+1);
-var absoluteCountBeginningBound = absoluteCount;
-var absoluteCountEndBound = (100*pageValue)+100;
+//var absoluteCount = ((pageValue*100)+1);
+//var absoluteCountBeginningBound = absoluteCount;
+//var absoluteCountEndBound = (100*pageValue)+100;
 	
 //Here is the for-now-functional display loops
 var folderName
@@ -58,7 +53,7 @@ function createImageAndLink(folderName,fileName) {
 	document.getElementById("anchor_"+folderName+"_"+fileName).appendChild(img);
 }
 
-function getPageValue() {
+/*function getPageValue() {
 	var pageString = location.search;
 	var pageValue = pageString.substr(queryStringPos(pageString,"page="),2);
 	pageValue = pageValue-1;
@@ -94,7 +89,7 @@ function setFileName(absoluteName) {
 		fileName = fileName - 950;
 	}
 	return fileName;
-}
+}*/
 	
 	
 	
