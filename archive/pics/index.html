@@ -16,19 +16,31 @@
 <script>
 	
 var fileName	
-var pageValue = getPageValue();
-	document.getElementById("debug").innerHTML = pageValue; //debugging text flag
+
 var absoluteCount = ((pageValue*100)+1);
 var absoluteCountBeginningBound = absoluteCount;
 var absoluteCountEndBound = (100*pageValue)+100;
-var folderName = getFolderName(absoluteCount);
-	document.getElementById("debug2").innerHTML = folderName; //debugging text flag
 	
-for (fileName = setFileName(absoluteCountBeginningBound); fileName <= (absoluteCountEndBound); fileName = fileNameIncrement(fileName)) {
+//Here is the for-now-functional display loops
+var folderName
+for (folderName = 1; folderName <= 2; folderName++){
+	for (fileName = 1; fileName <=950; fileName++){
+		createImageAndLink(folderName,fileName);
+	}
+}
+	
+	
+//this block is the WIP display loop, commented out so we can have a semi-functional archive in the meantime
+	//this block will eventually use PHP and SQL theories btw :^)
+/*var pageValue = getPageValue();
+	//document.getElementById("debug").innerHTML = pageValue; //debugging text flag	
+var folderName = getFolderName(absoluteCount);
+	//document.getElementById("debug2").innerHTML = folderName; //debugging text flag
+for (fileName = setFileName(absoluteCountBeginningBound); fileName <= (absoluteCountEndBound); fileName = fileNameIncrement(fileName)) { 
 	createImageAndLink(folderName,fileName);
 	absoluteCount++;
 	//folderName = getFolderName(absoluteCount);
-}
+}*/
 	
 function createImageAndLink(folderName,fileName) {
 	var anchor = document.createElement("A");
