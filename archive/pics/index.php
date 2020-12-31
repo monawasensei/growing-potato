@@ -5,8 +5,9 @@
 </head>
 <body>
 	<div id = "phpTesting">
+<!--
 		<?php 
-			$link = mysql_connect('monawasensei56192.domaincommysql.com', 'tuber', 'Test123!@#'); //:^)
+			/*$link = mysql_connect('monawasensei56192.domaincommysql.com', 'tuber', 'Test123!@#'); //:^)
 			if (!$link) { 
 				die('Could not connect: ' . mysql_error()); 
 			} 
@@ -15,8 +16,9 @@
 			echo '<p> :^) </p>';
 			//$sql = "SELECT * FROM Archive_Pics";
 			//$result = $conn->query($sql);
-			//echo $result->fetch_all();
+			//echo $result->fetch_all();*/
 		?>
+-->
 	</div>
 	
 	<div id = "imageDiv">
