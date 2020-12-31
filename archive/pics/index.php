@@ -12,9 +12,10 @@
 			} 
 			echo 'Connected successfully'; 
 			mysql_select_db(potato_database); 
-			$sql = "SELECT * FROM Archive_Pics";
-			$result = $conn->query($sql);
-			echo $result->fetch_all();
+			echo '<p> :^) </p>';
+			//$sql = "SELECT * FROM Archive_Pics";
+			//$result = $conn->query($sql);
+			//echo $result->fetch_all();
 		?>
 	</div>
 	
