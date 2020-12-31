@@ -6,7 +6,7 @@
 <body>
 	<div id = "imageDiv">
 		<?php
-		$servername = "github secret secret"
+
 		?>
 	</div>
 	<div id = "loadMoreDiv">
