@@ -4,11 +4,23 @@
 <title>pics main page</title>
 </head>
 <body>
-	<div id = "imageDiv">
-		<?php
-
+	<div id = "phpTesting">
+		<?php 
+			$link = mysql_connect('monawasensei56192.domaincommysql.com', 'tuber', 'Test123!@#'); //:^)
+			if (!$link) { 
+				die('Could not connect: ' . mysql_error()); 
+			} 
+			echo 'Connected successfully'; 
+			mysql_select_db(potato_database); 
+			$sql = "SELECT * FROM Archive_Pics";
+			$result = $conn->query($sql);
+			echo $result->fetch_all();
 		?>
 	</div>
+	
+	<div id = "imageDiv">
+	</div>
+	
 	<div id = "loadMoreDiv">
 	</div>
 	
