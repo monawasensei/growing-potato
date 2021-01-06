@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>pics main page</title>
+<title>artbook main page</title>
 </head>
 <body>
 	<div id = "phpTesting">
