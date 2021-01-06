@@ -11,17 +11,17 @@
 				die('Could not connect: ' . $conn->connect_error); 
 			} 
 		echo "Connected successfully";
-		$sql = "SELECT CONCAT(\'https://holedigging.club/archive/artbook/artbook/\',filename) AS 'absDir' FROM archive_artbook";
+		$sql = "SELECT CONCAT(\"https://holedigging.club/archive/artbook/artbook/\",filename) AS 'absDir' FROM archive_artbook";
 		$result = $conn->query($sql);
 		
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-				echo "filename: " . $row["absDir"].
+				echo "\nfilename: " . $row["absDir"].
 			"<br>";
 			}
 		} 
 		else {
-			echo "0 results";
+			echo "\n0 results";
 		}
 		?>
 	</div>
