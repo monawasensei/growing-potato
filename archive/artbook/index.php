@@ -12,6 +12,7 @@
 			} 
 		echo "Connected successfully"; 
 		mysql_select_db(potato_database);
+		echo "Hello does this work?";
 		
 		/*$sql = "SELECT CONCAT(\"https://holedigging.club/archive/artbook/artbook/\",filename) as \'absDir\'\n"
 
