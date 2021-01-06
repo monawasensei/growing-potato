@@ -22,6 +22,7 @@
 	</div>
 	
 	<div id = "imageDiv">
+		<p> why is none of my shit showing up? </p>
 	</div>
 	
 	<div id = "loadMoreDiv">
