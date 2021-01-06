@@ -17,8 +17,8 @@
 
 	    . "FROM archive_artbook";
 		echo $sql;
-		
 		?>
+		this text should show up on the page, though it's not in the PHP block..
 	</div>
 	
 	<div id = "imageDiv">
