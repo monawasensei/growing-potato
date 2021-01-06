@@ -12,6 +12,7 @@
 			} 
 		echo "Connected successfully";
 		$sql="hello";
+		echo $sql
 		/*$sql = "SELECT CONCAT(""https://holedigging.club/archive/artbook/artbook/"",filename) AS 'absDir' FROM archive_artbook";
 		echo $sql*/
 		/*$result = $conn->query($sql);
