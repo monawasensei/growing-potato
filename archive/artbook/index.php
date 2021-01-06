@@ -11,13 +11,7 @@
 				die('Could not connect: ' . $conn->connect_error); 
 			} 
 		echo "Connected successfully"; 
-		mysql_select_db(potato_database);
 		echo "Hello does this work?";
-		
-		/*$sql = "SELECT CONCAT(\"https://holedigging.club/archive/artbook/artbook/\",filename) as \'absDir\'\n"
-
-	    . "FROM archive_artbook";
-		echo $sql;*/
 		?>
 		<p>this text should show up on the page, though it's not in the PHP block..</p>
 	</div>
