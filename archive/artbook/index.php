@@ -5,20 +5,20 @@
 </head>
 <body>
 	<div id = "phpTesting">
-<!--
 		<?php 
-			/*$link = mysql_connect('monawasensei56192.domaincommysql.com', 'tuber', 'Test123!@#'); //:^)
+			$link = mysql_connect('monawasensei56192.domaincommysql.com', 'tuber', '*password*'); 
 			if (!$link) { 
 				die('Could not connect: ' . mysql_error()); 
 			} 
-			echo 'Connected successfully'; 
-			mysql_select_db(potato_database); 
-			echo '<p> :^) </p>';
-			//$sql = "SELECT * FROM Archive_Pics";
-			//$result = $conn->query($sql);
-			//echo $result->fetch_all();*/
+		echo 'Connected successfully'; 
+		mysql_select_db(potato_database);
+		
+		$sql = "SELECT CONCAT(\"https://holedigging.club/archive/artbook/artbook/\",filename) as \'absDir\'\n"
+
+	    . "FROM archive_artbook";
+		echo $sql;
+		
 		?>
--->
 	</div>
 	
 	<div id = "imageDiv">
