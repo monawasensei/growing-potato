@@ -6,17 +6,17 @@
 <body>
 	<div id = "phpTesting">
 		<?php 
-			$link = mysql_connect('monawasensei56192.domaincommysql.com', 'tuber', '*password*'); 
-			if (!$link) { 
-				die('Could not connect: ' . mysql_error()); 
+			$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#"); 
+			if ($conn->connect_error) { 
+				die('Could not connect: ' . $conn->connect_error); 
 			} 
-		echo 'Connected successfully'; 
+		echo "Connected successfully"; 
 		mysql_select_db(potato_database);
 		
-		$sql = "SELECT CONCAT(\"https://holedigging.club/archive/artbook/artbook/\",filename) as \'absDir\'\n"
+		/*$sql = "SELECT CONCAT(\"https://holedigging.club/archive/artbook/artbook/\",filename) as \'absDir\'\n"
 
 	    . "FROM archive_artbook";
-		echo $sql;
+		echo $sql;*/
 		?>
 		<p>this text should show up on the page, though it's not in the PHP block..</p>
 	</div>
