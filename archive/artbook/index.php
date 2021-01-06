@@ -12,7 +12,8 @@
 			} 
 		echo "Connected successfully"; 
 		$sql = "SELECT CONCAT(""https://holedigging.club/archive/artbook/artbook/"",filename) AS 'absDir' FROM archive_artbook";
-		$result = $conn->query($sql);
+		echo $sql
+		/*$result = $conn->query($sql);
 		
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
@@ -22,7 +23,7 @@
 		} 
 		else {
 			echo "0 results";
-		}
+		}*/
 		?>
 	</div>
 	
