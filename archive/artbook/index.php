@@ -11,7 +11,7 @@
 				die('Could not connect: ' . $conn->connect_error); 
 			} 
 		echo "Connected successfully"; 
-		echo -e "/nHello does this work?";
+		echo "Hello does this work?";
 		?>
 	</div>
 	
