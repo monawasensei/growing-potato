@@ -6,12 +6,23 @@
 <body>
 	<div id = "phpTesting">
 		<?php 
-			$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#"); 
+			$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#","potato_database"); 
 			if ($conn->connect_error) { 
 				die('Could not connect: ' . $conn->connect_error); 
 			} 
 		echo "Connected successfully"; 
-		echo "Hello does this work?";
+		$sql = "SELECT CONCAT(""https://holedigging.club/archive/artbook/artbook/",filename) AS 'absDir' FROM archive_artbook";
+		$result = $conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_accos()) {
+				echo "filename: " . $row["absDir"].
+				"<br>";
+			}
+		} 
+		else {
+			echo "0 results";
+		}
 		?>
 	</div>
 	
