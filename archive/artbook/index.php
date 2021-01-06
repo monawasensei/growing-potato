@@ -11,7 +11,7 @@
 				die('Could not connect: ' . $conn->connect_error); 
 			} 
 		echo "Connected successfully";
-		$myTest="hello";
+		$sql="hello";
 		/*$sql = "SELECT CONCAT(""https://holedigging.club/archive/artbook/artbook/"",filename) AS 'absDir' FROM archive_artbook";
 		echo $sql*/
 		/*$result = $conn->query($sql);
