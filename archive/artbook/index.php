@@ -3,13 +3,13 @@
 <head>
 <title>artbook main page</title>
 	<style>
-	* {
-		max-height: 50px;
+	.Gallery {
+		max-height: 300px;
 		}
 	</style>
 </head>
 <body>
-	<div id = "phpImageBlock">
+	<div class = "Gallery">
 		<?php 
 			$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#","potato_database"); 
 			if ($conn->connect_error) { 
