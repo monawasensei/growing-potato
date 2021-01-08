@@ -3,13 +3,12 @@
 <head>
 <title>artbook main page</title>
 	<style>
-	.contain {
+	image {
 		max-height: 300px;
 	}
 	</style>
 </head>
 <body>
-	<div class="contain">
 	<div>
 		<?php 
 			$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#","potato_database"); 
@@ -30,7 +29,6 @@
 			echo "\n0 results";
 		}
 		?>
-	</div>
 	</div>
 	
 	<div id = "imageDiv">
