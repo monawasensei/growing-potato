@@ -16,7 +16,7 @@
 		
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-				$filename = $row["absDir"].
+				$filename = $row["absDir"];
 				echo $filename;
 			"<br>";
 			}
