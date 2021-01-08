@@ -9,13 +9,12 @@
 	</style>
 </head>
 <body>
-	<div class = "Gallery">
+	<div class="Gallery">
 		<?php 
 			$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#","potato_database"); 
 			if ($conn->connect_error) { 
 				die('Could not connect: ' . $conn->connect_error); 
 			} 
-		echo "Connected successfully";
 		$sql = "SELECT CONCAT(\"https://holedigging.club/archive/artbook/artbook/\",filename) AS 'absDir' FROM archive_artbook";
 		$result = $conn->query($sql);
 		
