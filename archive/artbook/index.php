@@ -4,8 +4,7 @@
 <title>artbook main page</title>
 	<style>
 	#phpImageBlock {
-		margin: 5px;
-		max-height: 60px;
+		max-height: 50px;
 		}
 	</style>
 </head>
