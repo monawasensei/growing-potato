@@ -2,6 +2,11 @@
 <html>
 <head>
 <title>artbook main page</title>
+	<style>
+		php {
+			max-height: 200px;
+		}
+	</style>
 </head>
 <body>
 	<div>
@@ -16,7 +21,7 @@
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
 				$filename = $row["absDir"];
-				echo "<a href=\"${filename}\" target=\"_blank\"> <image src=\"${filename}\" style=\"maxHeight:300px\"></a>";
+				echo "<a href=\"${filename}\" target=\"_blank\"> <image src=\"${filename}\"></a>";
 			"<br>";
 			}
 		} 
