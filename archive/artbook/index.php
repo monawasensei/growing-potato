@@ -3,7 +3,7 @@
 <head>
 <title>artbook main page</title>
 	<style>
-	#phpImageBlock {
+	* {
 		max-height: 50px;
 		}
 	</style>
