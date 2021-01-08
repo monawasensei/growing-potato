@@ -5,7 +5,7 @@
 	<style>
 	#phpImageBlock {
 		margin: 5px;
-		max-height: 300px;
+		max-height: 60px;
 		}
 	</style>
 </head>
