@@ -3,13 +3,14 @@
 <head>
 <title>artbook main page</title>
 	<style>
-	div {
+	.contain {
 		max-height: 300px;
 	}
 	</style>
 </head>
 <body>
-	<div class="gallery">
+	<div class="contain">
+	<div>
 		<?php 
 			$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#","potato_database"); 
 			if ($conn->connect_error) { 
@@ -29,6 +30,7 @@
 			echo "\n0 results";
 		}
 		?>
+	</div>
 	</div>
 	
 	<div id = "imageDiv">
