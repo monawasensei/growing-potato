@@ -4,7 +4,7 @@
 <title>pics main page</title>
 	<style>
 		* {
-			max-height: 200px;
+			max-height: 300px;
 		}
 	</style>
 </head>
