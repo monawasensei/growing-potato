@@ -3,7 +3,7 @@
 <head>
 <title>artbook main page</title>
 	<style>
-		php {
+		* {
 			max-height: 200px;
 		}
 	</style>
