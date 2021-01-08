@@ -2,9 +2,15 @@
 <html>
 <head>
 <title>artbook main page</title>
+	<style>
+	#phpImageBlock {
+		margin: 5px;
+		max-height: 300px;
+		}
+	</style>
 </head>
 <body>
-	<div id = "phpTesting">
+	<div id = "phpImageBlock">
 		<?php 
 			$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#","potato_database"); 
 			if ($conn->connect_error) { 
@@ -17,7 +23,7 @@
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
 				$filename = $row["absDir"];
-				echo "<a href=\"${filename}\"> <image src=\"${filename}\"></a>";
+				echo "<a href=\"${filename}\" target=\"_blank\"> <image src=\"${filename}\"></a>";
 			"<br>";
 			}
 		} 
