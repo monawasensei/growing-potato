@@ -15,7 +15,8 @@
 			if ($conn->connect_error) { 
 				die('Could not connect: ' . $conn->connect_error); 
 			} 
-		$sql = "SELECT CONCAT(absolutepath,CASE WHEN relativepath IS NULL THEN \'\' ELSE relativepath END,filename) from screencaps";
+		//$sql = "SELECT CONCAT(absolutepath,CASE WHEN relativepath IS NULL THEN \'\' ELSE relativepath END,filename) from screencaps";
+		$sql = "SELECT * FROM screencaps";
 		$result = $conn->query($sql);
 		
 		if ($result->num_rows > 0) {
