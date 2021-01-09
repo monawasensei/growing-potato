@@ -15,7 +15,7 @@
 			if ($conn->connect_error) { 
 				die('Could not connect: ' . $conn->connect_error); 
 			} 
-		$sql = "SELECT CONCAT(absolutepath,CASE WHEN relativepath IS NULL THEN '' ELSE relativepath END, filename) as 'absDir' from misc";
+		$sql = "SELECT CONCAT(absolutepath,CASE WHEN relativepath IS NULL THEN '' ELSE relativepath END, filename) as 'absDir' from misc WHERE filetype != 'webm' AND filetype != 'mp4'";
 		$result = $conn->query($sql);
 		
 		if ($result->num_rows > 0) {
