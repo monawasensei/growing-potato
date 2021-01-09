@@ -2,11 +2,7 @@
 <html>
 <head>
 <title>screencaps main page</title>
-	<style>
-		* {
-			max-height: 300px;
-		}
-	</style>
+<link rel="stylesheet" href="https://holedigging.club/archive/archiveStyle.CSS">le>
 </head>
 <body>
 	<div>
