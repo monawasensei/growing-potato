@@ -3,6 +3,7 @@
 <head>
 <title>artbook main page</title>
 <link rel="stylesheet" href="https://holedigging.club/archive/archiveStyle.CSS">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div>
