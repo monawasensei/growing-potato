@@ -31,7 +31,7 @@
 			}
 			*/
 			//$directory="artbook";
-			$sql = "SELECT CONCAT('https://holedigging.club/archive/',uniquepath) as 'absDir' from archive WHERE origin = 'artbook' AND filetype != 'webm' AND filetype != 'mp4';" 
+			$sql = "SELECT CONCAT('https://holedigging.club/archive/',uniquepath) as 'absDir' from archive WHERE origin = 'artbook' AND filetype != 'webm' AND filetype != 'mp4';";
 			$result = $conn->query($sql);
 		
 			if ($result->num_rows > 0) {
