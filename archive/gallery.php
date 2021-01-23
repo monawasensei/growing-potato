@@ -12,7 +12,7 @@
 			if ($conn->connect_error) { 
 				die('Could not connect: ' . $conn->connect_error); 
 			}
-			
+			/*
 			$possibledirectory = array("artbook","colours","edits","pics","fanart","misc","screencaps"); //making this array to check that the querystring is not some malicious attempt at SQL code insertion
 			
 			$directory = $_GET['directory']; //will hopefully pull the querystring
@@ -29,8 +29,8 @@
 					echo "very naughty";
 					exit;
 			}
-			
-			
+			*/
+			$directory="artbook";
 			$sql = "SELECT CONCAT('https://holedigging.club/archive/',uniquepath) as 'absDir' from archive WHERE origin = '".$directory."' AND filetype != 'webm' AND filetype != 'mp4';" 
 			$result = $conn->query($sql);
 		
