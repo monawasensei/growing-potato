@@ -32,6 +32,7 @@
 					exit;
 			}
 			
+			echo "ready to begin";
 			/*
 			$sql = "SELECT CONCAT('https://holedigging.club/archive/',uniquepath) as 'absDir' from archive WHERE origin = '$directory' AND filetype != 'webm' AND filetype != 'mp4';" 
 			$result = $conn->query($sql);
