@@ -30,13 +30,14 @@
 					exit;
 			}
 			
-			$sql = "SELECT CONCAT('https://holedigging.club/archive/',uniquepath) as 'absDir' from archive WHERE origin = '" . $directory. "' AND filetype != 'webm' AND filetype != 'mp4';";
+			$sql = "SELECT CONCAT('https://holedigging.club/archive/',uniquepath) as 'image', CONCAT('https://holedigging.club/archive/thumbnails/',subdirectory,filename,'.th.jpg') as 'thumbnail' from archive WHERE origin = '" . $directory. "' AND filetype != 'webm' AND filetype != 'mp4';";
 			$result = $conn->query($sql);
 		
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
-					$filename = $row["absDir"];
-					echo "<a href=\"${filename}\" target=\"_blank\"> <image src=\"${filename}\"></a>";
+					$image = $row["image"];
+					$thumbnail = $row["thumbnail"];
+					echo "<a href=\"${image}\" target=\"_blank\"> <image src=\"${thumbnail}\"></a>";
 				"<br>";
 				}
 			}	 
