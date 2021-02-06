@@ -30,7 +30,7 @@
 					exit;
 			}
 			
-			$sql = "SELECT CONCAT('https://holedigging.club/archive/',uniquepath) as 'image',CASE WHEN filetype='gif' THEN CONCAT('https://holedigging.club/archive/',uniquepath) ELSE CONCAT('https://holedigging.club/archive/thumbnails/',subdirectory,filename,'.th.jpg') END as 'thumbnail' from archive WHERE origin = '" . $directory. "' AND filetype != 'webm' AND filetype != 'mp4';";
+			$sql = "SELECT CONCAT('https://holedigging.club/archive/',uniquepath) as 'image',CASE WHEN filetype='gif' THEN CONCAT('https://holedigging.club/archive/',uniquepath) ELSE CONCAT('https://holedigging.club/archive/thumbnails/',subdirectory,filename,'.th.jpg') END as 'thumbnail' from archive_rebuild WHERE origin = '" . $directory. "' AND filetype != 'webm' AND filetype != 'mp4';";
 			$result = $conn->query($sql);
 		
 			if ($result->num_rows > 0) {
