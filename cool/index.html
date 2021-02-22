@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html style="background-image: url('images/smuge.png');">
+<head>
+<meta charset="utf-8" />
+<style>
+span {font-size: 250%;}
+</style>
+<style>* { cursor:url(images/fish2.png), auto;}</style>
+  <style>
+    @keyframes infinite-spinning {
+ from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+}
+@-moz-keyframes infinite-spinning {
+ from { transform: rotate(0deg); background-position: 0 100%; } to { transform: rotate(360deg); background-position: 100% 0; }
+}
+@-webkit-keyframes infinite-spinning {
+ from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+}
+@-ms-keyframes infinite-spinning {
+ from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+}
+
+@keyframes shrink{
+ from { transform: scale(1,1); } to { transform: scale(.001,.001); }
+}
+@-moz-keyframes shrink {
+ from { transform: scale(1,1); } to { transform: scale(.001,.001); }
+}
+@-webkit-keyframes shrink {
+ from { transform: scale(1,1); } to { transform: scale(.001,.001); }
+}
+@-ms-keyframes shrink {
+ from { transform: scale(1,1); } to { transform: scale(.001,.001); }
+}
+#holedigger {
+	-moz-animation: infinite-spinning 9s forwards linear infinite;
+	-webkit-animation: infinite-spinning  9s forwards linear infinite;
+	-ms-animation: infinite-spinning  9s forwards linear infinite;
+	animation: infinite-spinning  9s forwards linear infinite;
+
+}
+#hddiv {
+	position: absolute;
+    top:0;
+    left:0;
+  margin-left: auto;
+  margin-right: auto;
+    z-index: 2;
+    -moz-animation: shrink 80s forwards linear ;
+	-webkit-animation: shrink  80s forwards linear ;
+	-ms-animation: shrink  80s forwards linear ;
+	animation: shrink  80s forwards linear ;
+  
+	}
+    
+  </style>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+    var vx = 5;
+    var vy = 3;
+
+    var chiito = document.getElementById('bouncing_chiito');
+
+    function setVelocityToRandom() {
+        // absolutely arbitrary numbers
+        var velocity = 5 + Math.random() * 2;
+        var angleDiff = (Math.random() - 0.5) * 0.75;
+        var oldAngle = Math.atan2(vy, vx);
+        var newAngle = oldAngle + angleDiff;
+        console.log(oldAngle,newAngle)
+        vx = velocity * Math.cos(newAngle);
+        vy = velocity * Math.sin(newAngle);
+    }
+
+    var counter = 0;
+
+    var x = 0;
+    var y = 0;
+
+    function step() {
+        window.requestAnimationFrame(step);
+
+        if(counter < 100) {
+            counter++;
+            return;
+        }
+
+        x += vx;
+        chiito.style.left = x + "px";
+
+        y += vy;
+        chiito.style.top = y + "px";
+
+        if((x < 0) || (x + chiito.width > window.innerWidth)) { vx *= -1; x += 3 * vx; setVelocityToRandom(); }
+        if((y < 0) || (y + chiito.height > window.innerHeight)) { vy *= -1; y += 3 * vy; setVelocityToRandom(); }
+    }
+
+    step();
+  });
+</script>
+</head>
+<center>
+  <div style="position: absolute; left: 35%; top: 25%; ">
+
+    <img id="hole" src="images/holedug.png" >
+    <a href=""><img src="images/Hey.png" style="position:absolute; left:45%; top:35%;"></a>
+<div id="hddiv" >
+  <img  src="images/holedigger.png" id="holedigger">
+  </div>    
+  </div>
+</center>
+<img src="images/5.png" style="z-index;-100; position:absolute; left:75%;">
+<div>
+<marquee behavior="scroll" direction="up" scrollamount="6"><img src="images/1.png"></marquee>
+<marquee behavior="scroll" direction="right" scrollamount="12"><span style="color:#ff5100">/</span><span style="color:#ffa100">T</span><span style="color:#fff200">K</span><span style="color:#bcff00">M</span><span style="color:#6bff00">I</span><span style="color:#1bff00">Z</span><span style="color:#00ff36">/</span><span style="color: transparent;text-shadow: none;">&nbsp;</span><span style="color:#00ffd7">H</span><span style="color:#00d7ff">O</span><span style="color:#0086ff">M</span><span style="color:#0036ff">E</span><span style="color:#1b00ff">P</span><span style="color:#6b00ff">A</span><span style="color:#bc00ff">G</span><span style="color:#ff00f2">E</span><span style="color:#ff00a1">!</span><span style="color:#ff0051">!</span><span style="color:#ff0000">!</span></h1></marquee>
+<marquee behavior="scroll" direction="left" scrollamount="20"><h3> <a href="https://cytu.be/r/potatofields">stream</a> <a href="https://www.yourworldoftext.com/tkmiz">YWOT</a> <a href="https://daredakke.neocities.org/ywot-archive.html">[A]</a> <a href="https://dynasty-scans.com/series/shimeji_simulation">Shimeji Sumultaioron</a> <a href="https://drive.google.com/drive/folders/1NOClhA0WUPXTSE9FCsNsDP27uH612rLo">Archive</a> <a href="ircs://irc.rizon.net/#tkmiz">irc</a></h3></marquee>
+</div>
+<img src="images/image.gif" style="position:absolute;right:0%;bottom:0%;z-index:-1;">
+<a href="https://holedigging.club/cooler"><img src="images/4.png" style="position:absolute; top:0px; left:0px; z-index:5;" id="bouncing_chiito" /></a>
+
+
+<iframe src="https://www.youtube.com/embed/Vv_9kgnoFSM?autoplay=1" style="position:absolute;left:0%;bottom:0%;">
+
+</html>
