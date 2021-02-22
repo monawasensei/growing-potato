@@ -15,4 +15,4 @@ jobs:
         username: potatoroot
         password: ${{ secrets.password }}
         state-name: syncStates/.ftp-Master-sync-state.json
-        dry-run: True
+        dry-run: False
