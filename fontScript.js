@@ -1,3 +1,6 @@
+
+
+
 function get_string(string) {
 	//gets the string from the apporpriate element on the page
 	change_font(string)
