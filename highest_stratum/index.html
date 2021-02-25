@@ -4,67 +4,48 @@
 		<title>Highest Stratum</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<style>
+		
 			* {
-				box-sizing: border-box;
-				max-width: 500px;
-			}
-			body {
-				background-image: url('https://holedigging.club/archive/screencaps/screencaps/SSR_manga/-gvlmHEcE5j3wtSwKlPZkIAa43ylGjouPIeSa81dbhQ.jpg');
-				background-attachment: fixed;
-				background-size: cover;
-				background-position: center;
-				max-width: 100%;
-				max-height: 100%;
+				margin: 0px;
 				background-color: #010101;
 				color: white;
 			}
-			
-			.flex-container {
-				display: flex;
-				flex-direction: row;
-				align-content: center;
-				background-color: #010101;
-				position: fixed;
-				top: 30%;
-				right: 42%;
+		
+			#main-image-div {
+				position: center;
+				max-height: 100%;
+				padding: 0px;
+				margin: 0px;
+				border: 0px;
+			}
+		
+			#main-image {
+				margin: 0px;
+				attachment: scroll;
+				max-height: 100%;
+				max-width: 100%;
 			}
 			
-			.essay {
-				font-family: monospace;
+			.repeating-staircase {
+				position: relative;
+				attachment: scroll;
+				width: 25%;
+				left: 45px;
 			}
 			
-			.essay-quote {
-				text-align: center;
-				font-style: italic;
-				font-size: 1.2em;
+			img {
+				size: cover;
 			}
-			
-			.essay-text {
-				text-align: left;
-			}
-			
 		</style>
 	</head>
 	<body>
-		<div class="flex-container">
-			<div class="essay">
-				<div class="essay-quote">
-					<p> 
-					If only we didn't have to eat to live,<br>
-							
-					I would hardly... call that living
-					</p>
-				</div>
-				<div class="essay-text">
-					<p>
-
-							- Titus and Julius (v1,c5,p3)<br>
-							<br>
-						Mankind lives to eat.
-				
-					</p>
-				</div>
-			</div>
+		<div class="main-image-div" id="main-image-div">
+			<img id="main-image" src=https://holedigging.club/archive/screencaps/screencaps/SSR_manga/-gvlmHEcE5j3wtSwKlPZkIAa43ylGjouPIeSa81dbhQ.jpg>
 		</div>
+		
+		<div class="repeating-staircase-div">
+			<img class="repeating-staircase" src="images/repeatingstaircase.jpg">
+		</div>
+		
 	</body>
 </html> 
