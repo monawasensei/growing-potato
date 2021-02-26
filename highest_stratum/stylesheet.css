@@ -34,12 +34,13 @@ body {
 	left: 25%;
 	//top: 30%;
 	margin: auto;
-	margin: 40px;
-	overflow: hidden;
+	margin: 5px;
+	overflow: scroll;
 	font-family: monospace;
 	background-color: #010101;
 	width: 50%;
 	max-width: 50%;
+	max-height: 100%;
 	padding: 5px;
 	border-style: ridge;
 	border-width: 2px;
@@ -49,8 +50,9 @@ body {
 
 .essay-quote {
 	font-style: italic;
-	font-size: 1.8em;
+	//font-size: 1.2em;
 	text-align: center;
+	padding: 20px;
 }
 
 .essay-text {
@@ -69,3 +71,4 @@ div.essay-text > p {
 	font-size: 1.2em;
 	text-align: center;
 }
+
