@@ -1,6 +1,18 @@
 * {
 	margin: 0px;
 }
+
+a {
+	text-decoration: none;
+}	
+
+a:link {
+	color: yellow;
+}
+
+a:visited {
+	color: gray;
+}
 		
 body {
 	background-image: url('https://holedigging.club/archive/screencaps/screencaps/SSR_manga/-gvlmHEcE5j3wtSwKlPZkIAa43ylGjouPIeSa81dbhQ.jpg');
@@ -37,13 +49,23 @@ body {
 
 .essay-quote {
 	font-style: italic;
-	font-size: 1.2em;
+	font-size: 1.8em;
 	text-align: center;
 }
 
 .essay-text {
-	text-indent: 35px;
+	font-size: 1.4em;
 	text-align: left;
 	margin: auto;
 	word-wrap: break-word;
+}
+
+div.essay-text > p {
+	text-indent: 20px;
+}
+
+.link-to-essay {
+	font-style: bold;
+	font-size: 1.2em;
+	text-align: center;
 }
