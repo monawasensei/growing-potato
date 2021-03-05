@@ -1,0 +1,82 @@
+body {
+    background: url("https://files.catbox.moe/2405t4.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+/*#motd
+{
+    font-family: cursive;
+    color: red;
+    background-image: url("https://files.catbox.moe/mdl04e.gif");
+    background-size: contain;
+}*/
+
+#chatheader, #currenttitle, #plmeta, .active, .poll-menu
+{
+    background-color:#5c716a;
+    color: rgb(255,255,255);
+    border:none;
+}
+
+#videowrap-header
+{
+border:none;
+}
+
+#messagebuffer,#userlist
+{
+   background-color:#0a0502;
+   background-size: 100%;
+   border:none;
+}
+
+#footer
+{
+    background: rgba(0,0,0,0)!important;
+}
+
+button
+{
+    background-color: #5c583b;
+    background-image: linear-gradient(to bottom, 
+        #334a52,
+        #2a4147);
+    background-repeat: repeat-x;
+    border-color: #191f22!important;
+}
+
+#nicobtn.btn.btn-sm.btn-success {
+	background-color: green;
+}
+
+#nicobtn.btn.btn-sm.btn-danger {
+	background-color: red;
+}
+
+
+
+nav, .navbar
+{
+    background-color: #5c583b;
+    background-image: linear-gradient(to bottom, 
+        #2a4045,
+        #233539);
+    background-repeat: repeat-x;
+    border: none!important;
+}
+
+.queue_entry
+{
+    background-color: #161a20;
+    border-color: #FFFFFF;
+}
+
+
+.queue_active
+{
+    background-color: #560e12 !important;
+    border-color: #FFFFFF;
+}
