@@ -3,6 +3,14 @@ body {
 	background-size: cover;
 }
 
+button {
+	background-color: yellow;
+}
+
+button:hover {
+	background-color: darkgray;
+}
+
 h1 {
 	background-color:yellow;
 	margin: auto;
