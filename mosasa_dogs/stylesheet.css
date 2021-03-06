@@ -1,0 +1,16 @@
+body {
+	background-image: url('https://holedigging.club/images/ai-lang.jpeg');
+	background-size: cover;
+}
+
+h1 {
+	background-color:yellow;
+	margin: auto;
+	display: inline;
+	position: relative;
+	left: 34%;
+	top: 50px;
+	outline-style: solid;
+	outline-width: 3px;
+	outline-color: darkgray;
+}
