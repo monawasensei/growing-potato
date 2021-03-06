@@ -14,3 +14,26 @@ h1 {
 	outline-width: 3px;
 	outline-color: darkgray;
 }
+
+.player-div {
+	background-color: white;
+}
+
+#queue {
+	font-family: monospace;
+	display: block;
+	padding: 10px;
+	outline-width: 2px;
+	outline-style: solid;
+}
+
+#player-toplevel {
+	position: absolute;
+	display: inline;
+	top: 40%;
+	right: 41%;
+	margin: auto;
+	padding: 10px;
+	outline-width: 5px;
+	outline-style: solid;
+}
