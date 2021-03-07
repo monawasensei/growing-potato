@@ -58,7 +58,7 @@ function make_div_test() {
 }
 
 function button_test() {
-	document.getElementById("queue-test-text").innerHTML = "desting jabasgribd :DDDDDDDDDDD";
+	document.getElementById("queue-test-text").innerHTML = "queueLength is " + get_queue_length();
 	make_div_test()
 }
 
@@ -75,5 +75,9 @@ function play_next_entry() {
 	//nextEntryObject.remove_entry();
 }
 
+function get_queue_length() {
+	var queueLength = document.getElementById("log_length").innerHTML;
+	return queueLength;
+}
 //don't know if I need to add an update_queue() function, but I will see
 

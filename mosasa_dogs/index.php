@@ -11,9 +11,10 @@
 $logIndexer = 0;
 $log = fopen("potatofields_playlist_log.txt","r") or die("could not read log");
 while (!feof($log)) {
-	echo $logIndexer++ . " " . fgets($log) . "<br>";
+	echo $logIndexer++ . "_LINE_" . fgets($log) . "<br>";
 }
 fclose($log);
+echo "<p id=\"log_length\">" . ($logIndexer-=1) . "</p>";
 ?>
 </div>
 	<h1>
