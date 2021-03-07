@@ -30,6 +30,6 @@ fclose($log);
 	</div>
 <script src="queue_handler.js"></script> <!-- have no idea if I need an end tag for an external script. Can't hurt I guess -->
 <noscript>why don'd u hab jabasgribd durnd on? :DDDDDDDDDDDDDDDD</noscript>
-<a href="https://holedigging.club/potatofieldsData/potatofields_playlist_log.txt", style="color:yellow">Temporary link to the playlist log</a>
+<a href="potatofields_playlist_log.txt">Temporary link to the playlist log</a>
 </body>
 </html>
