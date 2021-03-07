@@ -6,6 +6,16 @@
 	<link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
+<div id="log" style="display:none">
+<?php
+$logIndexer = 0;
+$log = fopen("potatofields_playlist_log.txt","r") or die("could not read log");
+while (!feof($log)) {
+	echo $logIndexer++ . " " . fgets($log) . "<br>";
+}
+fclose($log);
+?>
+</div>
 	<h1>
 	Future home of the Mosasa Dogs!
 	</h1>
