@@ -14,6 +14,7 @@
 			outline-width: 3px;
 			outline-style: solid;
 		}
+	</style>
 </head>
 <body>
 <div id="log">
