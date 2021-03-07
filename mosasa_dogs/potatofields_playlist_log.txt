@@ -1,0 +1,69 @@
+[Sat Mar 06 2021 09:33:03] [playlist] Now playing: IOSYS - Marisa Stole The Precious Thing (Full / 4k) (yt:1pDM6fQUfJs)
+[Sat Mar 06 2021 10:02:11] [playlist] salmoon added Renaissance Lute   John Dowland Album (yt:o2nr401xYTM)
+[Sat Mar 06 2021 10:02:11] [playlist] Now playing: Renaissance Lute   John Dowland Album (yt:o2nr401xYTM)
+[Sat Mar 06 2021 10:10:14] [playlist] salmoon added Brian Eno - New Space Music (yt:-dikWB6wm0A)
+[Sat Mar 06 2021 11:00:10] [playlist] Assigned leader: Saint_Guan
+[Sat Mar 06 2021 11:00:13] [playlist] Resuming autolead
+[Sat Mar 06 2021 11:00:25] [playlist] Assigned leader: Saint_Guan
+[Sat Mar 06 2021 11:00:40] [playlist] Assigned leader: Guardian123
+[Sat Mar 06 2021 11:00:45] [playlist] Assigned leader: Saint_Guan
+[Sat Mar 06 2021 11:01:17] [playlist] Assigned leader: salmoon
+[Sat Mar 06 2021 11:03:40] [playlist] Resuming autolead
+[Sat Mar 06 2021 11:05:35] [playlist] Assigned leader: salmoon
+[Sat Mar 06 2021 11:17:00] [playlist] Resuming autolead
+[Sat Mar 06 2021 11:17:59] [playlist] Assigned leader: salmoon
+[Sat Mar 06 2021 11:18:12] [playlist] Resuming autolead
+[Sat Mar 06 2021 11:18:40] [playlist] salmoon deleted Renaissance Lute   John Dowland Album
+[Sat Mar 06 2021 11:18:40] [playlist] Now playing: Brian Eno - New Space Music (yt:-dikWB6wm0A)
+[Sat Mar 06 2021 12:03:04] [playlist] Assigned leader: salmoon
+[Sat Mar 06 2021 12:03:43] [playlist] Resuming autolead
+[Sat Mar 06 2021 12:04:52] [playlist] Assigned leader: salmoon
+[Sat Mar 06 2021 12:06:44] [playlist] Resuming autolead
+[Sat Mar 06 2021 12:22:18] [playlist] pan_ningen added Foyer des Arts - Kaiserschnitt (live) (yt:Y3MHGnbPwcI)
+[Sat Mar 06 2021 12:22:18] [playlist] Now playing: Foyer des Arts - Kaiserschnitt (live) (yt:Y3MHGnbPwcI)
+[Sat Mar 06 2021 12:23:43] [playlist] pan_ningen added Foyer des Arts - A Su Ma Kra (Vom Tieferen Zusammenhang Der Dinge) (yt:8XcRpyR6f8g)
+[Sat Mar 06 2021 12:25:11] [playlist] pan_ningen added foyer des arts - schleichwege zum christentum (yt:Bn-poWgJvMs)
+[Sat Mar 06 2021 12:28:19] [playlist] Now playing: Foyer des Arts - A Su Ma Kra (Vom Tieferen Zusammenhang Der Dinge) (yt:8XcRpyR6f8g)
+[Sat Mar 06 2021 12:30:43] [playlist] Guardian123 added Raw Video (fi:https://files.catbox.moe/jzjao9.mp4)
+[Sat Mar 06 2021 12:32:36] [playlist] Now playing: foyer des arts - schleichwege zum christentum (yt:Bn-poWgJvMs)
+[Sat Mar 06 2021 12:33:30] [playlist] pan_ningen added Machikado Mazoku ED / Ending Full -「 Yoimachi Cantare よいまちカンターレ 」 (yt:AdrmGyf-3pA)
+[Sat Mar 06 2021 12:38:47] [playlist] Now playing: Raw Video (fi:https://files.catbox.moe/jzjao9.mp4)
+[Sat Mar 06 2021 12:39:10] [playlist] Now playing: Machikado Mazoku ED / Ending Full -「 Yoimachi Cantare よいまちカンターレ 」 (yt:AdrmGyf-3pA)
+[Sat Mar 06 2021 12:41:08] [playlist] pan_ningen added 桃黒亭一門    ニッポン笑顔百景 (yt:vj-26uJ9wXY)
+[Sat Mar 06 2021 12:43:30] [playlist] Now playing: 桃黒亭一門    ニッポン笑顔百景 (yt:vj-26uJ9wXY)
+[Sat Mar 06 2021 12:45:04] [playlist] pan_ningen added 「お後がよろしくって…よ!」 - じょしらく OP 歌詞 CC【極♨落女会】 (yt:7GqQ-USURrk)
+[Sat Mar 06 2021 12:46:03] [playlist] pan_ningen added 神聖かまってちゃん [Shinsei Kamattechan] - 天使じゃ地上じゃちっそく死 (yt:jRmDOUJNTxk)
+[Sat Mar 06 2021 12:47:44] [playlist] Now playing: 「お後がよろしくって…よ!」 - じょしらく OP 歌詞 CC【極♨落女会】 (yt:7GqQ-USURrk)
+[Sat Mar 06 2021 12:49:16] [playlist] Guardian123 added Raw Video (fi:https://files.catbox.moe/f8n0k8.webm)
+[Sat Mar 06 2021 12:51:46] [playlist] Now playing: 神聖かまってちゃん [Shinsei Kamattechan] - 天使じゃ地上じゃちっそく死 (yt:jRmDOUJNTxk)
+[Sat Mar 06 2021 12:55:31] [playlist] Guardian123 added English Pronunciation - "The Chaos" by Dr. Gerard Nolst Trenité (yt:tfRSvTSY0d4)
+[Sat Mar 06 2021 12:56:03] [playlist] Now playing: Raw Video (fi:https://files.catbox.moe/f8n0k8.webm)
+[Sat Mar 06 2021 12:57:47] [playlist] Now playing: English Pronunciation - "The Chaos" by Dr. Gerard Nolst Trenité (yt:tfRSvTSY0d4)
+[Sat Mar 06 2021 13:00:20] [playlist] pan_ningen added Tsuri no Sekai e (yt:cpWwCMUL-cI)
+[Sat Mar 06 2021 13:03:20] [playlist] Now playing: Tsuri no Sekai e (yt:cpWwCMUL-cI)
+[Sat Mar 06 2021 13:05:50] [playlist] Guardian123 added videoplayback (fi:https://files.catbox.moe/x5ek32.webm)
+[Sat Mar 06 2021 13:07:14] [playlist] pan_ningen added Kaerimichi FULL HQ (Bakemonogatari Opening 2) by Emiri Katou (yt:Pnua0NO0McM)
+[Sat Mar 06 2021 13:07:16] [playlist] Now playing: videoplayback (fi:https://files.catbox.moe/x5ek32.webm)
+[Sat Mar 06 2021 13:09:44] [playlist] Now playing: Kaerimichi FULL HQ (Bakemonogatari Opening 2) by Emiri Katou (yt:Pnua0NO0McM)
+[Sat Mar 06 2021 13:12:30] [playlist] darkforest added Ben-To-"Sakana Tengoku" with lyrics (yt:MdffTmVpNOs)
+[Sat Mar 06 2021 13:13:57] [playlist] Now playing: Ben-To-"Sakana Tengoku" with lyrics (yt:MdffTmVpNOs)
+[Sat Mar 06 2021 13:14:28] [playlist] Guardian123 added '' (fi:https://files.catbox.moe/uod75q.webm)
+[Sat Mar 06 2021 13:18:18] [playlist] Now playing: '' (fi:https://files.catbox.moe/uod75q.webm)
+[Sat Mar 06 2021 13:18:28] [playlist] pan_ningen added Mgła - Exercises in Futility I (Synthwave cover) (yt:2Qu-P-4vF1c)
+[Sat Mar 06 2021 13:18:32] [playlist] Now playing: Mgła - Exercises in Futility I (Synthwave cover) (yt:2Qu-P-4vF1c)
+[Sat Mar 06 2021 13:21:22] [playlist] Guardian123 added cute (fi:https://files.catbox.moe/4w2hjp.webm)
+[Sat Mar 06 2021 13:21:36] [playlist] Guardian123 added cute (fi:https://files.catbox.moe/np6ip4.webm)
+[Sat Mar 06 2021 13:22:02] [playlist] pan_ningen added Every Day Is Night (yt:H-AfGh8gmiQ)
+[Sat Mar 06 2021 13:23:04] [playlist] pan_ningen added Good For Health, Bad For Education (VA-11 HALL-A) (yt:4sBt_ceVtvQ)
+[Sat Mar 06 2021 13:23:27] [playlist] pan_ningen added Safe Haven (VA-11 HALL-A) (yt:yyK0RS6J_8A)
+[Sat Mar 06 2021 13:23:55] [playlist] pan_ningen added Aiura OST - KaniDo Luck! (yt:kpATifUvsn8)
+[Sat Mar 06 2021 13:24:59] [playlist] Now playing: cute (fi:https://files.catbox.moe/4w2hjp.webm)
+[Sat Mar 06 2021 13:25:05] [playlist] darkforest added Night of Nights (Flowering nights remix)  By COOL&CREATE/BeatMARIO (yt:vS_a8Edde8k)
+[Sat Mar 06 2021 13:25:34] [playlist] Now playing: cute (fi:https://files.catbox.moe/np6ip4.webm)
+[Sat Mar 06 2021 13:26:05] [playlist] Now playing: Every Day Is Night (yt:H-AfGh8gmiQ)
+[Sat Mar 06 2021 13:29:51] [playlist] Now playing: Good For Health, Bad For Education (VA-11 HALL-A) (yt:4sBt_ceVtvQ)
+[Sat Mar 06 2021 13:33:11] [playlist] Now playing: Safe Haven (VA-11 HALL-A) (yt:yyK0RS6J_8A)
+[Sat Mar 06 2021 13:35:57] [playlist] Now playing: Aiura OST - KaniDo Luck! (yt:kpATifUvsn8)
+[Sat Mar 06 2021 13:39:49] [playlist] Now playing: Night of Nights (Flowering nights remix)  By COOL&CREATE/BeatMARIO (yt:vS_a8Edde8k)
+[Sat Mar 06 2021 18:29:02] [playlist] SSR_Stream_anon added 神聖かまってちゃん - つまんね [FULL ALBUM] (yt:FcZOnrL9VKM)
+[Sat Mar 06 2021 18:29:02] [playlist] Now playing: 神聖かまってちゃん - つまんね [FULL ALBUM] (yt:FcZOnrL9VKM)
