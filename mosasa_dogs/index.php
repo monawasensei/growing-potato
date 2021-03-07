@@ -4,9 +4,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Radio</title>
 	<link rel="stylesheet" href="stylesheet.css">
+	<style>
+		#log {
+			display:block;
+			max-height: 15%;
+			max-width: 40%;
+			overflow: auto;
+			background-color: white;
+			outline-width: 3px;
+			outline-style: solid;
+		}
 </head>
 <body>
-<div id="log" style="display:none">
+<div id="log">
+<p>Temporary playlist log from potatofields.<br> </p>
 <?php
 $logIndexer = 0;
 $log = fopen("potatofields_playlist_log.txt","r") or die("could not read log");
