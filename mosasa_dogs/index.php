@@ -9,7 +9,7 @@
 <div id="log" style="display:none">
 <?php
 $logIndexer = 0;
-$log = fopen("potatofields_playlist_log.txt","r") or die("could not read log");
+$log = fopen("https://holedigging.club/potatofieldsData/potatofields_playlist_log.txt","r") or die("could not read log");
 while (!feof($log)) {
 	echo $logIndexer++ . " " . fgets($log) . "<br>";
 }
@@ -30,5 +30,6 @@ fclose($log);
 	</div>
 <script src="queue_handler.js"></script> <!-- have no idea if I need an end tag for an external script. Can't hurt I guess -->
 <noscript>why don'd u hab jabasgribd durnd on? :DDDDDDDDDDDDDDDD</noscript>
+<a href="https://holedigging.club/potatofieldsData/potatofields_playlist_log.txt", style="color:yellow">Temporary link to the playlist log</a>
 </body>
 </html>
