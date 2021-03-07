@@ -6,13 +6,16 @@
 	<link rel="stylesheet" href="stylesheet.css">
 	<style>
 		#log {
-			display:block;
-			max-height: 15%;
+			display: block;
+			max-height: 200px;
 			max-width: 40%;
 			overflow: auto;
 			background-color: white;
 			outline-width: 3px;
 			outline-style: solid;
+			position: absolute;
+			top: 800px;
+			left: 600px;
 		}
 	</style>
 </head>
