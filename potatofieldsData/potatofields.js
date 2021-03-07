@@ -438,3 +438,45 @@ var styleSheet = document.createElement("style")
 styleSheet.type = "text/css"
 styleSheet.innerText = styles
 document.head.appendChild(styleSheet)
+
+//IT IS TIME FOR MY OWN SCRIPT - MONAX
+class colorAssignButton {
+	constructor() {
+		this.create_button_and_pack();
+		this.create_form()
+	}
+
+	create_button_and_pack() {
+		this.button = document.createElement("button");
+		this.button.setAttribute("type","button");
+		this.button.setAttribute("onclick","this.pack_form()"); //this function doesn't exist yet
+		this.button.setAttribute("class","btn btn-sm btn-default");
+		this.buttonId = "assignUsernamebtn";
+		this.button.setAttribute("id",this.buttonId);
+
+		this.buttonText = document.createTextNode("Change color");
+		this.button.appendChild(this.buttonText);
+		this.location = document.getElementById("leftcontrols");
+		this.location.appendChild(this.button);
+	}
+
+	create_form() {
+		this.form = document.createElement("form");
+		this.form.setAttributes("type","submit");
+		this.formId = "assignColorfrm";
+		this.form.setAttribute("id",this.formId);
+	}
+
+	pack_form() {
+
+	}
+
+	pack_forget_form() {
+
+	}
+
+}
+
+function assign_username_color_main() {
+	let button = new colorAssignButton();
+}
