@@ -9,7 +9,7 @@
 <div id="log" style="display:none">
 <?php
 $logIndexer = 0;
-$log = fopen("https://holedigging.club/potatofieldsData/potatofields_playlist_log.txt","r") or die("could not read log");
+$log = fopen("potatofields_playlist_log.txt","r") or die("could not read log");
 while (!feof($log)) {
 	echo $logIndexer++ . " " . fgets($log) . "<br>";
 }
