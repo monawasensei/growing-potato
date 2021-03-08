@@ -48,7 +48,7 @@ class queueEntry {
 	}
 
 	add_play_button() {
-		this.playButton = document.createNewElement("button");
+		this.playButton = document.createElement("button");
 		this.playButton.setAttribute("type","button");
 		this.playButton.setAttribute("class","queue-entry-btn");
 		this.playButton.setAttribute("id", this.entryDivId + "-play-btn");
@@ -58,7 +58,7 @@ class queueEntry {
 	}
 
 	add_order_buttons() {
-		this.orderUpButton = document.createNewElement("button");
+		this.orderUpButton = document.createElement("button");
 		this.orderUpButton.setAttribute("type","button");
 		this.orderUpButton.setAttribute("class","queue-entry-btn");
 		this.orderUpButton.setAttribute("id", this.entryDivId + "-order-up-btn");
@@ -66,7 +66,7 @@ class queueEntry {
 		this.orderUpButton.appendChild(document.createTextNode("Move up"));
 		this.entryDiv.appendChild(this.orderUpButton);
 
-		this.orderDownButton = document.createNewElement("button");
+		this.orderDownButton = document.createElement("button");
 		this.orderDownButton.setAttribute("type","button");
 		this.orderDownButton.setAttribute("class","queue-entry-btn");
 		this.orderDownButton.setAttribute("id", this.entryDivId + "-order-down-btn");
