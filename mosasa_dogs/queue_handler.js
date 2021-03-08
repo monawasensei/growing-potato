@@ -100,7 +100,7 @@ class logLine {
 	}
 
 	get_url() {
-		this.url = this.line.slice(this.youtubeSubURLStartPos,this.youtubeSubURLEndPos+1); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
+		this.url = this.line.slice(this.youtubeSubURLStartPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
 	}
 }
 
