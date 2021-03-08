@@ -196,11 +196,12 @@ function get_entry_by_id(id) {
 //}
 
 function onYouTubeIframeAPIReady() {
+	document.getElementById("queue-test-text").innerHTML = "youtubeAPI ready";
 	mosasaYTPlayer = new YT.Player("player", {
 		playerVars: {
 			"autoplay": 1,
 			"disablekb": 1,
-			"origin": "https://holedigging.club",
+			//"origin": "https://holedigging.club",
 			"enablejsapi": 1
 			},
 		events: {
