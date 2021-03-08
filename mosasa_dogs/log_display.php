@@ -5,7 +5,7 @@
 </head>
 <body>
 <?php
-$log = fopen("potatofields_playlist_log.txt","r") or die("couldn't open log");
+$log = fopen("potatofields_html_style_log","r") or die("couldn't open log");
 while(!feof($log)) {
 	echo fgets($log) . "<br>";
 }
