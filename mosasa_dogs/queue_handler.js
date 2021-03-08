@@ -25,7 +25,7 @@ class queueEntry {
 	}
 
 	remove_from_queue() {
-		pos = this.get_queueIndex_pos();
+		var pos = this.get_queueIndex_pos();
 		queueIndex.splice(pos,1);
 		queueContainer.removeChild(this.entryDiv);
 	}
@@ -155,9 +155,9 @@ function get_queue_length() {
 }
 
 function play_entry(entryDivId) {
-	entry = get_entry_by_id(entryDivId); //find entry based on tag id
-	entry.remove_from_queue(); //doesn't exist yet
-	entry.add_to_queue(); //doesn't exist yet
+	entry = get_entry_by_id(entryDivId);
+	entry.remove_from_queue();
+	entry.add_to_queue();
 	entry.replace_player_src();
 }
 
