@@ -28,7 +28,7 @@
 		<h1 class="contents-title">Future home of the Mosasa Dogs!</h1>
 
 		<div id="player-toplevel" class="contents-video">
-			<iframe id="player" src="https://www.youtube.com/embed/FcZOnrL9VKM" frameborder="0" enablejsapi="true" events="onStateChange:current_entry_ended" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<iframe id="player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div>
 
 		<div id="queue">
