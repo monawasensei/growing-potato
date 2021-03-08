@@ -37,6 +37,7 @@ class queueEntry {
 		this.entryTitle = document.createElement("a")
 		this.entryTitle.setAttribute("class","entry-title")
 		this.entryTitle.setAttribute("href","https://www.youtube.com/watch/" + this.lineData.url);
+		this.entryTitle.setAttribute("target","_blank");
 		var entryTitleText = document.createTextNode(this.lineData.title)
 		this.entryTitle.appendChild(entryTitleText)
 		this.entryDiv.appendChild(this.entryTitle)
@@ -99,7 +100,7 @@ class logLine {
 	}
 
 	get_url() {
-		this.url = this.line.slice(this.titleEndPos+1,this.youtubeSubURLEndPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
+		this.url = this.line.slice(this.youtubeSubURLStartPos,this.youtubeSubURLEndPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
 	}
 }
 
