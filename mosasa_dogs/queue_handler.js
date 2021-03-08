@@ -21,7 +21,7 @@ class queueEntry {
 	}
 
 	replace_player_src() {
-		embeddedURL = "https://www.youtube.com/embed/" + this.lineData.url;
+		var embeddedURL = "https://www.youtube.com/embed/" + this.lineData.url;
 		document.getElementById("player").setAttribute("src",embeddedURL);
 	}
 
