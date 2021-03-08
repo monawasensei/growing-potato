@@ -184,7 +184,7 @@ function get_entry_by_id(id) {
 		}
 	}
 	return 0
-
+}
 //YOUTUBE BULLSHIT
 
 function make_player() {
