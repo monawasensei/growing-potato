@@ -22,8 +22,9 @@ class queueEntry {
 	}
 
 	replace_player_src() {
-		var embeddedURL = "https://www.youtube.com/embed/" + this.lineData.url + "?autoplay=1";
-		document.getElementById("player").setAttribute("src",embeddedURL);
+		//var embeddedURL = "https://www.youtube.com/embed/" + this.lineData.url + "?autoplay=1";
+		//document.getElementById("player").setAttribute("src",embeddedURL);
+		mosasaYTPlayer.loadVideoById(this.lineData.url);
 	}
 
 	remove_from_queue() {
@@ -157,7 +158,7 @@ function get_queue_length() {
 }
 
 function play_entry(entryDivId) {
-	entry = get_entry_by_id(entryDivId);
+	var entry = get_entry_by_id(entryDivId);
 	entry.remove_from_queue();
 	entry.add_to_queue();
 	entry.replace_player_src();
@@ -183,44 +184,46 @@ function get_entry_by_id(id) {
 		}
 	}
 	return 0
+
+//YOUTUBE BULLSHIT
+
+function make_player() {
+	var tag = document.createElement("script");
+	tag.src = "https://www.youtube.com/iframe_api";
+	tag.setAttribute("id","yt-api");
+	ytAPITag = document.getElementById("yt-api");
+	ytAPITag.parentNode.insertBefore(tag,ytAPITag);
 }
 
-function current_entry_ended(event) {
-	getElementById.("queue-test-text").innerHTML = "sdade jainj :DDDDDDDDD\t" + event;
+function onYouTubeIframeAPIReady() {
+	mosasaYTPlayer = new YT.Player("player", {
+		playerVars: {
+			"autoplay": 1,
+			"disablekb": 1,
+			"origin": "https://holedigging.club",
+			"enablejsapi": 1
+			},
+		events: {
+			"onReady": onPlayerReady,
+			"onStateChange": onPlayerStateChange
+			}
+		});
 }
-//
+
+function onPlayerReady(event) {
+	autoplay_next_entry();
+}
+
+function onPlayerStateChange(event) {
+	if (mosasaYTPlayer.getPlayerState() == 0) {
+		autoplay_next_entry();
+	}
+}
+
 //YOUTUBE BULLSHIT
-//
-//function make_player() {
-//	var tag = document.createElement("script");
-//	tag.src = "https://www.youtube.com/iframe_api";
-//	tag.setAttribute("id","yt-api");
-//	ytAPITag = document.getElementById("yt-api");
-//	ytAPITag.parentNode.insertBefore(tag,ytAPITag);
-//}
-//
-//function onYouTubeIframeAPIReady() {
-//	mosasaYTPlayer = new YT.Player("player", {
-//		playerVars: "autoplay",
-//		events: {
-//			"onReady": onPlayerReady,
-//			"onStateChange": onPlayerStateChange
-//			}
-//		})
-//}
-//
-//function onPlayerReady(event) {
-//	//idk how this one works
-//}
-//
-//function onPlayerStateChange(event) {
-//
-//}
-//
-//YOUTUBE BULLSHIT
-//
+
 function main() {
-//	make_player();
+	make_player();
 	get_log();
 }
 
