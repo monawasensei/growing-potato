@@ -162,20 +162,15 @@ function play_entry(entryDivId) {
 }
 
 function get_entry_by_id(id) {
-	var done = 0;
 	for (let entry of queueIndex) {
 		if (id == entry.entryDivId) {
-			let foundEntry = entry;
-			done = 1;
-			break;
+			return entry;
 		}
 		else {
 			continue;
 		}
 	}
-
-	if (done != 1) {return 0};
-	return foundEntry;
+	return 0
 }
 
 function main() {
