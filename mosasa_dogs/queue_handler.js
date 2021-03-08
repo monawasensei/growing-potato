@@ -70,16 +70,18 @@ class logLine {
 function get_log() {
 	var log = document.getElementById("log").innerHTML;
 	var _Line_Pos = 0;
+	var _Line_EndPos;
 	var next_Line_Pos = 0;
 	var _Line_String;
 	var logEntryText;
 	var length = get_queue_length();
-	for (index = 1; index <= length; index++) {
+	for (index = 0; index <= length; index++) {
 		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
 		_Line_String = "_LINE_" + index;
 		_Line_Pos += _Line_Pos + _Line_String.length;
 		next_Line_Pos = log.indexOf("_LINE_",_Line_Pos);
-		logEntryText = log.slice(_Line_Pos,next_Line_Pos);
+		_Line_EndPos = next_Line_Pos - "\n<br>".length;
+		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
 		let logLineObject = new logLine(logEntryText);
 		let playlistQueueEntry = new queueEntry(logLineObject);
 	}
