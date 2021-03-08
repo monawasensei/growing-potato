@@ -73,7 +73,7 @@ class queueEntry {
 		this.playButton.setAttribute("type","button");
 		this.playButton.setAttribute("class","entry-btn");
 		this.playButton.setAttribute("id", this.entryDivId + "-play-btn");
-		this.playButton.setAttribute("onclick","play_entry(" + this.entryDivId + ")"); //this one will be tricky to figure out I think.
+		this.playButton.setAttribute("onclick","play_entry(\"" + this.entryDivId + "\")"); //this one will be tricky to figure out I think.
 		this.playButton.appendChild(document.createTextNode("play"));
 		this.buttonDiv.appendChild(this.playButton);
 	}
