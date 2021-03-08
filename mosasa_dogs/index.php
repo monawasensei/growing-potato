@@ -4,7 +4,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Radio</title>
 	<link rel="stylesheet" href="../stylesheet.css">
-	<script src="queue_handler.js" defer></script> <!-- have no idea if I need an end tag for an external script. Can't hurt I guess -->
+	<script id="queue-handler" src="queue_handler.js" defer></script> <!-- have no idea if I need an end tag for an external script. Can't hurt I guess -->
+	<script id="yt-api" src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 	<div id="log" style="display:none">
