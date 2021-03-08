@@ -16,9 +16,10 @@ class queueEntry {
 	create_entry() {
 		this.create_entry_div()
 		this.populate_entry_div()
+		this.add_log_buttons()
 	}
 
-	remove_entry() {
+	remove_entry() { //this doesn't work yet so don't call it
 		queueIndex.splice(queueIndex.indexOf(this),1)
 	}
 
@@ -33,11 +34,45 @@ class queueEntry {
 	}
 
 	populate_entry_div() {
-		this.entryTitle = document.createElement("p")
+		this.entryTitle = document.createElement("a")
 		this.entryTitle.setAttribute("class","entry-title")
+		this.entryTitle.setAttribute("href","https://www.youtube.com/watch/" + this.lineData.url);
 		var entryTitleText = document.createTextNode(this.lineData.title)
 		this.entryTitle.appendChild(entryTitleText)
 		this.entryDiv.appendChild(this.entryTitle)
+	}
+
+	add_log_buttons() {
+		this.add_play_button();
+		this.add_order_buttons();
+	}
+
+	add_play_button() {
+		this.playButton = document.createNewElement("button");
+		this.playButton.setAttribute("type","button");
+		this.playButton.setAttribute("class","queue-entry-btn");
+		this.playButton.setAttribute("id", this.entryDivId + "-play-btn");
+		//this.play_button.setAttribute("onclick","play_entry(this)"); //this one will be tricky to figure out I think.
+		this.playButton.appendChild(document.createTextNode("play"));
+		this.entryDiv.appendChild(this.playButton);
+	}
+
+	add_order_buttons() {
+		this.orderUpButton = document.createNewElement("button");
+		this.orderUpButton.setAttribute("type","button");
+		this.orderUpButton.setAttribute("class","queue-entry-btn");
+		this.orderUpButton.setAttribute("id", this.entryDivId + "-order-up-btn");
+		//this.play_button.setAttribute("onclick","move_entry(this,"up")"); //this one will be tricky to figure out I think.
+		this.orderUpButton.appendChild(document.createTextNode("Move up"));
+		this.entryDiv.appendChild(this.orderUpButton);
+
+		this.orderDownButton = document.createNewElement("button");
+		this.orderDownButton.setAttribute("type","button");
+		this.orderDownButton.setAttribute("class","queue-entry-btn");
+		this.orderDownButton.setAttribute("id", this.entryDivId + "-order-down-btn");
+		//this.play_button.setAttribute("onclick","move_entry(this,"down")"); //this one will be tricky to figure out I think.
+		this.orderDownButton.appendChild(document.createTextNode("Move down"));
+		this.entryDiv.appendChild(this.orderDownButton);
 	}
 
 	add_log_info() {
