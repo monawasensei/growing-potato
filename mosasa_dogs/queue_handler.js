@@ -44,6 +44,10 @@ class queueEntry {
 	}
 
 	add_log_buttons() {
+		this.buttonDiv = document.createElement("div");
+		this.buttonDiv.setAttribute("class","entry-btn-div");
+		this.buttonDiv.setAttribute("id",this.entryDivId + "btn-div");
+		this.entryDiv.appendChild(this.buttonDiv);
 		this.add_play_button();
 		this.add_order_buttons();
 	}
@@ -51,29 +55,29 @@ class queueEntry {
 	add_play_button() {
 		this.playButton = document.createElement("button");
 		this.playButton.setAttribute("type","button");
-		this.playButton.setAttribute("class","queue-entry-btn");
+		this.playButton.setAttribute("class","entry-btn");
 		this.playButton.setAttribute("id", this.entryDivId + "-play-btn");
 		//this.play_button.setAttribute("onclick","play_entry(this)"); //this one will be tricky to figure out I think.
 		this.playButton.appendChild(document.createTextNode("play"));
-		this.entryDiv.appendChild(this.playButton);
+		this.buttonDiv.appendChild(this.playButton);
 	}
 
 	add_order_buttons() {
 		this.orderUpButton = document.createElement("button");
 		this.orderUpButton.setAttribute("type","button");
-		this.orderUpButton.setAttribute("class","queue-entry-btn");
+		this.orderUpButton.setAttribute("class","entry-btn");
 		this.orderUpButton.setAttribute("id", this.entryDivId + "-order-up-btn");
 		//this.play_button.setAttribute("onclick","move_entry(this,"up")"); //this one will be tricky to figure out I think.
 		this.orderUpButton.appendChild(document.createTextNode("Move up"));
-		this.entryDiv.appendChild(this.orderUpButton);
+		this.buttonDiv.appendChild(this.orderUpButton);
 
 		this.orderDownButton = document.createElement("button");
 		this.orderDownButton.setAttribute("type","button");
-		this.orderDownButton.setAttribute("class","queue-entry-btn");
+		this.orderDownButton.setAttribute("class","entry-btn");
 		this.orderDownButton.setAttribute("id", this.entryDivId + "-order-down-btn");
 		//this.play_button.setAttribute("onclick","move_entry(this,"down")"); //this one will be tricky to figure out I think.
 		this.orderDownButton.appendChild(document.createTextNode("Move down"));
-		this.entryDiv.appendChild(this.orderDownButton);
+		this.buttonDiv.appendChild(this.orderDownButton);
 	}
 
 	add_log_info() {
