@@ -204,11 +204,12 @@ function onYouTubeIframeAPIReady() {
 		//	//"origin": "https://holedigging.club",
 		//	"enablejsapi": 1
 		//	},
-		events: {
-			"onReady": onPlayerReady,
-			"onStateChange": onPlayerStateChange
-			}
+		//events: {
+		//	"onReady": onPlayerReady,
+		//	"onStateChange": onPlayerStateChange
+		//	}
 		});
+	document.getElementById("queue-test-text").innerHTML = "mosasaYTPlayer object created";
 }
 
 function onPlayerReady(event) {
