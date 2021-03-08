@@ -4,6 +4,7 @@
 var queueIndex = new Array();
 var queueEntryId = 0
 var queueContainer = document.getElementById("queue")
+var mosasaYTPlayer
 //var log = new Array();
 
 class queueEntry {
@@ -168,7 +169,7 @@ function autoplay_next_entry() {
 }
 
 function get_top_entry_id() {
-	var topEntry = document.querySelectorAll("#queue div:first-child");
+	var topEntry = document.querySelectorAll("#queue div.entry-div")[0];
 	return topEntry.getAttribute("id");
 }
 
@@ -184,7 +185,42 @@ function get_entry_by_id(id) {
 	return 0
 }
 
+function current_entry_ended(event) {
+	getElementById.("queue-test-text").innerHTML = "sdade jainj :DDDDDDDDD\t" + event;
+}
+//
+//YOUTUBE BULLSHIT
+//
+//function make_player() {
+//	var tag = document.createElement("script");
+//	tag.src = "https://www.youtube.com/iframe_api";
+//	tag.setAttribute("id","yt-api");
+//	ytAPITag = document.getElementById("yt-api");
+//	ytAPITag.parentNode.insertBefore(tag,ytAPITag);
+//}
+//
+//function onYouTubeIframeAPIReady() {
+//	mosasaYTPlayer = new YT.Player("player", {
+//		playerVars: "autoplay",
+//		events: {
+//			"onReady": onPlayerReady,
+//			"onStateChange": onPlayerStateChange
+//			}
+//		})
+//}
+//
+//function onPlayerReady(event) {
+//	//idk how this one works
+//}
+//
+//function onPlayerStateChange(event) {
+//
+//}
+//
+//YOUTUBE BULLSHIT
+//
 function main() {
+//	make_player();
 	get_log();
 }
 
