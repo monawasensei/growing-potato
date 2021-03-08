@@ -21,7 +21,7 @@ class queueEntry {
 	}
 
 	replace_player_src() {
-		var embeddedURL = "https://www.youtube.com/embed/" + this.lineData.url;
+		var embeddedURL = "https://www.youtube.com/embed/" + this.lineData.url + "?autoplay=1";
 		document.getElementById("player").setAttribute("src",embeddedURL);
 	}
 
@@ -147,6 +147,7 @@ function get_log() {
 
 function button_test() {
 	document.getElementById("queue-test-text").innerHTML = "queueLength is " + get_queue_length();
+	autoplay_next_entry();
 }
 
 function get_queue_length() {
@@ -159,6 +160,16 @@ function play_entry(entryDivId) {
 	entry.remove_from_queue();
 	entry.add_to_queue();
 	entry.replace_player_src();
+}
+
+function autoplay_next_entry() {
+	var nextEntryId = get_top_entry_id();
+	play_entry(nextEntryId);
+}
+
+function get_top_entry_id() {
+	var topEntry = document.querySelectorAll("#queue div:first-child");
+	return topEntry.getAttribute("id");
 }
 
 function get_entry_by_id(id) {
