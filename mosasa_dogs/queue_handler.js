@@ -96,11 +96,11 @@ class logLine {
 	}
 
 	get_title() {
-		this.title = this.line.slice(0,this.titleEndPos);
+		this.title = this.line.slice(0,this.titleEndPos+1);
 	}
 
 	get_url() {
-		this.url = this.line.slice(this.youtubeSubURLStartPos,this.youtubeSubURLEndPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
+		this.url = this.line.slice(this.youtubeSubURLStartPos,this.youtubeSubURLEndPos+1); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
 	}
 }
 
