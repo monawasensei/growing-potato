@@ -187,13 +187,13 @@ function get_entry_by_id(id) {
 }
 //YOUTUBE BULLSHIT
 
-function make_player() {
-	var tag = document.createElement("script");
-	tag.src = "https://www.youtube.com/iframe_api";
-	tag.setAttribute("id","yt-api");
-	ytAPITag = document.getElementById("yt-api");
-	ytAPITag.parentNode.insertBefore(tag,ytAPITag);
-}
+//function make_player() {
+//	var tag = document.createElement("script");
+//	tag.src = "https://www.youtube.com/iframe_api";
+//	tag.setAttribute("id","yt-api");
+//	ytAPITag = document.getElementById("yt-api");
+//	ytAPITag.parentNode.insertBefore(tag,ytAPITag);
+//}
 
 function onYouTubeIframeAPIReady() {
 	mosasaYTPlayer = new YT.Player("player", {
@@ -223,7 +223,6 @@ function onPlayerStateChange(event) {
 //YOUTUBE BULLSHIT
 
 function main() {
-	make_player();
 	get_log();
 }
 
