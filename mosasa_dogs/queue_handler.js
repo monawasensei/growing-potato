@@ -89,8 +89,9 @@ class logLine {
 	}
 
 	get_indeces() {
-		this.titleEndPos = this.line.indexOf("https://www.youtube.com/watch")-1;
-		this.youtubeSubURLStartPos = this.line.indexOf("https://www.youtube/watch/") + "https://www.youtube/watch/".length;
+		this.titleEndPos = this.line.indexOf("\thttps://www.youtube.com/watch")-1;
+		this.youtubeSubURLStartPos = this.line.indexOf("https://www.youtube.com/watch/") + "https://www.youtube.com/watch/".length;
+		this.youtubeSubURLEndPos = this.line.indexOf("\n<br>",this.youtubeSubURLStartPos);
 	}
 
 	get_title() {
@@ -98,7 +99,7 @@ class logLine {
 	}
 
 	get_url() {
-		this.url = this.line.slice(this.titleEndPos+1,this.youtubeSubURLStartPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
+		this.url = this.line.slice(this.titleEndPos+1,this.youtubeSubURLEndPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
 	}
 }
 
