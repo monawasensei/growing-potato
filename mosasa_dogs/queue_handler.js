@@ -78,7 +78,7 @@ function get_log() {
 	for (index = 0; index <= length; index++) {
 		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
 		_Line_String = "_LINE_" + index;
-		_Line_Pos += _Line_Pos + _Line_String.length;
+		_Line_Pos = _Line_Pos + _Line_String.length;
 		next_Line_Pos = log.indexOf("_LINE_",_Line_Pos);
 		_Line_EndPos = next_Line_Pos - "\n<br>".length;
 		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
