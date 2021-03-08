@@ -3,6 +3,7 @@
 
 var queueIndex = new Array();
 var queueEntryId = 0
+var queueContainer = document.getElementById("queue")
 //var log = new Array();
 
 class queueEntry {
@@ -41,7 +42,6 @@ class queueEntry {
 
 	create_entry_div() {
 		queueEntryId += 1
-		var queueContainer = document.getElementById("queue")
 		this.entryDiv = document.createElement("div")
 		this.entryDivId = "entry-" + queueEntryId
 		this.entryDiv.setAttribute("id",this.entryDivId)
