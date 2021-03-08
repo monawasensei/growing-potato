@@ -14,7 +14,7 @@ while (!feof($log)) {
 	echo $logIndexer++ . "_LINE_" . fgets($log) . "<br>";
 }
 fclose($log);
-echo "<p id=\"log_length\">" . ($logIndexer-=1) . "</p>";
+echo "<p id=\"log_length\">" . ($logIndexer-=2) . "</p>";
 ?>
 </div>
 	<h1>
