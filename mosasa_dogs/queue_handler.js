@@ -19,8 +19,24 @@ class queueEntry {
 		this.add_log_buttons()
 	}
 
-	remove_entry() { //this doesn't work yet so don't call it
-		queueIndex.splice(queueIndex.indexOf(this),1)
+	replace_player_src() {
+		embeddedURL = "https://www.youtube.com/embed/" + this.lineData.url;
+		document.getElementById("player").setAttribute("src",embeddedURL);
+	}
+
+	remove_from_queue() {
+		pos = this.get_queueIndex_pos();
+		queueIndex.splice(pos,1);
+		queueContainer.removeChild(this.entryDiv);
+	}
+
+	add_to_queue() {
+		queueIndex.push(this);
+		queueContainer.appendChild(this.entryDiv);
+	}
+
+	get_queueIndex_pos() {
+		return queueIndex.indexOf(this);
 	}
 
 	create_entry_div() {
@@ -57,7 +73,7 @@ class queueEntry {
 		this.playButton.setAttribute("type","button");
 		this.playButton.setAttribute("class","entry-btn");
 		this.playButton.setAttribute("id", this.entryDivId + "-play-btn");
-		//this.play_button.setAttribute("onclick","play_entry(this)"); //this one will be tricky to figure out I think.
+		this.play_button.setAttribute("onclick","play_entry(" + this.entryDivId + ")"); //this one will be tricky to figure out I think.
 		this.playButton.appendChild(document.createTextNode("play"));
 		this.buttonDiv.appendChild(this.playButton);
 	}
@@ -128,32 +144,39 @@ function get_log() {
 	}
 }
 
-//function make_div_test() {
-//	let testEntryDiv = new queueEntry("https://holedigging.club")
-//}
 
 function button_test() {
 	document.getElementById("queue-test-text").innerHTML = "queueLength is " + get_queue_length();
-	make_div_test()
 }
-
-//function play_queue() {
-//	play_next_entry()
-	//queueIndex.shift();
-//}
-
-//function play_next_entry() {
-//	var nextEntryObject = queueIndex[0];
-//	player = document.getElementById("player");
-//	player.setAttribute("src",nextEntryObject.src);
-	//nextEntryObject.remove_entry();
-//}
 
 function get_queue_length() {
 	var queueLength = document.getElementById("log_length").innerHTML;
 	return queueLength;
 }
-//don't know if I need to add an update_queue() function, but I will see
+
+function play_entry(entryDivId) {
+	entry = get_entry_by_id(entryDivId); //find entry based on tag id
+	entry.remove_from_queue(); //doesn't exist yet
+	entry.add_to_queue(); //doesn't exist yet
+	entry.replace_player_src();
+}
+
+function get_entry_by_id(id) {
+	var done = 0;
+	for (let entry of queueIndex) {
+		if (id == entry.entryDivId) {
+			let foundEntry = entry;
+			done = 1;
+			break;
+		}
+		else {
+			continue;
+		}
+	}
+
+	if (done != 1) {return 0};
+	return foundEntry;
+}
 
 function main() {
 	get_log();
