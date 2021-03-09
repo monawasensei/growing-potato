@@ -38,10 +38,18 @@ class queueEntry {
 		queueContainer.appendChild(this.entryDiv);
 	}
 
-	shift_in_queue(index) {
-		this.remove_from_queue();
+	shift_in_queue(index) { //fixing
+		var previousPos = this.get_queueIndex_pos();
+		if (index < previousPos) {previousPos += 1;}
 		queueIndex.splice(index,0,this);
-		queueContainer.appendChild(this.entryDiv);
+		if (index >= queueIndex.length-1) {
+			queueContainer.appendChild(this.entryDiv);
+		}
+		else {
+		var beforeDiv = queueIndex[index + 1].entryDiv;
+		queueContainer.insertBefore(this.entryDiv,beforeDiv);
+		}
+		queueIndex.splice(previousPos,1);
 	}
 
 	get_queueIndex_pos() {
@@ -176,14 +184,16 @@ function autoplay_next_entry() {
 }
 
 function move_entry(entryDivId,direction,number) { //need to add validation so that it checks direction to be either "up" or "down", though this isn't a  big deal
+	var moveMod = 0;
 	if (direction == "up") {number *= -1;}
+	else if (direction == "down") {moveMod = 1;}
 	var entry = get_entry_by_id(entryDivId);
 	var isEndEntry = is_end_entry_by_id(entryDivId);
 	if (isEndEntry == 1 && number < 0) {number = 0;}
 	else if (isEndEntry == -1 && number > 0) {number = 0;}
 	var queueStartPos = entry.get_queueIndex_pos();
 	number = move_distance_in_bounds(queueStartPos,number);
-	var queueDestinationPos = queueStartPos + number;
+	var queueDestinationPos = queueStartPos + number + moveMod;
 	entry.shift_in_queue(queueDestinationPos);
 }
 
