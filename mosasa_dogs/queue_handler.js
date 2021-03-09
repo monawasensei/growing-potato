@@ -38,6 +38,12 @@ class queueEntry {
 		queueContainer.appendChild(this.entryDiv);
 	}
 
+	shift_in_queue(index) {
+		this.remove_from_queue();
+		queueIndex.splice(index,0,this);
+		queueContainer.appendChild(this.enryDiv);
+	}
+
 	get_queueIndex_pos() {
 		return queueIndex.indexOf(this);
 	}
@@ -85,7 +91,7 @@ class queueEntry {
 		this.orderUpButton.setAttribute("type","button");
 		this.orderUpButton.setAttribute("class","entry-btn");
 		this.orderUpButton.setAttribute("id", this.entryDivId + "-order-up-btn");
-		//this.play_button.setAttribute("onclick","move_entry(this,"up")"); //this one will be tricky to figure out I think.
+		this.orderUpButton.setAttribute("onclick","move_entry(\"" + this.entryDivId + "\",\"up\",1)");
 		this.orderUpButton.appendChild(document.createTextNode("Move up"));
 		this.buttonDiv.appendChild(this.orderUpButton);
 
@@ -93,7 +99,7 @@ class queueEntry {
 		this.orderDownButton.setAttribute("type","button");
 		this.orderDownButton.setAttribute("class","entry-btn");
 		this.orderDownButton.setAttribute("id", this.entryDivId + "-order-down-btn");
-		//this.play_button.setAttribute("onclick","move_entry(this,"down")"); //this one will be tricky to figure out I think.
+		this.orderDownButton.setAttribute("onclick","move_entry(\"" + this.entryDivId + "\",\"down\",1)");
 		this.orderDownButton.appendChild(document.createTextNode("Move down"));
 		this.buttonDiv.appendChild(this.orderDownButton);
 	}
@@ -165,13 +171,66 @@ function play_entry(entryDivId) {
 }
 
 function autoplay_next_entry() {
-	var nextEntryId = get_top_entry_id();
+	var nextEntryId = get_end_entry_id("top");
 	play_entry(nextEntryId);
 }
 
-function get_top_entry_id() {
-	var topEntry = document.querySelectorAll("#queue div.entry-div")[0];
-	return topEntry.getAttribute("id");
+function move_entry(entryDivId,direction,number) { //need to add validation so that it checks direction to be either "up" or "down", though this isn't a  big deal
+	if (direcion == "up") {number *= -1;}
+	var entry = get_entry_by_id(entryDivId);
+	var isEndEntry = is_end_entry_by_id(entryDivId);
+	if (isEndEntry == 1)&&(number < 0) {number = 0;}
+	else if (isEndEntry == -1)&&(number > 0) {number = 0;}
+	var queueStartPos = entry.get_queueIndex_pos();
+	number = move_distance_in_bounds(queueStartPos,entry,number);
+	var queueDestinationPos = queueStartPos + number;
+	entry.shift_in_queue(queueDestinationPos);
+}
+
+function move_distance_in_bounds(currentPos,entry,number) {
+	//make sure number is less than or equal to the bounds of the queue
+	if (currentPos + number < 0) {number = -1 * currentPos;}
+	else if (currentPos + number > queueIndex.length) {number = queueIndex.length - currentPos;}
+	return number;
+}
+
+//function get_top_entry_id() {
+//	var topEntry = document.querySelectorAll("#queue div.entry-div")[0];
+//	return topEntry.getAttribute("id");
+//}
+
+function is_end_entry_by_id(entryId) {
+	var topId;
+	topId = get_end_entry_id("top");
+	var bottomId;
+	botomId = get_end_entry_id("bottom");
+
+	if (entryId == topId) {
+		return 1;
+	}
+	else if (entryId == bottomId) {
+		return -1;
+	}
+	else {
+		return 0;
+	}
+}
+
+function get_end_entry_id(whichEnd) {
+	var endIndex;
+	switch (whichEnd) {
+		case "top":
+			endIndex = 0;
+			break;
+		case "bottom":
+			endIndex = -1;
+			break;
+		default:
+			endIndex = 0;
+	}
+
+	var endEntry = document.querySelectorAll("#queue div.entry-div")[endIndex];
+	return endEntry.getAttribute("id");
 }
 
 function get_entry_by_id(id) {
