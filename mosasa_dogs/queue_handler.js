@@ -212,10 +212,12 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
+	document.getElementById("queue-test-text").innerHTML = "onPlayerReady";
 	autoplay_next_entry();
 }
 
 function onPlayerStateChange(event) {
+	document.getElementById("queue-test-text").innerHTML = "onPlayerStateChange";
 	if (mosasaYTPlayer.getPlayerState() == 0) {
 		autoplay_next_entry();
 	}
