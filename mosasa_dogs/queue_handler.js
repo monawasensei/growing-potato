@@ -176,11 +176,11 @@ function autoplay_next_entry() {
 }
 
 function move_entry(entryDivId,direction,number) { //need to add validation so that it checks direction to be either "up" or "down", though this isn't a  big deal
-	if (direcion == "up") {number *= -1;}
+	if (direction == "up") {number *= -1;}
 	var entry = get_entry_by_id(entryDivId);
 	var isEndEntry = is_end_entry_by_id(entryDivId);
-	if (isEndEntry == 1)&&(number < 0) {number = 0;}
-	else if (isEndEntry == -1)&&(number > 0) {number = 0;}
+	if (isEndEntry == 1 && number < 0) {number = 0;}
+	else if (isEndEntry == -1 && number > 0) {number = 0;}
 	var queueStartPos = entry.get_queueIndex_pos();
 	number = move_distance_in_bounds(queueStartPos,number);
 	var queueDestinationPos = queueStartPos + number;
@@ -218,19 +218,23 @@ function is_end_entry_by_id(entryId) {
 
 function get_end_entry_id(whichEnd) {
 	var endIndex;
+	var queueEntryNodeList = document.querySelectorAll("#queue div.entry-div");
 	switch (whichEnd) {
 		case "top":
 			endIndex = 0;
 			break;
 		case "bottom":
-			endIndex = -1;
+			endIndex = queueEntryNodeList.length - 1;
 			break;
 		default:
 			endIndex = 0;
 	}
 
-	var endEntry = document.querySelectorAll("#queue div.entry-div")[endIndex];
-	return endEntry.getAttribute("id");
+	//var endEntry = document.querySelectorAll("#queue div.entry-div")[endIndex];
+	var endEntry = queueEntryNodeList[endIndex];
+	var endEntryId = endEntry.getAttribute("id");
+	//var endEntryId = document.querySelectorAll("#queue div.entry-div")[endIndex].getAttribute("id");
+	return endEntryId
 }
 
 function get_entry_by_id(id) {
