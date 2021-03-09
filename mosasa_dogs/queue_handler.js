@@ -230,7 +230,10 @@ function get_end_entry_id(whichEnd) {
 	}
 
 	//var endEntry = document.querySelectorAll("#queue div.entry-div")[endIndex];
-	var endEntryId = document.querySelectorAll("#queue div.entry-div")[endIndex].getAttribute("id");
+	var queueEntryNodeList = document.querySelectorAll("#queue div.entry-div");
+	var endEntry = queueEntryNodeList[endIndex];
+	var endEntryId = endEntry.getAttribute("id");
+	//var endEntryId = document.querySelectorAll("#queue div.entry-div")[endIndex].getAttribute("id");
 	return endEntryId
 }
 
