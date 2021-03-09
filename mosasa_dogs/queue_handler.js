@@ -2,6 +2,7 @@
 //then use queueEntry objects to pack and unpack these items, so that the playlist never ends :DDDDDDDD
 
 var queueIndex = new Array();
+var subQueue = new Array();
 var queueEntryId = 0;
 var queueContainer = document.getElementById("queue");
 var mosasaYTPlayer;
@@ -54,6 +55,10 @@ class queueEntry {
 
 	get_queueIndex_pos() {
 		return queueIndex.indexOf(this);
+	}
+
+	get_subQueue_pos() {
+		return subQueue.indexOf(this);
 	}
 
 	create_entry_div() {
@@ -112,6 +117,37 @@ class queueEntry {
 		this.buttonDiv.appendChild(this.orderDownButton);
 	}
 
+	add_sub_queue_buttons() {
+		this.subQueueButton = document.createElement("button");
+		this.subQueueButton.setAttribute("type","button");
+		this.subQueueButton.setAttribute("class","entry-btn");
+		this.subQueueButton.setAttribute("id", this.entryDivId + "-add-sub-queue-btn");
+		this.subQueueButton.setAttribute("onclick","add_entry_to_subQueue(\"" + this.entryDivId + "\")");
+		this.subQueueButton.appendChild(document.createTextNode("Add to queue"));
+		this.buttonDiv.appendChild(this.subQueueButton);
+	}
+
+	modify_queue_buttons(addRemove) {
+		switch (addRemove) {
+			case "add":
+				this.set_queue_buttons_added();
+				break;
+			case "remove":
+				this.reinit_queue_buttons();
+				break;
+		}
+	}
+
+	reinit_queue_buttons() {
+		this.subQueueButton.setAttribute("onclick","add_entry_to_subQueue(\"" + this.entryDivId + "\")");
+		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "Add to queue";
+	}
+
+	set_queue_buttons_added() {
+		this.subQueueButton.setAttribute("onclick","remove_entry_from_subQueue(\"" + this.entryDivId + "\")");
+		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + this.get_subQueue_pos() + ")";
+	}
+
 	add_log_info() {
 		//wip
 	}
@@ -161,6 +197,18 @@ function get_log() {
 }
 
 
+function add_entry_to_subQueue(entryDivId) {
+	var entry = get_entry_by_id(entryDivId);
+	subQueue.push(entry);
+	entry.modify_queue_buttons("add");
+}
+
+function remove_entry_from_subQueue(entryDivId) {
+	var entry = get_entry_by_id(entryDivId);
+	subQueue.splice(entry.get_subQueue_pos(),1);
+	entry.modify_queue_buttons("remove");
+}
+
 function button_test() {
 	document.getElementById("queue-test-text").innerHTML = "queueLength is " + get_queue_length();
 	autoplay_next_entry();
@@ -179,14 +227,16 @@ function play_entry(entryDivId) {
 }
 
 function autoplay_next_entry() {
-	var nextEntryId = get_end_entry_id("top");
-	play_entry(nextEntryId);
+	if (subQueue.length != 0) {
+		play_entry(subQueue[0].entryDivId);
+		remove_entry_from_subQueue(subQueue[0].entryDivId);
+	}
+	else {
+		play_entry(get_end_entry_id("top"));
+	}
 }
 
 function shuffle_queue() {
-	//loop through each index in queue shifting each one to a new index
-	//do this three or so times I guess, to reduce the odds of something not getting shuffled
-	//maybe add a shuffled attribute down the line.. idk
 	var queueLength = queueIndex.length;
 	for (i = 0; i <= 3; i++) {
 		for (index = 0; index < queueLength; index++) {
