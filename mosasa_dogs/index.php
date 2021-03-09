@@ -35,9 +35,12 @@
 		<div id="queue">
 			<p><a href="log_display.php" class="link">Temporary link to the playlist log</a></p>
 
-			<p id="queue-test-text">Queue goes here</p>
+			<p id="queue-test-text" style="display:none">Queue goes here</p>
 
-			<button type="button" onclick="button_test()" class="btn-primary">desd sgribd :DD</button>
+			<div id="queue-control-div">
+				<button type="button" onclick="autoplay_next_entry()" class="btn-primary">Play Next</button>
+				<button type="button" onclick="shuffle_queue()" class="btn-primary">Shuffle</button> 
+			</div>
 		</div>
 	</div>
 
