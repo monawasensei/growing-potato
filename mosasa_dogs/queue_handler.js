@@ -90,7 +90,7 @@ class queueEntry {
 		this.playButton.setAttribute("class","entry-btn");
 		this.playButton.setAttribute("id", this.entryDivId + "-play-btn");
 		this.playButton.setAttribute("onclick","play_entry(\"" + this.entryDivId + "\")"); //this one will be tricky to figure out I think.
-		this.playButton.appendChild(document.createTextNode("play"));
+		this.playButton.appendChild(document.createTextNode("Play"));
 		this.buttonDiv.appendChild(this.playButton);
 	}
 
@@ -181,6 +181,19 @@ function play_entry(entryDivId) {
 function autoplay_next_entry() {
 	var nextEntryId = get_end_entry_id("top");
 	play_entry(nextEntryId);
+}
+
+function shuffle_queue() {
+	//loop through each index in queue shifting each one to a new index
+	//do this three or so times I guess, to reduce the odds of something not getting shuffled
+	//maybe add a shuffled attribute down the line.. idk
+	var queueLength = queueIndex.length;
+	for (i = 0, i <= 3, i++) {
+		for (index = 0, index < queueLength, index++) {
+			var randomPos = Math.floor(Math.random() * queueLength);
+			queueIndex[index].shift_in_queue(randomPos);
+		}
+	}
 }
 
 function move_entry(entryDivId,direction,number) { //need to add validation so that it checks direction to be either "up" or "down", though this isn't a  big deal
