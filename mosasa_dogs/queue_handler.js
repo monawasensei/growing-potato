@@ -176,7 +176,7 @@ function autoplay_next_entry() {
 }
 
 function move_entry(entryDivId,direction,number) { //need to add validation so that it checks direction to be either "up" or "down", though this isn't a  big deal
-	if (direcion == "up") {number *= -1;}
+	if (direction == "up") {number *= -1;}
 	var entry = get_entry_by_id(entryDivId);
 	var isEndEntry = is_end_entry_by_id(entryDivId);
 	if (isEndEntry == 1 && number < 0) {number = 0;}
