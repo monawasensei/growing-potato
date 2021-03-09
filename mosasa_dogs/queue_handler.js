@@ -259,6 +259,7 @@ function shuffle_queue() {
 			queueIndex[index].shift_in_queue(randomPos);
 		}
 	}
+	autoplay_next_entry();
 }
 
 function move_entry(entryDivId,direction,number) { //need to add validation so that it checks direction to be either "up" or "down", though this isn't a  big deal
