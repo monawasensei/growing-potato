@@ -87,6 +87,7 @@ class queueEntry {
 		this.entryDiv.appendChild(this.buttonDiv);
 		this.add_play_button();
 		this.add_order_buttons();
+		this.add_sub_queue_buttons();
 	}
 
 	add_play_button() {
