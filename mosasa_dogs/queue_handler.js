@@ -179,8 +179,8 @@ function move_entry(entryDivId,direction,number) { //need to add validation so t
 	if (direcion == "up") {number *= -1;}
 	var entry = get_entry_by_id(entryDivId);
 	var isEndEntry = is_end_entry_by_id(entryDivId);
-	if (isEndEntry == 1)&&(number < 0) {number = 0;}
-	else if (isEndEntry == -1)&&(number > 0) {number = 0;}
+	if (isEndEntry == 1 && number < 0) {number = 0;}
+	else if (isEndEntry == -1 && number > 0) {number = 0;}
 	var queueStartPos = entry.get_queueIndex_pos();
 	number = move_distance_in_bounds(queueStartPos,number);
 	var queueDestinationPos = queueStartPos + number;
