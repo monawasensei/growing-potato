@@ -86,8 +86,9 @@ class queueEntry {
 		this.buttonDiv.setAttribute("id",this.entryDivId + "btn-div");
 		this.entryDiv.appendChild(this.buttonDiv);
 		this.add_play_button();
-		this.add_order_buttons();
+		//this.add_order_buttons();
 		this.add_sub_queue_buttons();
+		this.add_delete_from_queue_buttons();
 	}
 
 	add_play_button() {
@@ -146,7 +147,17 @@ class queueEntry {
 
 	set_queue_buttons_added() {
 		this.subQueueButton.setAttribute("onclick","remove_entry_from_subQueue(\"" + this.entryDivId + "\")");
-		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + this.get_subQueue_pos() + ")";
+		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + this.get_subQueue_pos() + 1 + ")";
+	}
+
+	add_delete_from_queue_buttons() {
+		this.deleteEntryButton = document.createElement("button");
+		this.deleteEntryButton.setAttribute("type","button");
+		this.deleteEntryButton.setAttribute("class","entry-btn");
+		this.deleteEntryButton.setAttribute("id", this.entryDivId + "-remove-entry-btn");
+		this.deleteEntryButton.setAttribute("onclick","get_entry_by_id(\"" + this.entryDivId + "\").remove_from_queue()");
+		this.deleteEntryButton.appendChild(document.createTextNode("Delete"));
+		this.buttonDiv.appendChild(this.deleteEntryButton);
 	}
 
 	add_log_info() {
@@ -208,6 +219,9 @@ function remove_entry_from_subQueue(entryDivId) {
 	var entry = get_entry_by_id(entryDivId);
 	subQueue.splice(entry.get_subQueue_pos(),1);
 	entry.modify_queue_buttons("remove");
+	for (let entry of subQueue) {
+		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.get_subQueue_pos() + 1 + ")";
+	}
 }
 
 function button_test() {
