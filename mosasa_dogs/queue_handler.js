@@ -229,8 +229,8 @@ function get_end_entry_id(whichEnd) {
 			endIndex = 0;
 	}
 
-	var endEntry = document.querySelectorAll("#queue div.entry-div")[endIndex];
-	var endEntryId = endEntry.getAttribute("id");
+	//var endEntry = document.querySelectorAll("#queue div.entry-div")[endIndex];
+	var endEntryId = document.querySelectorAll("#queue div.entry-div")[endIndex].getAttribute("id");
 	return endEntryId
 }
 
