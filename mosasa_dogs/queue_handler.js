@@ -2,9 +2,9 @@
 //then use queueEntry objects to pack and unpack these items, so that the playlist never ends :DDDDDDDD
 
 var queueIndex = new Array();
-var queueEntryId = 0
-var queueContainer = document.getElementById("queue")
-var mosasaYTPlayer
+var queueEntryId = 0;
+var queueContainer = document.getElementById("queue");
+var mosasaYTPlayer;
 //var log = new Array();
 
 class queueEntry {
@@ -189,23 +189,26 @@ function get_entry_by_id(id) {
 function load_youtube_iframe_api_script() {
 	var tag = document.createElement('script');
 
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	tag.src = "https://www.youtube.com/iframe_api";
+      	var firstScriptTag = document.getElementsByTagName('script')[0];
+      	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
 function onYouTubeIframeAPIReady() {
 	document.getElementById("queue-test-text").innerHTML = "youtubeAPI ready";
-	mosasaYTPlayer = new YT.Player("player", {
+	mosasaYTPlayer = new YT.Player('player', {
+		height: '200',
+		width: '200',
+		videoId: 'FcZOnrL9VKM',
 		playerVars: {
-			"autoplay": 1,
-			"disablekb": 1,
-			"origin": "https://holedigging.club",
-			"enablejsapi": 1
+			'autoplay': 1,
+			'disablekb': 1,
+			'origin': 'https://holedigging.club',
+			'enablejsapi': 1
 			},
 		events: {
-			"onReady": onPlayerReady,
-			"onStateChange": onPlayerStateChange
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange
 			}
 		});
 	document.getElementById("queue-test-text").innerHTML = "mosasaYTPlayer object created";
@@ -213,14 +216,18 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
 	document.getElementById("queue-test-text").innerHTML = "onPlayerReady";
-	autoplay_next_entry();
+	event.target.playVideo();
 }
 
 function onPlayerStateChange(event) {
 	document.getElementById("queue-test-text").innerHTML = "onPlayerStateChange";
-	if (mosasaYTPlayer.getPlayerState() == 0) {
+	if (event.data == YT.PlayerState.ENDED) {
 		autoplay_next_entry();
 	}
+}
+
+function stopVideo() {
+	mosasaYTPlayer.stopVideo();
 }
 
 //YOUTUBE BULLSHIT
