@@ -41,7 +41,7 @@ class queueEntry {
 	shift_in_queue(index) {
 		this.remove_from_queue();
 		queueIndex.splice(index,0,this);
-		queueContainer.appendChild(this.enryDiv);
+		queueContainer.appendChild(this.entryDiv);
 	}
 
 	get_queueIndex_pos() {
@@ -182,12 +182,12 @@ function move_entry(entryDivId,direction,number) { //need to add validation so t
 	if (isEndEntry == 1)&&(number < 0) {number = 0;}
 	else if (isEndEntry == -1)&&(number > 0) {number = 0;}
 	var queueStartPos = entry.get_queueIndex_pos();
-	number = move_distance_in_bounds(queueStartPos,entry,number);
+	number = move_distance_in_bounds(queueStartPos,number);
 	var queueDestinationPos = queueStartPos + number;
 	entry.shift_in_queue(queueDestinationPos);
 }
 
-function move_distance_in_bounds(currentPos,entry,number) {
+function move_distance_in_bounds(currentPos,number) {
 	//make sure number is less than or equal to the bounds of the queue
 	if (currentPos + number < 0) {number = -1 * currentPos;}
 	else if (currentPos + number > queueIndex.length) {number = queueIndex.length - currentPos;}
