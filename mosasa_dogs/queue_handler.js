@@ -197,16 +197,16 @@ function load_youtube_iframe_api_script() {
 function onYouTubeIframeAPIReady() {
 	document.getElementById("queue-test-text").innerHTML = "youtubeAPI ready";
 	mosasaYTPlayer = new YT.Player("player", {
-		//playerVars: {
-		//	"autoplay": 1,
-		//	"disablekb": 1,
-		//	//"origin": "https://holedigging.club",
-		//	"enablejsapi": 1
-		//	},
-		//events: {
-		//	"onReady": onPlayerReady,
-		//	"onStateChange": onPlayerStateChange
-		//	}
+		playerVars: {
+			"autoplay": 1,
+			"disablekb": 1,
+			"origin": "https://holedigging.club",
+			"enablejsapi": 1
+			},
+		events: {
+			"onReady": onPlayerReady,
+			"onStateChange": onPlayerStateChange
+			}
 		});
 	document.getElementById("queue-test-text").innerHTML = "mosasaYTPlayer object created";
 }
