@@ -88,7 +88,7 @@ class queueEntry {
 		this.add_play_button();
 		//this.add_order_buttons();
 		this.add_sub_queue_buttons();
-		this.add_delete_from_queue_buttons();
+		//this.add_delete_from_queue_buttons();
 	}
 
 	add_play_button() {
@@ -147,7 +147,7 @@ class queueEntry {
 
 	set_queue_buttons_added() {
 		this.subQueueButton.setAttribute("onclick","remove_entry_from_subQueue(\"" + this.entryDivId + "\")");
-		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + this.get_subQueue_pos() + 1 + ")";
+		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + this.get_subQueue_pos() + ")";
 	}
 
 	add_delete_from_queue_buttons() {
@@ -220,7 +220,7 @@ function remove_entry_from_subQueue(entryDivId) {
 	subQueue.splice(entry.get_subQueue_pos(),1);
 	entry.modify_queue_buttons("remove");
 	for (let entry of subQueue) {
-		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.get_subQueue_pos() + 1 + ")";
+		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.get_subQueue_pos() + ")";
 	}
 }
 
@@ -259,6 +259,7 @@ function shuffle_queue() {
 			queueIndex[index].shift_in_queue(randomPos);
 		}
 	}
+	autoplay_next_entry();
 }
 
 function move_entry(entryDivId,direction,number) { //need to add validation so that it checks direction to be either "up" or "down", though this isn't a  big deal
