@@ -188,8 +188,8 @@ function shuffle_queue() {
 	//do this three or so times I guess, to reduce the odds of something not getting shuffled
 	//maybe add a shuffled attribute down the line.. idk
 	var queueLength = queueIndex.length;
-	for (i = 0, i <= 3, i++) {
-		for (index = 0, index < queueLength, index++) {
+	for (i = 0; i <= 3; i++) {
+		for (index = 0; index < queueLength; index++) {
 			var randomPos = Math.floor(Math.random() * queueLength);
 			queueIndex[index].shift_in_queue(randomPos);
 		}
