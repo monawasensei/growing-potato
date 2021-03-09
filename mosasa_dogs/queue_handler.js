@@ -186,14 +186,13 @@ function get_entry_by_id(id) {
 	return 0
 }
 //YOUTUBE BULLSHIT
+function load_youtube_iframe_api_script() {
+	var tag = document.createElement('script');
 
-//function make_player() {
-//	var tag = document.createElement("script");
-//	tag.src = "https://www.youtube.com/iframe_api";
-//	tag.setAttribute("id","yt-api");
-//	ytAPITag = document.getElementById("yt-api");
-//	ytAPITag.parentNode.insertBefore(tag,ytAPITag);
-//}
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
 
 function onYouTubeIframeAPIReady() {
 	document.getElementById("queue-test-text").innerHTML = "youtubeAPI ready";
@@ -225,6 +224,7 @@ function onPlayerStateChange(event) {
 //YOUTUBE BULLSHIT
 
 function main() {
+	load_youtube_iframe_api_script();
 	get_log();
 }
 

@@ -5,7 +5,6 @@
 	<title>Radio</title>
 	<link rel="stylesheet" href="../stylesheet.css">
 	<script id="queue-handler" src="queue_handler.js" defer></script> <!-- have no idea if I need an end tag for an external script. Can't hurt I guess -->
-	<script id="yt-api" src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 	<div id="log" style="display:none">
