@@ -28,7 +28,8 @@
 		<h1 class="contents-title">Future home of the Mosasa Dogs!</h1>
 
 		<div id="player-toplevel" class="contents-video">
-			<iframe id="player"<!-- frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen-->></iframe>
+			<div id="player">
+			</div>
 		</div>
 
 		<div id="queue">
