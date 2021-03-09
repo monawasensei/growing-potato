@@ -230,7 +230,8 @@ function get_end_entry_id(whichEnd) {
 	}
 
 	var endEntry = document.querySelectorAll("#queue div.entry-div")[endIndex];
-	return endEntry.getAttribute("id");
+	var endEntryId = endEntry.getAttribute("id");
+	return endEntryId
 }
 
 function get_entry_by_id(id) {
