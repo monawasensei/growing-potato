@@ -218,19 +218,19 @@ function is_end_entry_by_id(entryId) {
 
 function get_end_entry_id(whichEnd) {
 	var endIndex;
+	var queueEntryNodeList = document.querySelectorAll("#queue div.entry-div");
 	switch (whichEnd) {
 		case "top":
 			endIndex = 0;
 			break;
 		case "bottom":
-			endIndex = -1;
+			endIndex = queueEntryNodeList.length - 1;
 			break;
 		default:
 			endIndex = 0;
 	}
 
 	//var endEntry = document.querySelectorAll("#queue div.entry-div")[endIndex];
-	var queueEntryNodeList = document.querySelectorAll("#queue div.entry-div");
 	var endEntry = queueEntryNodeList[endIndex];
 	var endEntryId = endEntry.getAttribute("id");
 	//var endEntryId = document.querySelectorAll("#queue div.entry-div")[endIndex].getAttribute("id");
