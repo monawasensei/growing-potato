@@ -48,8 +48,8 @@
 			}
 			
 		
-			/*$sql = "SELECT title, concat(\'https://www.youtube.com/watch/\',url_id) as \'url\' from potatofields_playlist_log";*/
-			$sql = "SELECT * FROM potatofields_playlist_log";
+			/*$sql = "SELECT title, CONCAT(\'https://www.youtube.com/watch/\',url_id) as \'url\' FROM potatofields_playlist_log";*/
+			$sql = "SELECT title, url_id FROM potatofields_playlist_log";
 			$result = $conn->query($sql);
 		
 			if ($result->num_rows > 0) {
