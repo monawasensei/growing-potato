@@ -57,7 +57,7 @@
 					$title = $row["title"];
 					#$url = $row["url"];
 					$url = $row["url_id"];
-					echo "_LINE_" . $logIndexer++ . $title . "\t" . "https://www.youtube.com/watch/" . $url . "<br>";
+					echo "_LINE_" . $logIndexer++ . $title . "\thttps://www.youtube.com/watch/" . $url . "<br>";
 				}
 			}
 		
