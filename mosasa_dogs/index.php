@@ -21,7 +21,7 @@
 	#queue-control-div button {
 	  display: inline;
 	}
-	
+
 	#subQueue-div .entry-btn {
   		border: none;
 	}
@@ -30,8 +30,8 @@
 <body>
 	<div id="log" style="display:none">
 	<?php
+
 	$logIndexer = 0;
-	/*
 	$log = fopen("potatofields_playlist_formatted_log.txt","r") or die("could not read log");
 
 	while (!feof($log)) {
@@ -40,31 +40,6 @@
 
 	fclose($log);
 	echo "<p id=\"log_length\">" . ($logIndexer-=2) . "</p>";
-	*/
-	
-	$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#","potato_database"); 
-			if ($conn->connect_error) { 
-				die('Could not connect: ' . $conn->connect_error); 
-			}
-			
-		
-			/*$sql = "SELECT title, CONCAT(\'https://www.youtube.com/watch/\',url_id) as \'url\' FROM potatofields_playlist_log";*/
-			$sql = "SELECT title, url_id FROM potatofields_playlist_log";
-			$result = $conn->query($sql);
-		
-			if ($result->num_rows > 0) {
-				while($row = $result->fetch_assoc()) {
-					$title = $row["title"];
-					#$url = $row["url"];
-					$url = $row["url_id"];
-					echo "_LINE_" . $logIndexer++ . $title . "\thttps://www.youtube.com/watch/" . $url . "<br>";
-				}
-			}
-		
-			else {
-				echo "\n0 results";
-			}
-		echo "<p id=\"log_length\">" . ($logIndexer-=2) . "</p>";
 	?>
 
 	</div>
@@ -84,7 +59,7 @@
 
 			<div id="queue-control-div">
 				<button type="button" onclick="autoplay_next_entry()" class="btn-primary">Play Next</button>
-				<button type="button" onclick="shuffle_queue()" class="btn-primary">Shuffle</button> 
+				<button type="button" onclick="shuffle_queue()" class="btn-primary">Shuffle</button>
 			</div>
 		</div>
 	</div>
