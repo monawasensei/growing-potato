@@ -231,7 +231,7 @@ function add_entry_to_subQueue_div(entry) {
 	entry.subQueueDivButton.setAttribute("type","button");
 	entry.subQueueDivButton.setAttribute("id",entry.entryDivId + "-subQueue-div-btn");
 	entry.subQueueDivButton.setAttribute("class","entry-btn");
-	entry.subQueueDivButton.settAttribute("onclick","remove_entry_from_subQueue(\"" + entry.entryDivId + "\");
+	entry.subQueueDivButton.settAttribute("onclick","remove_entry_from_subQueue(\"" + entry.entryDivId + "\")";
 	entry.subQueueDivButton.appendChild(createTextNode(entry.lineData.title));
 	var subQueueDiv = document.getElementById("subQueue-div");
 	subQueueDiv.appendChild(entry.subQueueDivButton);
