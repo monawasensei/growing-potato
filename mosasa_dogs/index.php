@@ -64,6 +64,7 @@
 			else {
 				echo "\n0 results";
 			}
+		echo "<p id=\"log_length\">" . ($logIndexer-=2) . "</p>";
 	?>
 
 	</div>
