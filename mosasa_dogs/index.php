@@ -25,7 +25,7 @@
 	</div>
 
 	<div class="contents-box">
-		<h1 class="contents-title">Future home of the Mosasa Dogs!</h1>
+		<h1 class="contents-title">The Mosasa Dogs Present: Potatofields Radio!</h1>
 
 		<div id="player-toplevel" class="contents-video">
 			<div id="player">
@@ -45,6 +45,7 @@
 	</div>
 
 	<div class="contents-box-secondary" id="subQueue-div">
+		<h2 class="contents-title">Playlist Queue</h2>
 	</div>
 
 	<noscript>why don'd u hab jabasgribd durnd on? :DDDDDDDDDDDDDDDD</noscript>
