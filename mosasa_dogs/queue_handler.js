@@ -238,7 +238,7 @@ function add_entry_to_subQueue_div(entry) {
 }
 
 function remove_entry_from_subQueue_div(entry) {
-	remove_entry_from_subQueue(entry.entryDivId);
+	//remove_entry_from_subQueue(entry.entryDivId);
 	document.getElementById(entry.entryDivId + "-subQueue-div-btn").remove();
 }
 
