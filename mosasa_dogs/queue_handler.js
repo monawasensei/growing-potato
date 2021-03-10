@@ -212,16 +212,34 @@ function get_log() {
 function add_entry_to_subQueue(entryDivId) {
 	var entry = get_entry_by_id(entryDivId);
 	subQueue.push(entry);
+	add_entry_to_subQueue_div(entry);
 	entry.modify_queue_buttons("add");
 }
 
 function remove_entry_from_subQueue(entryDivId) {
 	var entry = get_entry_by_id(entryDivId);
 	subQueue.splice(entry.get_subQueue_pos(),1);
+	remove_entry_from_subQueue_div(entry);
 	entry.modify_queue_buttons("remove");
 	for (let entry of subQueue) {
 		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.get_subQueue_pos() + ")";
 	}
+}
+
+function add_entry_to_subQueue_div(entry) {
+	entry.subQueueDivButton = document.createElement("button");
+	entry.subQueueDivButton.setAttribute("type","button");
+	entry.subQueueDivButton.setAttribute("id",entry.entryDivId + "-subQueue-div-btn");
+	entry.subQueueDivButton.setAttribute("class","entry-btn");
+	entry.subQueueDivButton.settAttribute("onclick","remove_entry_from_subQueue(\"" + entry.entryDivId + "\");
+	entry.subQueueDivButton.appendChild(createTextNode(entry.lineData.title));
+	var subQueueDiv = document.getElementById("subQueue-div");
+	subQueueDiv.appendChild(entry.subQueueDivButton);
+}
+
+function remove_entry_from_subQueue_div(entry) {
+	remove_entry_from_subQueue(entry.entryDivId);
+	document.getElementById(entry.entryDivId + "-subQueue-div-btn").remove();
 }
 
 function button_test() {

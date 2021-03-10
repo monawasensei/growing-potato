@@ -44,6 +44,9 @@
 		</div>
 	</div>
 
+	<div class="contents-box-secondary" id="subQueue-div">
+	</div>
+
 	<noscript>why don'd u hab jabasgribd durnd on? :DDDDDDDDDDDDDDDD</noscript>
 </body>
 </html>
