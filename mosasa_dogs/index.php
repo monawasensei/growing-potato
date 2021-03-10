@@ -5,6 +5,27 @@
 	<title>Radio</title>
 	<link rel="stylesheet" href="../stylesheet.css">
 	<script id="queue-handler" src="queue_handler.js" defer></script> <!-- have no idea if I need an end tag for an external script. Can't hurt I guess -->
+	<style>
+	#subQueue-div {
+	  position: absolute;
+	  display: inline;
+	  max-width: 300px;
+	  top: 126px;
+	  right: 300px;
+	}
+
+	#queue-control-div {
+	  padding-bottom: 15px;
+	}
+
+	#queue-control-div button {
+	  display: inline;
+	}
+	
+	#subQueue-div .entry-btn {
+  		border: none;
+	}
+	</style>
 </head>
 <body>
 	<div id="log" style="display:none">

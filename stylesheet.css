@@ -75,14 +75,6 @@ a {
   width: 100%;
 }
 
-#subQueue-div {
-  position: absolute;
-  display: inline;
-  max-width: 300px;
-  top: 126px;
-  right: 300px;
-}
-
 .contents-title {
   display: block;
   font-family: openSansCondBold, sans-serif;
@@ -193,10 +185,6 @@ a {
   background-color: var(--col-grey);
   border 3px solid var(--col-grey);
   color: var(--col-yellow);
-}
-
-#subQueue-div .entry-btn {
-  border: none;
 }
 
 @media screen and (min-width: 600px) {

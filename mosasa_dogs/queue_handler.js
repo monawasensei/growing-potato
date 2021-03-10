@@ -1,19 +1,15 @@
-//workflow: turn every entry in the log file into a logLine Object
-//then use queueEntry objects to pack and unpack these items, so that the playlist never ends :DDDDDDDD
-
 var queueIndex = new Array();
 var subQueue = new Array();
 var queueEntryId = 0;
 var queueContainer = document.getElementById("queue");
 var mosasaYTPlayer;
-//var log = new Array();
 
+/*************CLASS QUEUEENTRY*****************************************************************************/
 class queueEntry {
 	constructor(logLineObject) {
 		this.lineData = logLineObject;
 		queueIndex.push(this);
 		this.create_entry();
-		this.add_log_info(); //wip
 	}
 
 	create_entry() {
@@ -21,46 +17,7 @@ class queueEntry {
 		this.populate_entry_div()
 		this.add_log_buttons()
 	}
-
-	replace_player_src() {
-		//var embeddedURL = "https://www.youtube.com/embed/" + this.lineData.url + "?autoplay=1";
-		//document.getElementById("player").setAttribute("src",embeddedURL);
-		mosasaYTPlayer.loadVideoById(this.lineData.url);
-	}
-
-	remove_from_queue() {
-		var pos = this.get_queueIndex_pos();
-		queueIndex.splice(pos,1);
-		queueContainer.removeChild(this.entryDiv);
-	}
-
-	add_to_queue() {
-		queueIndex.push(this);
-		queueContainer.appendChild(this.entryDiv);
-	}
-
-	shift_in_queue(index) { //fixing
-		var previousPos = this.get_queueIndex_pos();
-		if (index < previousPos) {previousPos += 1;}
-		queueIndex.splice(index,0,this);
-		if (index >= queueIndex.length-1) {
-			queueContainer.appendChild(this.entryDiv);
-		}
-		else {
-		var beforeDiv = queueIndex[index + 1].entryDiv;
-		queueContainer.insertBefore(this.entryDiv,beforeDiv);
-		}
-		queueIndex.splice(previousPos,1);
-	}
-
-	get_queueIndex_pos() {
-		return queueIndex.indexOf(this);
-	}
-
-	get_subQueue_pos() {
-		return subQueue.indexOf(this);
-	}
-
+	
 	create_entry_div() {
 		queueEntryId += 1
 		this.entryDiv = document.createElement("div")
@@ -79,7 +36,7 @@ class queueEntry {
 		this.entryTitle.appendChild(entryTitleText)
 		this.entryDiv.appendChild(this.entryTitle)
 	}
-
+	
 	add_log_buttons() {
 		this.buttonDiv = document.createElement("div");
 		this.buttonDiv.setAttribute("class","entry-btn-div");
@@ -90,7 +47,7 @@ class queueEntry {
 		this.add_sub_queue_buttons();
 		//this.add_delete_from_queue_buttons();
 	}
-
+	
 	add_play_button() {
 		this.playButton = document.createElement("button");
 		this.playButton.setAttribute("type","button");
@@ -160,11 +117,46 @@ class queueEntry {
 		this.buttonDiv.appendChild(this.deleteEntryButton);
 	}
 
-	add_log_info() {
-		//wip
+	replace_player_src() {
+		mosasaYTPlayer.loadVideoById(this.lineData.url);
+	}
+
+	remove_from_queue() {
+		var pos = this.get_queueIndex_pos();
+		queueIndex.splice(pos,1);
+		queueContainer.removeChild(this.entryDiv);
+	}
+
+	add_to_queue() {
+		queueIndex.push(this);
+		queueContainer.appendChild(this.entryDiv);
+	}
+
+	shift_in_queue(index) {
+		var previousPos = this.get_queueIndex_pos();
+		if (index < previousPos) {previousPos += 1;}
+		queueIndex.splice(index,0,this);
+		if (index >= queueIndex.length-1) {
+			queueContainer.appendChild(this.entryDiv);
+		}
+		else {
+		var beforeDiv = queueIndex[index + 1].entryDiv;
+		queueContainer.insertBefore(this.entryDiv,beforeDiv);
+		}
+		queueIndex.splice(previousPos,1);
+	}
+
+	get_queueIndex_pos() {
+		return queueIndex.indexOf(this);
+	}
+
+	get_subQueue_pos() {
+		return subQueue.indexOf(this);
 	}
 }
+/*************CLASS QUEUEENTRY*****************************************************************************/
 
+/*************CLASS LOGLINE********************************************************************************/
 class logLine {
 	constructor(logLine) { //don't need to push to global index since an entry is made right after this object is made.
 		this.line = logLine;
@@ -187,43 +179,16 @@ class logLine {
 		this.url = this.line.slice(this.youtubeSubURLStartPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
 	}
 }
+/*************CLASS LOGLINE********************************************************************************/
 
-function get_log() {
-	var log = document.getElementById("log").innerHTML;
-	var _Line_Pos = 0;
-	var _Line_EndPos;
-	var next_Line_Pos = 0;
-	var _Line_String;
-	var logEntryText;
-	var length = get_queue_length();
-	for (index = 0; index <= length; index++) {
-		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
-		_Line_String = "_LINE_" + index;
-		_Line_Pos = _Line_Pos + _Line_String.length;
-		next_Line_Pos = log.indexOf("_LINE_",_Line_Pos);
-		_Line_EndPos = next_Line_Pos - "\n<br>".length;
-		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
-		let logLineObject = new logLine(logEntryText);
-		let playlistQueueEntry = new queueEntry(logLineObject);
-	}
-}
-
-
+/*********************************************************************************************************/
+/*************FUNCTIONS***********************************************************************************/
+/*********************************************************************************************************/
 function add_entry_to_subQueue(entryDivId) {
 	var entry = get_entry_by_id(entryDivId);
 	subQueue.push(entry);
 	add_entry_to_subQueue_div(entry);
 	entry.modify_queue_buttons("add");
-}
-
-function remove_entry_from_subQueue(entryDivId) {
-	var entry = get_entry_by_id(entryDivId);
-	subQueue.splice(entry.get_subQueue_pos(),1);
-	remove_entry_from_subQueue_div(entry);
-	entry.modify_queue_buttons("remove");
-	for (let entry of subQueue) {
-		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.get_subQueue_pos() + ")";
-	}
 }
 
 function add_entry_to_subQueue_div(entry) {
@@ -237,36 +202,24 @@ function add_entry_to_subQueue_div(entry) {
 	subQueueDiv.appendChild(entry.subQueueDivButton);
 }
 
+function remove_entry_from_subQueue(entryDivId) {
+	var entry = get_entry_by_id(entryDivId);
+	subQueue.splice(entry.get_subQueue_pos(),1);
+	remove_entry_from_subQueue_div(entry);
+	entry.modify_queue_buttons("remove");
+	for (let entry of subQueue) {
+		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.get_subQueue_pos() + ")";
+	}
+}
+
 function remove_entry_from_subQueue_div(entry) {
 	//remove_entry_from_subQueue(entry.entryDivId);
 	document.getElementById(entry.entryDivId + "-subQueue-div-btn").remove();
 }
 
-function button_test() {
-	document.getElementById("queue-test-text").innerHTML = "queueLength is " + get_queue_length();
-	autoplay_next_entry();
-}
-
 function get_queue_length() {
 	var queueLength = document.getElementById("log_length").innerHTML;
 	return queueLength;
-}
-
-function play_entry(entryDivId) {
-	var entry = get_entry_by_id(entryDivId);
-	entry.remove_from_queue();
-	entry.add_to_queue();
-	entry.replace_player_src();
-}
-
-function autoplay_next_entry() {
-	if (subQueue.length != 0) {
-		play_entry(subQueue[0].entryDivId);
-		remove_entry_from_subQueue(subQueue[0].entryDivId);
-	}
-	else {
-		play_entry(get_end_entry_id("top"));
-	}
 }
 
 function shuffle_queue() {
@@ -301,10 +254,22 @@ function move_distance_in_bounds(currentPos,number) {
 	return number;
 }
 
-//function get_top_entry_id() {
-//	var topEntry = document.querySelectorAll("#queue div.entry-div")[0];
-//	return topEntry.getAttribute("id");
-//}
+function autoplay_next_entry() {
+	if (subQueue.length != 0) {
+		play_entry(subQueue[0].entryDivId);
+		remove_entry_from_subQueue(subQueue[0].entryDivId);
+	}
+	else {
+		play_entry(get_end_entry_id("top"));
+	}
+}
+
+function play_entry(entryDivId) {
+	var entry = get_entry_by_id(entryDivId);
+	entry.remove_from_queue();
+	entry.add_to_queue();
+	entry.replace_player_src();
+}
 
 function is_end_entry_by_id(entryId) {
 	var topId;
@@ -355,7 +320,28 @@ function get_entry_by_id(id) {
 	}
 	return 0
 }
-//YOUTUBE BULLSHIT
+
+function get_log() {
+	var log = document.getElementById("log").innerHTML;
+	var _Line_Pos = 0;
+	var _Line_EndPos;
+	var next_Line_Pos = 0;
+	var _Line_String;
+	var logEntryText;
+	var length = get_queue_length();
+	for (index = 0; index <= length; index++) {
+		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
+		_Line_String = "_LINE_" + index;
+		_Line_Pos = _Line_Pos + _Line_String.length;
+		next_Line_Pos = log.indexOf("_LINE_",_Line_Pos);
+		_Line_EndPos = next_Line_Pos - "\n<br>".length;
+		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
+		let logLineObject = new logLine(logEntryText);
+		let playlistQueueEntry = new queueEntry(logLineObject);
+	}
+}
+
+/*****************************YOUTUBE API*****************************************************************************************************/
 function load_youtube_iframe_api_script() {
 	var tag = document.createElement('script');
 
@@ -386,7 +372,8 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
 	document.getElementById("queue-test-text").innerHTML = "onPlayerReady";
-	event.target.playVideo();
+	shuffle_queue();
+	//event.target.playVideo();
 }
 
 function onPlayerStateChange(event) {
@@ -399,12 +386,17 @@ function onPlayerStateChange(event) {
 function stopVideo() {
 	mosasaYTPlayer.stopVideo();
 }
+/*****************************YOUTUBE API*****************************************************************************************************/
 
-//YOUTUBE BULLSHIT
-
+/*****************************EXECUTION BLOCK AND TEST FUNCTIONS*****************************************************************************/
 function main() {
 	load_youtube_iframe_api_script();
 	get_log();
+}
+
+function button_test() {
+	document.getElementById("queue-test-text").innerHTML = "queueLength is " + get_queue_length();
+	autoplay_next_entry();
 }
 
 main()
