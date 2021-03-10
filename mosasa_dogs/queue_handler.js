@@ -166,7 +166,7 @@ class logLine {
 	}
 
 	get_indeces() {
-		this.titleEndPos = this.line.indexOf("\thttps://www.youtube.com/watch")-1;
+		this.titleEndPos = this.line.indexOf("https://www.youtube.com/watch")-1;
 		this.youtubeSubURLStartPos = this.line.indexOf("https://www.youtube.com/watch/") + "https://www.youtube.com/watch/".length;
 		this.youtubeSubURLEndPos = this.line.indexOf("\n<br>",this.youtubeSubURLStartPos);
 	}
