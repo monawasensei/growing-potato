@@ -30,8 +30,8 @@
 <body>
 	<div id="log" style="display:none">
 	<?php
-
 	$logIndexer = 0;
+	/*
 	$log = fopen("potatofields_playlist_formatted_log.txt","r") or die("could not read log");
 
 	while (!feof($log)) {
@@ -40,7 +40,28 @@
 
 	fclose($log);
 	echo "<p id=\"log_length\">" . ($logIndexer-=2) . "</p>";
-
+	*/
+	
+	$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#","potato_database"); 
+			if ($conn->connect_error) { 
+				die('Could not connect: ' . $conn->connect_error); 
+			}
+			
+		
+			$sql = "SELECT title, concat(\'https://www.youtube.com/watch/\',url_id) as \'url\' from potatofields_playlist_log";
+			$result = $conn->query($sql);
+		
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					$title = $row["title"];
+					$url = $row["url"];
+					echo "_LINE_" . $logIndexer++ . $title . "\t" . $url . "<br>";
+				}
+			}
+		
+			else {
+				echo "\n0 results";
+			}
 	?>
 
 	</div>
