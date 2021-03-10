@@ -231,14 +231,14 @@ function add_entry_to_subQueue_div(entry) {
 	entry.subQueueDivButton.setAttribute("type","button");
 	entry.subQueueDivButton.setAttribute("id",entry.entryDivId + "-subQueue-div-btn");
 	entry.subQueueDivButton.setAttribute("class","entry-btn");
-	entry.subQueueDivButton.settAttribute("onclick","remove_entry_from_subQueue(\"" + entry.entryDivId + "\");
-	entry.subQueueDivButton.appendChild(createTextNode(entry.lineData.title));
+	entry.subQueueDivButton.setAttribute("onclick","remove_entry_from_subQueue(\"" + entry.entryDivId + "\")");
+	entry.subQueueDivButton.appendChild(document.createTextNode(entry.lineData.title));
 	var subQueueDiv = document.getElementById("subQueue-div");
 	subQueueDiv.appendChild(entry.subQueueDivButton);
 }
 
 function remove_entry_from_subQueue_div(entry) {
-	remove_entry_from_subQueue(entry.entryDivId);
+	//remove_entry_from_subQueue(entry.entryDivId);
 	document.getElementById(entry.entryDivId + "-subQueue-div-btn").remove();
 }
 
