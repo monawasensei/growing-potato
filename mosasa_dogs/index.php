@@ -48,13 +48,15 @@
 			}
 			
 		
-			$sql = "SELECT title, concat(\'https://www.youtube.com/watch/\',url_id) as \'url\' from potatofields_playlist_log";
+			/*$sql = "SELECT title, concat(\'https://www.youtube.com/watch/\',url_id) as \'url\' from potatofields_playlist_log";*/
+			$sql = "SELECT * FROM potatofields_playlist_log";
 			$result = $conn->query($sql);
 		
 			if ($result->num_rows > 0) {
 				while($row = $result->fetch_assoc()) {
 					$title = $row["title"];
-					$url = $row["url"];
+					#$url = $row["url"];
+					$url = $row["url_id"];
 					echo "_LINE_" . $logIndexer++ . $title . "\t" . $url . "<br>";
 				}
 			}
