@@ -45,7 +45,7 @@ class queueEntry {
 		this.add_play_button();
 		//this.add_order_buttons();
 		this.add_sub_queue_buttons();
-		//this.add_delete_from_queue_buttons();
+		this.add_delete_from_queue_buttons();
 	}
 
 	add_play_button() {
