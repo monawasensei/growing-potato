@@ -17,7 +17,7 @@ class queueEntry {
 		this.populate_entry_div()
 		this.add_log_buttons()
 	}
-	
+
 	create_entry_div() {
 		queueEntryId += 1
 		this.entryDiv = document.createElement("div")
@@ -36,7 +36,7 @@ class queueEntry {
 		this.entryTitle.appendChild(entryTitleText)
 		this.entryDiv.appendChild(this.entryTitle)
 	}
-	
+
 	add_log_buttons() {
 		this.buttonDiv = document.createElement("div");
 		this.buttonDiv.setAttribute("class","entry-btn-div");
@@ -47,7 +47,7 @@ class queueEntry {
 		this.add_sub_queue_buttons();
 		//this.add_delete_from_queue_buttons();
 	}
-	
+
 	add_play_button() {
 		this.playButton = document.createElement("button");
 		this.playButton.setAttribute("type","button");
@@ -184,6 +184,15 @@ class logLine {
 /*********************************************************************************************************/
 /*************FUNCTIONS***********************************************************************************/
 /*********************************************************************************************************/
+function make_random_subQueue_10() {
+	var queueLength = get_queue_length();
+	for (i=1; i<=10; i++) {
+	var entryIdNumber = Math.floor(Math.random() * queueLength);
+	var entryDivId = "entry-" + entryIdNumber; //hopefully this works
+	add_entry_to_subQueue(entryDivId);
+	}
+}
+
 function add_entry_to_subQueue(entryDivId) {
 	var entry = get_entry_by_id(entryDivId);
 	subQueue.push(entry);
