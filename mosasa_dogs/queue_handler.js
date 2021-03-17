@@ -188,29 +188,22 @@ class logLine {
 function encode_subQueue_to_url() {
 	//I'm not sure how I'm going to do this but I know I want to
 	//I can think of a simple, dumb way anyways	//here goes:
-	var playListString = subQueue.length;
+	var playListArray = new Array();
 	for (let entry of subQueue) {
-		playListString = playListString + "_" + entry.entryDivId;
+		playListArray.push(entry.entryDivId);
 	}
-	playListString = playListString + "_";
-	var playListURI = encodeURIComponent(playListString);
+	var playListURI = encodeURIComponent(playListArray.join("_"));
 	location.hash = playListURI;
 }
 
 function decode_subQueue_from_url() {
-	var entryDivId;
-	var nextParsePos = 0;
-	var playListURIEncoded = location.hash;
-	playListURIEncoded = playListURIEncoded.slice(1);
+	var playListURIEncoded = location.hash.slice(1); //gets the hashstring and removes "#" //hopefully
 	var playListURI = decodeURIComponent(playListURIEncoded);
-	var parsePos = playListURI.indexOf("_");
-	var playListLength = playListURI.slice(0,parsePos);
-	for (i = 0, i <= playListLength, i++) {
-		nextParsePos = playListURI.indexOf("_",parsePos + 1); //what will happen at the end of the string?? who can say for now, I'm just gonna run it and find out.
-		entryDivId = playListURI.slice(parsePos + 1,nextParsePos);
-		add_entry_to_subQueue(entryDivId); //have to think about if I want to add exception handling to this if there are problems, or if someone tries to manually enter a code.
-		parsePos = nextParsePos;
+	var playListArray = playListURI.split("_"); //don't know if I should declare new Array(); before assigning this oh well.
+	for (let entry of playListArray) {
+		add_entry_to_subQueue(entry.entryDivId);
 	}
+	autoplay_next_entry(); //we'll see how this works out here.
 }
 
 function make_random_subQueue_10() {
@@ -222,7 +215,7 @@ function make_random_subQueue_10() {
 	}
 }
 
-function add_entry_to_subQueue(entryDivId) {
+function add_entry_to_subQueue(entryDivId) { //really don't like the fact that some functions call the div id and some call the object, I know there's a better way to keep things uniform.
 	var entry = get_entry_by_id(entryDivId);
 	subQueue.push(entry);
 	add_entry_to_subQueue_div(entry);
@@ -347,7 +340,7 @@ function get_end_entry_id(whichEnd) {
 	return endEntryId
 }
 
-function get_entry_by_id(id) {
+function get_entry_by_id(id) { //this function is really stupid and it's mega dumb how much the script relies on it.
 	for (let entry of queueIndex) {
 		if (id == entry.entryDivId) {
 			return entry;
