@@ -184,6 +184,34 @@ class logLine {
 /*********************************************************************************************************/
 /*************FUNCTIONS***********************************************************************************/
 /*********************************************************************************************************/
+function encode_subQueue_to_url() {
+	//I'm not sure how I'm going to do this but I know I want to
+	//I can think of a simple, dumb way anyways	//here goes:
+	var playListString = subQueue.length;
+	for (let entry of subQueue) {
+		playListString = playListString + "_" + entry.entryDivId;
+	}
+	playListString = playListString + "_";
+	var playListURI = encodeURIComponent(playListString);
+	location.hash = playListURI;
+}
+
+function decode_subQueue_from_url() {
+	var entryDivId;
+	var nextParsePos = 0;
+	var playListURIEncoded = location.hash;
+	playListURIEncoded = playListURIEncoded.slice(1);
+	var playListURI = decodeURIComponent(playListURIEncoded);
+	var parsePos = playListURI.indexOf("_");
+	var playListLength = playListURI.slice(0,parsePos);
+	for (i = 0, i <= playListLength, i++) {
+		nextParsePos = playListURI.indexOf("_",parsePos + 1); //what will happen at the end of the string?? who can say for now, I'm just gonna run it and find out.
+		entryDivId = playListURI.slice(parsePos + 1,nextParsePos);
+		add_entry_to_subQueue(entryDivId); //have to think about if I want to add exception handling to this if there are problems, or if someone tries to manually enter a code.
+		parsePos = nextParsePos;
+	}
+}
+
 function make_random_subQueue_10() {
 	var queueLength = get_queue_length();
 	for (i=1; i<=10; i++) {

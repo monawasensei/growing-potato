@@ -67,6 +67,8 @@
 
 	<div class="contents-box-secondary" id="subQueue-div">
 		<h2 class="contents-title">Playlist Queue</h2>
+		<button type="button" class="btn-primary" onclick="encode_subQueue_to_url()">Encode URL</button>
+		<button type="button" class="btn-primary" onclick="decode_subQueue_from_url()">Decode URL</button>
 	</div>
 
 	<noscript>why don'd u hab jabasgribd durnd on? :DDDDDDDDDDDDDDDD</noscript>
