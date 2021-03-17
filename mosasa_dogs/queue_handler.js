@@ -45,7 +45,7 @@ class queueEntry {
 		this.add_play_button();
 		//this.add_order_buttons();
 		this.add_sub_queue_buttons();
-		//this.add_delete_from_queue_buttons();
+		this.add_delete_from_queue_buttons();
 	}
 
 	add_play_button() {
@@ -113,7 +113,8 @@ class queueEntry {
 		this.deleteEntryButton.setAttribute("class","entry-btn");
 		this.deleteEntryButton.setAttribute("id", this.entryDivId + "-remove-entry-btn");
 		this.deleteEntryButton.setAttribute("onclick","get_entry_by_id(\"" + this.entryDivId + "\").remove_from_queue()");
-		this.deleteEntryButton.appendChild(document.createTextNode("Delete"));
+		//this.deleteEntryButton.setAttribute("style" , "position: relative; left: 240px;");
+		this.deleteEntryButton.appendChild(document.createTextNode("Remove"));
 		this.buttonDiv.appendChild(this.deleteEntryButton);
 	}
 

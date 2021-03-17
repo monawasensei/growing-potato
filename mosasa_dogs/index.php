@@ -60,7 +60,9 @@
 			<div id="queue-control-div">
 				<button type="button" onclick="autoplay_next_entry()" class="btn-primary">Play Next</button>
 				<button type="button" onclick="shuffle_queue()" class="btn-primary">Shuffle</button>
-				<button type="button" onclick="make_random_subQueue_10()" class="btn-primary">Random 10</button>
+				<!--<
+				button type="button" onclick="make_random_subQueue_10()" class="btn-primary">Random 10</button>
+				-->
 			</div>
 		</div>
 	</div>
