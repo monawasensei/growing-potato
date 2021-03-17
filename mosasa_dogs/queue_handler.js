@@ -205,7 +205,7 @@ function decode_subQueue_from_url() {
 	var playListURI = decodeURIComponent(playListURIEncoded);
 	var parsePos = playListURI.indexOf("_");
 	var playListLength = playListURI.slice(0,parsePos);
-	for (i = 0, i <= playListLength, i++) {
+	for (i=0; i<=playListLength; i++) {
 		nextParsePos = playListURI.indexOf("_",parsePos + 1); //what will happen at the end of the string?? who can say for now, I'm just gonna run it and find out.
 		entryDivId = playListURI.slice(parsePos + 1,nextParsePos);
 		add_entry_to_subQueue(entryDivId); //have to think about if I want to add exception handling to this if there are problems, or if someone tries to manually enter a code.
