@@ -200,8 +200,8 @@ function decode_subQueue_from_url() {
 	var playListURIEncoded = location.hash.slice(1); //gets the hashstring and removes "#" //hopefully
 	var playListURI = decodeURIComponent(playListURIEncoded);
 	var playListArray = playListURI.split("_"); //don't know if I should declare new Array(); before assigning this oh well.
-	for (let entry of playListArray) {
-	  add_entry_to_subQueue(entry.entryDivId);
+	for (let entryDivId of playListArray) {
+	  add_entry_to_subQueue(entryDivId);
 	}
 	autoplay_next_entry(); //we'll see how this works out here.
 }
