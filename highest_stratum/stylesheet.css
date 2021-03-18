@@ -83,11 +83,14 @@ div.essay-text > p {
 }
 
 .essay-supplement-a:hover .essay-supplement {
-  visibility: visible;
+	visibility: visible;
+	opacity: 1;
 }
 
 .essay-supplement {
 	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.25s;
 	position: absolute;
 	z-index: 1;
 	max-width: 300px;
