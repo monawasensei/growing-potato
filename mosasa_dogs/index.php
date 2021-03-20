@@ -60,8 +60,9 @@
 			<div id="queue-control-div">
 				<button type="button" onclick="autoplay_next_entry()" class="btn-primary">Play Next</button>
 				<button type="button" onclick="shuffle_queue()" class="btn-primary">Shuffle</button>
-				<!--<
-				button type="button" onclick="make_random_subQueue_10()" class="btn-primary">Random 10</button>
+				<a href="https://holedigging.club/mosasa_dogs#bottom"><button type="button" class="btn-primary" id="top"></a> <!--Hope I can stick a button in an anchor tag, probably an easier way to do this anyways-->
+				<!--
+				<button type="button" onclick="make_random_subQueue_10()" class="btn-primary">Random 10</button>
 				-->
 			</div>
 		</div>
@@ -74,5 +75,6 @@
 	</div>
 
 	<noscript>why don'd u hab jabasgribd durnd on? :DDDDDDDDDDDDDDDD</noscript>
+<a href="https://holedigging.club/mosasa_dogs#top"><button type="button" class="btn-primary" id="bottom"></a>
 </body>
 </html>
