@@ -30,9 +30,10 @@ class entry {
 		this.div.appendChild(this.buttonDiv);
 	}
 
-	createEntryButton(buttonId,buttonClass,onClickFunction,nodeText) {
+	createEntryButton(buttonIdSuffix,buttonClass,onClickFunction,nodeText) {
 		var button = document.createElement("button");
 		button.setAttribute("type","button");
+		var buttonId = this.divId + "-" + buttonIdSuffix;
 		button.setAttribute("id",buttonId);
 		button.setAttribute("class",buttonClass);
 		button.setAttribute("onclick",onClickFunction);
@@ -42,14 +43,6 @@ class entry {
 
 	addEntryToIndex(indexArray) {
 		indexArray.push();
-	}
-
-	removeEntryFromIndex(indexArray) {
-		indexArray.splice(indexArray.indexOf(this),1);
-	}
-
-	removeEntryFromNode(node,child) {
-		node.removeChild(child);
 	}
 
 	replacePlayerSRC() {
@@ -63,15 +56,46 @@ class mainEntry extends entry {
 	constructor(logLineObject) {
 		super(logLineObject);
 		mainEntryIndex.push(this);
-		this.createEntryDiv("main-entry","entry-div",queueContainer);
-		this.createEntryButton(this.divId + "-play-btn","entry-btn","playEntry(\"" + this.divId + "\")","Play"); //play button
-		this.createEntryButton(this.divId + "-add-sub-queue-btn","entry-btn","addEntryToSubQueue(\"" + this.divId + "\")","Queue"); //add to queue button
-		this.createEntryButton(this.divId + "-remove-entry-btn","entry-btn","getEntryById(\"" + this.divId + "\").removeFromMain()","Remove"); //remove from main button
+		this.createEntryDiv( 			//create main entry div
+			"main-entry", 				//id prefix
+			"entry-div", 				//class
+			queueContainer 				//parent node
+		);
+		this.createEntryButton( 		//play button
+			"play-btn", 				//id suffix
+			"entry-btn", 				//class
+			"playEntry(\"" + this.divId + "\")", 	//onclick=
+			"Play" 					//text
+		);
+		this.createEntryButton( 		//add to queue button
+			"add-sub-queue-btn",
+			"entry-btn",
+			"addEntryToSubQueue(\"" + this.divId + "\")",
+			"Queue"
+		);
+		this.createEntryButton( 		//remove from main button
+			"remove-entry-btn",
+			"entry-btn","getEntryById(\"" + this.divId + "\").removeFromMain()",
+			"Delete"
+		);
+	}
+
+	shiftInQueue(index) { //rename to shiftInMain //should be functional now
+		var previousPos = mainEntryIndex.indexOf(this);
+		if (index < previousPos) {previousPos += 1;}
+		mainEntryIndex.splice(index,0,this);
+		if (index >= mainEntryIndex.length-1) {
+			queueContainer.appendChild(this.div);
+		}else {
+		var beforeDiv = mainEntryIndex[index + 1].div;
+		queueContainer.insertBefore(this.div,beforeDiv);
+		}
+		mainEntryIndex.splice(previousPos,1);
 	}
 
 	removeFromMain() {
-		removeEntryFromIndex(mainEntryIndex);
-		removeEntryFromNode(queueContainer,this.div);
+		mainEntryIndex.splice(mainEntryIndex.indexOf(this),1);
+		queueContainer.removeChild(this.div);
 	}
 }
 /**********************************************************************************************************/
@@ -81,76 +105,25 @@ class queueEntry extends entry {
 	constructor(logLineObject) {
 		super(logLineObject);
 		queueIndex.push(this);
-		this.createEntryDiv("queue-entry","entry-div",subQueueContainer);
+		this.createEntryDiv(
+			"queue-entry",
+			"entry-div",
+			subQueueContainer
+		);
+		this.createEntryButton(
+			"remove-queue-entry-btn",
+			"entry-btn",
+			"this.destroy()",	//this will be a fun experiment, if this works I can rewrite even more stuff to just be methods instead of being functions with id arguments
+			"Remove"  				//no onclick function for this button has been written yet
+		);
 	}
 
 	destroy() {
-		this.removeEntryFromIndex(queueIndex);
+		queueIndex.splice(queueIndex.indexOf(this),1);
 		this.div.remove();
 	}
 }
 /**********************************************************************************************************/
-
-/*************CLASS QUEUEENTRY*****************************************************************************/
-//GOING TO START COMMENTING OUT CODE I'VE REFACTORED/W/E SOMEWHERE ELSE
-class queueEntry {
-	constructor(logLineObject) {
-		queueEntryId += 1;
-		this.entryIdNumber = queueEntryId;
-		this.lineData = logLineObject;
-		mainEntryIndex.push(this);
-		this.createEntry();
-	}
-
-	modifyQueueButtons(addRemove) {
-		switch (addRemove) {
-			case "add":
-				this.setQueueButtonsAdded();
-				break;
-			case "remove":
-				this.reInitQueueButtons();
-				break;
-		}
-	}
-
-	reInitQueueButtons() {
-		this.subQueueButton.setAttribute("onclick","addEntryToSubQueue(\"" + this.entryDivId + "\")");
-		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "Add to queue";
-	}
-
-	setQueueButtonsAdded() {
-		this.subQueueButton.setAttribute("onclick","removeEntryFromSubQueue(\"" + this.entryDivId + "\")");
-		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + this.getSubQueuePos() + ")";
-	}
-////
-	addToQueue() {
-		mainEntryIndex.push(this);
-		queueContainer.appendChild(this.entryDiv);
-	}
-////
-	shiftInQueue(index) {
-		var previousPos = this.getQueueIndexPos();
-		if (index < previousPos) {previousPos += 1;}
-		mainEntryIndex.splice(index,0,this);
-		if (index >= mainEntryIndex.length-1) {
-			queueContainer.appendChild(this.entryDiv);
-		}
-		else {
-		var beforeDiv = mainEntryIndex[index + 1].entryDiv;
-		queueContainer.insertBefore(this.entryDiv,beforeDiv);
-		}
-		mainEntryIndex.splice(previousPos,1);
-	}
-
-	getQueueIndexPos() {
-		return mainEntryIndex.indexOf(this);
-	}
-
-	getSubQueuePos() {
-		return queueIndex.indexOf(this);
-	}
-}
-/*************CLASS QUEUEENTRY*****************************************************************************/
 
 /*************CLASS LOGLINE********************************************************************************/
 class logLine {
@@ -161,7 +134,6 @@ class logLine {
 		this.getURL();
 		this.lineId = lineId;
 	}
-
 
 	getIndeces() {
 		this.titleEndPos = this.line.indexOf("\t")-1; //may have to look into changing this from \t to a better delimiter - Mar 20 2021 monax
@@ -202,56 +174,35 @@ function decodeSubQueueFromURL() {
 }
 
 function makeRandomSubQueue10() {
-	var queueLength = getQueueLength();
+	var logLength = getLogLength();
 	for (i=1; i<=10; i++) {
-	var entryIdNumber = Math.floor(Math.random() * queueLength);
+	var entryIdNumber = Math.floor(Math.random() * logLength);
 	var entryDivId = "entry-" + entryIdNumber; //hopefully this works
 	addEntryToSubQueue(entryDivId);
 	}
 }
-/*THIS IS GOING TO BE DEPRECATED, WILL BE RENAMED DURING FINND&REPLACE REFACTORING */
-function addEntryToSubQueue(entryDivId) { //really don't like the fact that some functions call the div id and some call the object, I know there's a better way to keep things uniform.
+
+function addEntryToSubQueue(entryDivId) {
 	var entry = getEntryById(entryDivId);
 	let newQueueEntry = new queueEntry(entry.lineData);
-	//entry.modifyQueueButtons("add"); //haven't refactored this method yet
-}
-/************************************************************************************/
-function addEntryToSubQueueDiv(entry) {
-	entry.subQueueDivButton = document.createElement("button");
-	entry.subQueueDivButton.setAttribute("type","button");
-	entry.subQueueDivButton.setAttribute("id",entry.entryDivId + "-subQueue-div-btn");
-	entry.subQueueDivButton.setAttribute("class","entry-btn");
-	entry.subQueueDivButton.setAttribute("onclick","removeEntryFromSubQueue(\"" + entry.entryDivId + "\")");
-	entry.subQueueDivButton.appendChild(document.createTextNode(entry.lineData.title));
-	var subQueueDiv = document.getElementById("subQueue-div");
-	subQueueDiv.appendChild(entry.subQueueDivButton);
-}
-////////////////////////////////
-function removeEntryFromSubQueue(entryDivId) {
-	var entry = getEntryById(entryDivId);
-	queueIndex.splice(entry.getSubQueuePos(),1);
-	removeEntryFromSubQueueDiv(entry);
-	entry.modifyQueueButtons("remove");
-	for (let entry of queueIndex) {
-		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.getSubQueuePos() + ")";
-	}
 }
 
-function removeEntryFromSubQueueDiv(entry) {
-	//removeEntryFromSubQueue(entry.entryDivId);
-	document.getElementById(entry.entryDivId + "-subQueue-div-btn").remove();
+/*///////////////////////////////////////*/
+function removeEntryFromSubQueue(queueEntry) { //going to try passing the object sinnce I can assign this to a button, am retard though
+	queueEntry.destroy();
 }
-////////////////////////////////
-function getQueueLength() {
-	var queueLength = document.getElementById("log_length").innerHTML;
-	return queueLength;
+/////////////////////////////////////////
+
+function getLogLength() {
+	var logLength = document.getElementById("log_length").innerHTML;
+	return logLength;
 }
 
-function shuffleQueue() {
-	var queueLength = mainEntryIndex.length;
+function shuffleMain() {
+	var mainLength = mainEntryIndex.length;
 	for (i = 0; i <= 3; i++) {
-		for (index = 0; index < queueLength; index++) {
-			var randomPos = Math.floor(Math.random() * queueLength);
+		for (index = 0; index < mainLength; index++) {
+			var randomPos = Math.floor(Math.random() * mainLength);
 			mainEntryIndex[index].shiftInQueue(randomPos);
 		}
 	}
@@ -327,10 +278,8 @@ function getEndEntryId(whichEnd) {
 			endIndex = 0;
 	}
 
-	//var endEntry = document.querySelectorAll("#queue div.entry-div")[endIndex];
 	var endEntry = queueEntryNodeList[endIndex];
 	var endEntryId = endEntry.getAttribute("id");
-	//var endEntryId = document.querySelectorAll("#queue div.entry-div")[endIndex].getAttribute("id");
 	return endEntryId
 }
 
@@ -353,7 +302,7 @@ function getLog() {
 	var next_Line_Pos = 0;
 	var _Line_String;
 	var logEntryText;
-	var length = getQueueLength();
+	var length = getLogLength();
 	for (index = 0; index <= length; index++) {
 		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
 		_Line_String = "_LINE_" + index;
@@ -397,7 +346,7 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
 	document.getElementById("queue-test-text").innerHTML = "onPlayerReady";
-	shuffleQueue();
+	shuffleMain();
 	//event.target.playVideo();
 }
 
@@ -420,7 +369,7 @@ function main() {
 }
 
 function button_test() {
-	document.getElementById("queue-test-text").innerHTML = "queueLength is " + getQueueLength();
+	document.getElementById("queue-test-text").innerHTML = "logLength is " + getLogLength();
 	autoPlayNextEntry();
 }
 
