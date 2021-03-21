@@ -58,10 +58,10 @@
 			<p id="queue-test-text" style="display:none">Queue goes here</p>
 
 			<div id="queue-control-div">
-				<button type="button" onclick="autoplay_next_entry()" class="btn-primary">Play Next</button>
-				<button type="button" onclick="shuffle_queue()" class="btn-primary">Shuffle</button>
+				<button type="button" onclick="autoPlayNextEntry()" class="btn-primary">Play Next</button>
+				<button type="button" onclick="shuffleQueue()" class="btn-primary">Shuffle</button>
 				<!--<
-				button type="button" onclick="make_random_subQueue_10()" class="btn-primary">Random 10</button>
+				button type="button" onclick="makeRandomSubQueue10()" class="btn-primary">Random 10</button>
 				-->
 			</div>
 		</div>
@@ -69,10 +69,10 @@
 
 	<div class="contents-box-secondary" id="subQueue-div">
 		<h2 class="contents-title">Playlist Queue</h2>
-		<button type="button" class="btn-primary" onclick="encode_subQueue_to_url()">Encode URL</button>
-		<button type="button" class="btn-primary" onclick="decode_subQueue_from_url()">Decode URL</button>
+		<button type="button" class="btn-primary" onclick="encodeSubQueueToURL()">Encode URL</button>
+		<button type="button" class="btn-primary" onclick="decodeSubQueueFromURL()">Decode URL</button>
 	</div>
 
-	<noscript>why don'd u hab jabasgribd durnd on? :DDDDDDDDDDDDDDDD</noscript>
+	<noscript>sdob usingg mothra and durn on ur jabasgridb :DDDDDDDD</noscript>
 </body>
 </html>
