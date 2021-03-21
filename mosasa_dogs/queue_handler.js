@@ -159,7 +159,7 @@ class queueEntry {
 
 /*************CLASS LOGLINE********************************************************************************/
 class logLine {
-	constructor(logLine) { //don't need to push to global index since an entry is made right after this object is made.
+	constructor(logLine) {
 		this.line = logLine;
 		this.get_indeces();
 		this.get_title();
@@ -167,9 +167,9 @@ class logLine {
 	}
 
 	get_indeces() {
-		this.titleEndPos = this.line.indexOf("\thttps://www.youtube.com/watch")-1;
-		this.youtubeSubURLStartPos = this.line.indexOf("https://www.youtube.com/watch/") + "https://www.youtube.com/watch/".length;
-		this.youtubeSubURLEndPos = this.line.indexOf("\n<br>",this.youtubeSubURLStartPos);
+		this.titleEndPos = this.line.indexOf("\t")-1; //may have to look into changing this from \t to a better delimiter - Mar 20 2021 monax
+		this.youtubeSubURLStartPos = this.line.indexOf("\t") + "\t".length;
+		//this.youtubeSubURLEndPos = this.line.indexOf("\n<br>",this.youtubeSubURLStartPos); //consider also, making a better endline delimiter too, instead of a potentially ubiquitous "/n<br>" - Mar 20 2021 monax
 	}
 
 	get_title() {
@@ -177,7 +177,7 @@ class logLine {
 	}
 
 	get_url() {
-		this.url = this.line.slice(this.youtubeSubURLStartPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
+		this.url = this.line.slice(this.youtubeSubURLStartPos);
 	}
 }
 /*************CLASS LOGLINE********************************************************************************/
@@ -186,8 +186,6 @@ class logLine {
 /*************FUNCTIONS***********************************************************************************/
 /*********************************************************************************************************/
 function encode_subQueue_to_url() {
-	//I'm not sure how I'm going to do this but I know I want to
-	//I can think of a simple, dumb way anyways	//here goes:
 	var playListArray = new Array();
 	for (let entry of subQueue) {
 		playListArray.push(entry.entryDivId);
