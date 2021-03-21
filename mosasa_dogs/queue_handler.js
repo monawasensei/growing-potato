@@ -1,89 +1,105 @@
-var queueIndex = new Array();
-var subQueue = new Array();
-var queueEntryId = 0;
+var mainEntryIndex = new Array();
+var queueIndex = new Array(); //REMEMBER YOU RENAMED THIS, YOU WILL HAVE ETO GO THROUGH AND CAREFULLY LOOK AT THE CODE BECAUSE YOU INIIALLY NAMED IT LIKE A COMPLETE RETARD
 var queueContainer = document.getElementById("queue");
+var subQueueContainer = document.getElementById("subQueue-div");
 var mosasaYTPlayer;
+/**********************************************************************************************************/
 
-/*************CLASS QUEUEENTRY*****************************************************************************/
-class queueEntry {
-	constructor(logLineObject) {
+/**********************************************************************************************************/
+class entry {
+	constructor(logLineObject) { //note that this logLineObject MUST be passed, even if it's not a main Entry!!
 		this.lineData = logLineObject;
-		queueIndex.push(this);
-		this.createEntry();
+		this.idNumber = this.lineData.lineId;
 	}
 
-	createEntry() {
-		this.createEntryDiv()
-		this.populateEntryDiv()
-		this.addLogButtons()
-	}
-
-	createEntryDiv() {
-		queueEntryId += 1
-		this.entryDiv = document.createElement("div")
-		this.entryDivId = "entry-" + queueEntryId
-		this.entryDiv.setAttribute("id",this.entryDivId)
-		this.entryDiv.setAttribute("class","entry-div")
-		queueContainer.appendChild(this.entryDiv)
-	}
-
-	populateEntryDiv() {
-		this.entryTitle = document.createElement("a")
-		this.entryTitle.setAttribute("class","entry-title")
+	createEntryDiv(divIdPrefix,divClass,divParentNode) {
+		this.div = document.createElement("div");
+		this.divId/*previously .entryDivId*/ = divIdPrefix + "-" + this.idNumber;
+		this.div.setAttribute("id",this.divId);
+		this.div.setAttribute("class",divClass);
+		divParentNode.appendChild(this.div);
+		this.entryTitle = document.createElement("a");
+		this.entryTitle.setAttribute("class","entry-title");
 		this.entryTitle.setAttribute("href","https://www.youtube.com/watch/" + this.lineData.url);
 		this.entryTitle.setAttribute("target","_blank");
-		var entryTitleText = document.createTextNode(this.lineData.title)
-		this.entryTitle.appendChild(entryTitleText)
-		this.entryDiv.appendChild(this.entryTitle)
-	}
-
-	addLogButtons() {
+		this.entryTitle.appendChild(document.createTextNode(this.lineData.title));
+		this.div.appendChild(this.entryTitle);
 		this.buttonDiv = document.createElement("div");
+		this.buttonDiv.setAttribute("id",this.divId + "-btn-div");
 		this.buttonDiv.setAttribute("class","entry-btn-div");
-		this.buttonDiv.setAttribute("id",this.entryDivId + "btn-div");
-		this.entryDiv.appendChild(this.buttonDiv);
-		this.addPlayButton();
-		//this.addOrderButtons();
-		this.addSubQueueButtons();
-		this.addDeleteFromQueueButtons();
+		this.div.appendChild(this.buttonDiv);
 	}
 
-	addPlayButton() {
-		this.playButton = document.createElement("button");
-		this.playButton.setAttribute("type","button");
-		this.playButton.setAttribute("class","entry-btn");
-		this.playButton.setAttribute("id", this.entryDivId + "-play-btn");
-		this.playButton.setAttribute("onclick","playEntry(\"" + this.entryDivId + "\")"); //this one will be tricky to figure out I think.
-		this.playButton.appendChild(document.createTextNode("Play"));
-		this.buttonDiv.appendChild(this.playButton);
+	createEntryButton(buttonId,buttonClass,onClickFunction,nodeText) {
+		var button = document.createElement("button");
+		button.setAttribute("type","button");
+		button.setAttribute("id",buttonId);
+		button.setAttribute("class",buttonClass);
+		button.setAttribute("onclick",onClickFunction);
+		button.appendChild(document.createTextNode(nodeText));
+		this.buttonDiv.appendChild(button);
 	}
 
-	addOrderButtons() {
-		this.orderUpButton = document.createElement("button");
-		this.orderUpButton.setAttribute("type","button");
-		this.orderUpButton.setAttribute("class","entry-btn");
-		this.orderUpButton.setAttribute("id", this.entryDivId + "-order-up-btn");
-		this.orderUpButton.setAttribute("onclick","moveEntry(\"" + this.entryDivId + "\",\"up\",1)");
-		this.orderUpButton.appendChild(document.createTextNode("Move up"));
-		this.buttonDiv.appendChild(this.orderUpButton);
-
-		this.orderDownButton = document.createElement("button");
-		this.orderDownButton.setAttribute("type","button");
-		this.orderDownButton.setAttribute("class","entry-btn");
-		this.orderDownButton.setAttribute("id", this.entryDivId + "-order-down-btn");
-		this.orderDownButton.setAttribute("onclick","moveEntry(\"" + this.entryDivId + "\",\"down\",1)");
-		this.orderDownButton.appendChild(document.createTextNode("Move down"));
-		this.buttonDiv.appendChild(this.orderDownButton);
+	addEntryToIndex(indexArray) {
+		indexArray.push();
 	}
 
-	addSubQueueButtons() {
-		this.subQueueButton = document.createElement("button");
-		this.subQueueButton.setAttribute("type","button");
-		this.subQueueButton.setAttribute("class","entry-btn");
-		this.subQueueButton.setAttribute("id", this.entryDivId + "-add-sub-queue-btn");
-		this.subQueueButton.setAttribute("onclick","addEntryToSubQueue(\"" + this.entryDivId + "\")");
-		this.subQueueButton.appendChild(document.createTextNode("Add to queue"));
-		this.buttonDiv.appendChild(this.subQueueButton);
+	removeEntryFromIndex(indexArray) {
+		indexArray.splice(indexArray.indexOf(this),1);
+	}
+
+	removeEntryFromNode(node,child) {
+		node.removeChild(child);
+	}
+
+	replacePlayerSRC() {
+		mosasaYTPlayer.loadVideoById(this.lineData.url);
+	}
+}
+/**********************************************************************************************************/
+
+/**********************************************************************************************************/
+class mainEntry extends entry {
+	constructor(logLineObject) {
+		super(logLineObject);
+		mainEntryIndex.push(this);
+		this.createEntryDiv("main-entry","entry-div",queueContainer);
+		this.createEntryButton(this.divId + "-play-btn","entry-btn","playEntry(\"" + this.divId + "\")","Play"); //play button
+		this.createEntryButton(this.divId + "-add-sub-queue-btn","entry-btn","addEntryToSubQueue(\"" + this.divId + "\")","Queue"); //add to queue button
+		this.createEntryButton(this.divId + "-remove-entry-btn","entry-btn","getEntryById(\"" + this.divId + "\").removeFromMain()","Remove"); //remove from main button
+	}
+
+	removeFromMain() {
+		removeEntryFromIndex(mainEntryIndex);
+		removeEntryFromNode(queueContainer,this.div);
+	}
+}
+/**********************************************************************************************************/
+
+/**********************************************************************************************************/
+class queueEntry extends entry {
+	constructor(logLineObject) {
+		super(logLineObject);
+		queueIndex.push(this);
+		this.createEntryDiv("queue-entry","entry-div",subQueueContainer);
+	}
+
+	destroy() {
+		this.removeEntryFromIndex(queueIndex);
+		this.div.remove();
+	}
+}
+/**********************************************************************************************************/
+
+/*************CLASS QUEUEENTRY*****************************************************************************/
+//GOING TO START COMMENTING OUT CODE I'VE REFACTORED/W/E SOMEWHERE ELSE
+class queueEntry {
+	constructor(logLineObject) {
+		queueEntryId += 1;
+		this.entryIdNumber = queueEntryId;
+		this.lineData = logLineObject;
+		mainEntryIndex.push(this);
+		this.createEntry();
 	}
 
 	modifyQueueButtons(addRemove) {
@@ -106,64 +122,44 @@ class queueEntry {
 		this.subQueueButton.setAttribute("onclick","removeEntryFromSubQueue(\"" + this.entryDivId + "\")");
 		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + this.getSubQueuePos() + ")";
 	}
-
-	addDeleteFromQueueButtons() {
-		this.deleteEntryButton = document.createElement("button");
-		this.deleteEntryButton.setAttribute("type","button");
-		this.deleteEntryButton.setAttribute("class","entry-btn");
-		this.deleteEntryButton.setAttribute("id", this.entryDivId + "-remove-entry-btn");
-		this.deleteEntryButton.setAttribute("onclick","getEntryById(\"" + this.entryDivId + "\").removeFromQueue()");
-		//this.deleteEntryButton.setAttribute("style" , "position: relative; left: 240px;");
-		this.deleteEntryButton.appendChild(document.createTextNode("Remove"));
-		this.buttonDiv.appendChild(this.deleteEntryButton);
-	}
-
-	replacePlayerSrc() {
-		mosasaYTPlayer.loadVideoById(this.lineData.url);
-	}
-
-	removeFromQueue() {
-		var pos = this.getQueueIndexPos();
-		queueIndex.splice(pos,1);
-		queueContainer.removeChild(this.entryDiv);
-	}
-
+////
 	addToQueue() {
-		queueIndex.push(this);
+		mainEntryIndex.push(this);
 		queueContainer.appendChild(this.entryDiv);
 	}
-
+////
 	shiftInQueue(index) {
 		var previousPos = this.getQueueIndexPos();
 		if (index < previousPos) {previousPos += 1;}
-		queueIndex.splice(index,0,this);
-		if (index >= queueIndex.length-1) {
+		mainEntryIndex.splice(index,0,this);
+		if (index >= mainEntryIndex.length-1) {
 			queueContainer.appendChild(this.entryDiv);
 		}
 		else {
-		var beforeDiv = queueIndex[index + 1].entryDiv;
+		var beforeDiv = mainEntryIndex[index + 1].entryDiv;
 		queueContainer.insertBefore(this.entryDiv,beforeDiv);
 		}
-		queueIndex.splice(previousPos,1);
+		mainEntryIndex.splice(previousPos,1);
 	}
 
 	getQueueIndexPos() {
-		return queueIndex.indexOf(this);
+		return mainEntryIndex.indexOf(this);
 	}
 
 	getSubQueuePos() {
-		return subQueue.indexOf(this);
+		return queueIndex.indexOf(this);
 	}
 }
 /*************CLASS QUEUEENTRY*****************************************************************************/
 
 /*************CLASS LOGLINE********************************************************************************/
 class logLine {
-	constructor(logLine) {
+	constructor(logLine,lineId) {
 		this.line = logLine;
 		this.getIndeces();
 		this.getTitle();
 		this.getURL();
+		this.lineId = lineId;
 	}
 
 
@@ -188,7 +184,7 @@ class logLine {
 /*********************************************************************************************************/
 function encodeSubQueueToURL() {
 	var playListArray = new Array();
-	for (let entry of subQueue) {
+	for (let entry of queueIndex) {
 		playListArray.push(entry.entryDivId);
 	}
 	var playListURI = encodeURIComponent(playListArray.join("_"));
@@ -213,14 +209,13 @@ function makeRandomSubQueue10() {
 	addEntryToSubQueue(entryDivId);
 	}
 }
-
+/*THIS IS GOING TO BE DEPRECATED, WILL BE RENAMED DURING FINND&REPLACE REFACTORING */
 function addEntryToSubQueue(entryDivId) { //really don't like the fact that some functions call the div id and some call the object, I know there's a better way to keep things uniform.
 	var entry = getEntryById(entryDivId);
-	subQueue.push(entry);
-	addEntryToSubQueueDiv(entry);
-	entry.modifyQueueButtons("add");
+	let newQueueEntry = new queueEntry(entry.lineData);
+	//entry.modifyQueueButtons("add"); //haven't refactored this method yet
 }
-
+/************************************************************************************/
 function addEntryToSubQueueDiv(entry) {
 	entry.subQueueDivButton = document.createElement("button");
 	entry.subQueueDivButton.setAttribute("type","button");
@@ -231,13 +226,13 @@ function addEntryToSubQueueDiv(entry) {
 	var subQueueDiv = document.getElementById("subQueue-div");
 	subQueueDiv.appendChild(entry.subQueueDivButton);
 }
-
+////////////////////////////////
 function removeEntryFromSubQueue(entryDivId) {
 	var entry = getEntryById(entryDivId);
-	subQueue.splice(entry.getSubQueuePos(),1);
+	queueIndex.splice(entry.getSubQueuePos(),1);
 	removeEntryFromSubQueueDiv(entry);
 	entry.modifyQueueButtons("remove");
-	for (let entry of subQueue) {
+	for (let entry of queueIndex) {
 		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.getSubQueuePos() + ")";
 	}
 }
@@ -246,18 +241,18 @@ function removeEntryFromSubQueueDiv(entry) {
 	//removeEntryFromSubQueue(entry.entryDivId);
 	document.getElementById(entry.entryDivId + "-subQueue-div-btn").remove();
 }
-
+////////////////////////////////
 function getQueueLength() {
 	var queueLength = document.getElementById("log_length").innerHTML;
 	return queueLength;
 }
 
 function shuffleQueue() {
-	var queueLength = queueIndex.length;
+	var queueLength = mainEntryIndex.length;
 	for (i = 0; i <= 3; i++) {
 		for (index = 0; index < queueLength; index++) {
 			var randomPos = Math.floor(Math.random() * queueLength);
-			queueIndex[index].shiftInQueue(randomPos);
+			mainEntryIndex[index].shiftInQueue(randomPos);
 		}
 	}
 	autoPlayNextEntry();
@@ -280,14 +275,14 @@ function moveEntry(entryDivId,direction,number) { //need to add validation so th
 function moveDistanceInBounds(currentPos,number) {
 	//make sure number is less than or equal to the bounds of the queue
 	if (currentPos + number < 0) {number = -1 * currentPos;}
-	else if (currentPos + number > queueIndex.length) {number = queueIndex.length - currentPos;}
+	else if (currentPos + number > mainEntryIndex.length) {number = mainEntryIndex.length - currentPos;}
 	return number;
 }
 
 function autoPlayNextEntry() {
-	if (subQueue.length != 0) {
-		playEntry(subQueue[0].entryDivId);
-		removeEntryFromSubQueue(subQueue[0].entryDivId);
+	if (queueIndex.length != 0) {
+		playEntry(queueIndex[0].entryDivId);
+		removeEntryFromSubQueue(queueIndex[0].entryDivId);
 	}
 	else {
 		playEntry(getEndEntryId("top"));
@@ -340,7 +335,7 @@ function getEndEntryId(whichEnd) {
 }
 
 function getEntryById(id) { //this function is really stupid and it's mega dumb how much the script relies on it.
-	for (let entry of queueIndex) {
+	for (let entry of mainEntryIndex) {
 		if (id == entry.entryDivId) {
 			return entry;
 		}
@@ -366,7 +361,7 @@ function getLog() {
 		next_Line_Pos = log.indexOf("_LINE_",_Line_Pos);
 		_Line_EndPos = next_Line_Pos - "\n<br>".length;
 		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
-		let logLineObject = new logLine(logEntryText);
+		let logLineObject = new logLine(logEntryText,index);
 		let playlistQueueEntry = new queueEntry(logLineObject);
 	}
 }
