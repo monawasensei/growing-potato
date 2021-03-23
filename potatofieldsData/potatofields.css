@@ -70,3 +70,91 @@ nav, .navbar {
     background-color: #560e12!important;
     border-color: #FFFFFF;
 }
+
+.userlist_op {
+    color:salmon!important;
+    /*background-color:paleturquoise!important;*/
+}
+
+.userlist_owner {
+    color: paleturquoise!important;
+}
+
+div.chat-msg-guan_tea .username {
+    color: green!important;
+}
+
+div.chat-msg-guanxiale .username {
+    color: orange!important;
+}
+
+div.chat-msg-Guardian123 .username {
+    color: purple!important;
+}
+
+div.chat-msg-pan_ningen .username {
+    color: yellow!important;
+}
+
+div.chat-msg-darkforest .username {
+    color:green!important;
+}
+
+div.chat-msg-muhkuh .username {
+    color:green!important;
+}
+
+div.chat-msg-salmon4 .username {
+    color:salmon!important;
+}
+
+div.chat-msg-salmon5 .username {
+    color:salmon!important;
+}
+
+div.chat-msg-Onion202 .username {
+    color:green!important;
+}
+
+div.chat-msg-daredakke .username {
+    color:magenta!important;
+}
+
+div.chat-msg-FishEarthTheory .username {
+    color:turquoise!important;
+}
+
+div.chat-msg-nuui .username {
+    color:red!important;
+}
+
+div.chat-msg-desunder .username {
+    color: orange!important;
+}
+
+div.chat-msg-aquoot .username {
+    color:#00BFA5!important;
+}
+
+div.chat-msg-Pope_Pius_XII .username {
+    color:purple!important;
+}
+
+div.chat-msg-Starchnon .username {
+    color:#b79268!important;
+}
+
+div.chat-msg-APEBerg .username {
+    color:maroon!important;
+}
+
+div.chat-msg-nks .username {
+    color:#00D4F2!important;
+}
+
+div.chat-msg-rekijo .username {
+    color:teal!important;
+}
+
+
+

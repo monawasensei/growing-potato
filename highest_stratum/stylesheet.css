@@ -72,3 +72,34 @@ div.essay-text > p {
 	text-align: center;
 }
 
+.essay-supplement-a {
+	display: inline;
+	text-decoration: underline;
+	color: yellow;
+}
+
+.essay-supplement-a:hover {
+	color: gray;
+}
+
+.essay-supplement-a:hover .essay-supplement {
+	visibility: visible;
+	opacity: 1;
+}
+
+.essay-supplement {
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.25s;
+	position: absolute;
+	z-index: 1;
+	max-width: 300px;
+	color: white;
+	font-style: italic;
+	text-align: center;
+	background-color: black;
+	padding: 10px;
+	outline-color: yellow;
+	outline-width: 1px;
+	outline-style: solid;
+}

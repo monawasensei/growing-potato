@@ -9,16 +9,16 @@ class queueEntry {
 	constructor(logLineObject) {
 		this.lineData = logLineObject;
 		queueIndex.push(this);
-		this.create_entry();
+		this.createEntry();
 	}
 
-	create_entry() {
-		this.create_entry_div()
-		this.populate_entry_div()
-		this.add_log_buttons()
+	createEntry() {
+		this.createEntryDiv()
+		this.populateEntryDiv()
+		this.addLogButtons()
 	}
-	
-	create_entry_div() {
+
+	createEntryDiv() {
 		queueEntryId += 1
 		this.entryDiv = document.createElement("div")
 		this.entryDivId = "entry-" + queueEntryId
@@ -27,7 +27,7 @@ class queueEntry {
 		queueContainer.appendChild(this.entryDiv)
 	}
 
-	populate_entry_div() {
+	populateEntryDiv() {
 		this.entryTitle = document.createElement("a")
 		this.entryTitle.setAttribute("class","entry-title")
 		this.entryTitle.setAttribute("href","https://www.youtube.com/watch/" + this.lineData.url);
@@ -36,34 +36,34 @@ class queueEntry {
 		this.entryTitle.appendChild(entryTitleText)
 		this.entryDiv.appendChild(this.entryTitle)
 	}
-	
-	add_log_buttons() {
+
+	addLogButtons() {
 		this.buttonDiv = document.createElement("div");
 		this.buttonDiv.setAttribute("class","entry-btn-div");
 		this.buttonDiv.setAttribute("id",this.entryDivId + "btn-div");
 		this.entryDiv.appendChild(this.buttonDiv);
-		this.add_play_button();
-		//this.add_order_buttons();
-		this.add_sub_queue_buttons();
-		//this.add_delete_from_queue_buttons();
+		this.addPlayButton();
+		//this.addOrderButtons();
+		this.addSubQueueButtons();
+		this.addDeleteFromQueueButtons();
 	}
-	
-	add_play_button() {
+
+	addPlayButton() {
 		this.playButton = document.createElement("button");
 		this.playButton.setAttribute("type","button");
 		this.playButton.setAttribute("class","entry-btn");
 		this.playButton.setAttribute("id", this.entryDivId + "-play-btn");
-		this.playButton.setAttribute("onclick","play_entry(\"" + this.entryDivId + "\")"); //this one will be tricky to figure out I think.
+		this.playButton.setAttribute("onclick","playEntry(\"" + this.entryDivId + "\")"); //this one will be tricky to figure out I think.
 		this.playButton.appendChild(document.createTextNode("Play"));
 		this.buttonDiv.appendChild(this.playButton);
 	}
 
-	add_order_buttons() {
+	addOrderButtons() {
 		this.orderUpButton = document.createElement("button");
 		this.orderUpButton.setAttribute("type","button");
 		this.orderUpButton.setAttribute("class","entry-btn");
 		this.orderUpButton.setAttribute("id", this.entryDivId + "-order-up-btn");
-		this.orderUpButton.setAttribute("onclick","move_entry(\"" + this.entryDivId + "\",\"up\",1)");
+		this.orderUpButton.setAttribute("onclick","moveEntry(\"" + this.entryDivId + "\",\"up\",1)");
 		this.orderUpButton.appendChild(document.createTextNode("Move up"));
 		this.buttonDiv.appendChild(this.orderUpButton);
 
@@ -71,69 +71,70 @@ class queueEntry {
 		this.orderDownButton.setAttribute("type","button");
 		this.orderDownButton.setAttribute("class","entry-btn");
 		this.orderDownButton.setAttribute("id", this.entryDivId + "-order-down-btn");
-		this.orderDownButton.setAttribute("onclick","move_entry(\"" + this.entryDivId + "\",\"down\",1)");
+		this.orderDownButton.setAttribute("onclick","moveEntry(\"" + this.entryDivId + "\",\"down\",1)");
 		this.orderDownButton.appendChild(document.createTextNode("Move down"));
 		this.buttonDiv.appendChild(this.orderDownButton);
 	}
 
-	add_sub_queue_buttons() {
+	addSubQueueButtons() {
 		this.subQueueButton = document.createElement("button");
 		this.subQueueButton.setAttribute("type","button");
 		this.subQueueButton.setAttribute("class","entry-btn");
 		this.subQueueButton.setAttribute("id", this.entryDivId + "-add-sub-queue-btn");
-		this.subQueueButton.setAttribute("onclick","add_entry_to_subQueue(\"" + this.entryDivId + "\")");
+		this.subQueueButton.setAttribute("onclick","addEntryToSubQueue(\"" + this.entryDivId + "\")");
 		this.subQueueButton.appendChild(document.createTextNode("Add to queue"));
 		this.buttonDiv.appendChild(this.subQueueButton);
 	}
 
-	modify_queue_buttons(addRemove) {
+	modifyQueueButtons(addRemove) {
 		switch (addRemove) {
 			case "add":
-				this.set_queue_buttons_added();
+				this.setQueueButtonsAdded();
 				break;
 			case "remove":
-				this.reinit_queue_buttons();
+				this.reInitQueueButtons();
 				break;
 		}
 	}
 
-	reinit_queue_buttons() {
-		this.subQueueButton.setAttribute("onclick","add_entry_to_subQueue(\"" + this.entryDivId + "\")");
+	reInitQueueButtons() {
+		this.subQueueButton.setAttribute("onclick","addEntryToSubQueue(\"" + this.entryDivId + "\")");
 		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "Add to queue";
 	}
 
-	set_queue_buttons_added() {
-		this.subQueueButton.setAttribute("onclick","remove_entry_from_subQueue(\"" + this.entryDivId + "\")");
-		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + this.get_subQueue_pos() + ")";
+	setQueueButtonsAdded() {
+		this.subQueueButton.setAttribute("onclick","removeEntryFromSubQueue(\"" + this.entryDivId + "\")");
+		document.getElementById(this.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + this.getSubQueuePos() + ")";
 	}
 
-	add_delete_from_queue_buttons() {
+	addDeleteFromQueueButtons() {
 		this.deleteEntryButton = document.createElement("button");
 		this.deleteEntryButton.setAttribute("type","button");
 		this.deleteEntryButton.setAttribute("class","entry-btn");
 		this.deleteEntryButton.setAttribute("id", this.entryDivId + "-remove-entry-btn");
-		this.deleteEntryButton.setAttribute("onclick","get_entry_by_id(\"" + this.entryDivId + "\").remove_from_queue()");
-		this.deleteEntryButton.appendChild(document.createTextNode("Delete"));
+		this.deleteEntryButton.setAttribute("onclick","getEntryById(\"" + this.entryDivId + "\").removeFromQueue()");
+		//this.deleteEntryButton.setAttribute("style" , "position: relative; left: 240px;");
+		this.deleteEntryButton.appendChild(document.createTextNode("Remove"));
 		this.buttonDiv.appendChild(this.deleteEntryButton);
 	}
 
-	replace_player_src() {
+	replacePlayerSrc() {
 		mosasaYTPlayer.loadVideoById(this.lineData.url);
 	}
 
-	remove_from_queue() {
-		var pos = this.get_queueIndex_pos();
+	removeFromQueue() {
+		var pos = this.getQueueIndexPos();
 		queueIndex.splice(pos,1);
 		queueContainer.removeChild(this.entryDiv);
 	}
 
-	add_to_queue() {
+	addToQueue() {
 		queueIndex.push(this);
 		queueContainer.appendChild(this.entryDiv);
 	}
 
-	shift_in_queue(index) {
-		var previousPos = this.get_queueIndex_pos();
+	shiftInQueue(index) {
+		var previousPos = this.getQueueIndexPos();
 		if (index < previousPos) {previousPos += 1;}
 		queueIndex.splice(index,0,this);
 		if (index >= queueIndex.length-1) {
@@ -146,11 +147,11 @@ class queueEntry {
 		queueIndex.splice(previousPos,1);
 	}
 
-	get_queueIndex_pos() {
+	getQueueIndexPos() {
 		return queueIndex.indexOf(this);
 	}
 
-	get_subQueue_pos() {
+	getSubQueuePos() {
 		return subQueue.indexOf(this);
 	}
 }
@@ -158,24 +159,25 @@ class queueEntry {
 
 /*************CLASS LOGLINE********************************************************************************/
 class logLine {
-	constructor(logLine) { //don't need to push to global index since an entry is made right after this object is made.
+	constructor(logLine) {
 		this.line = logLine;
-		this.get_indeces();
-		this.get_title();
-		this.get_url();
+		this.getIndeces();
+		this.getTitle();
+		this.getURL();
 	}
 
-	get_indeces() {
-		this.titleEndPos = this.line.indexOf("\thttps://www.youtube.com/watch")-1;
-		this.youtubeSubURLStartPos = this.line.indexOf("https://www.youtube.com/watch/") + "https://www.youtube.com/watch/".length;
-		this.youtubeSubURLEndPos = this.line.indexOf("\n<br>",this.youtubeSubURLStartPos);
+
+	getIndeces() {
+		this.titleEndPos = this.line.indexOf("\t")-1; //may have to look into changing this from \t to a better delimiter - Mar 20 2021 monax
+		this.youtubeSubURLStartPos = this.line.indexOf("\t") + "\t".length;
+		//this.youtubeSubURLEndPos = this.line.indexOf("\n<br>",this.youtubeSubURLStartPos); //consider also, making a better endline delimiter too, instead of a potentially ubiquitous "/n<br>" - Mar 20 2021 monax
 	}
 
-	get_title() {
+	getTitle() {
 		this.title = this.line.slice(0,this.titleEndPos+1);
 	}
 
-	get_url() {
+	getURL() {
 		this.url = this.line.slice(this.youtubeSubURLStartPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
 	}
 }
@@ -184,98 +186,126 @@ class logLine {
 /*********************************************************************************************************/
 /*************FUNCTIONS***********************************************************************************/
 /*********************************************************************************************************/
-function add_entry_to_subQueue(entryDivId) {
-	var entry = get_entry_by_id(entryDivId);
-	subQueue.push(entry);
-	add_entry_to_subQueue_div(entry);
-	entry.modify_queue_buttons("add");
+function encodeSubQueueToURL() {
+	var playListArray = new Array();
+	for (let entry of subQueue) {
+		playListArray.push(entry.entryDivId);
+	}
+	var playListURI = encodeURIComponent(playListArray.join("_"));
+	location.hash = playListURI;
 }
 
-function add_entry_to_subQueue_div(entry) {
+function decodeSubQueueFromURL() {
+	var playListURIEncoded = location.hash.slice(1); //gets the hashstring and removes "#" //hopefully
+	var playListURI = decodeURIComponent(playListURIEncoded);
+	var playListArray = playListURI.split("_"); //don't know if I should declare new Array(); before assigning this oh well.
+	for (let entryDivId of playListArray) {
+	  addEntryToSubQueue(entryDivId);
+	}
+	autoPlayNextEntry(); //we'll see how this works out here.
+}
+
+function makeRandomSubQueue10() {
+	var queueLength = getQueueLength();
+	for (i=1; i<=10; i++) {
+	var entryIdNumber = Math.floor(Math.random() * queueLength);
+	var entryDivId = "entry-" + entryIdNumber; //hopefully this works
+	addEntryToSubQueue(entryDivId);
+	}
+}
+
+function addEntryToSubQueue(entryDivId) { //really don't like the fact that some functions call the div id and some call the object, I know there's a better way to keep things uniform.
+	var entry = getEntryById(entryDivId);
+	subQueue.push(entry);
+	addEntryToSubQueueDiv(entry);
+	entry.modifyQueueButtons("add");
+}
+
+function addEntryToSubQueueDiv(entry) {
 	entry.subQueueDivButton = document.createElement("button");
 	entry.subQueueDivButton.setAttribute("type","button");
 	entry.subQueueDivButton.setAttribute("id",entry.entryDivId + "-subQueue-div-btn");
 	entry.subQueueDivButton.setAttribute("class","entry-btn");
-	entry.subQueueDivButton.setAttribute("onclick","remove_entry_from_subQueue(\"" + entry.entryDivId + "\")");
+	entry.subQueueDivButton.setAttribute("onclick","removeEntryFromSubQueue(\"" + entry.entryDivId + "\")");
 	entry.subQueueDivButton.appendChild(document.createTextNode(entry.lineData.title));
 	var subQueueDiv = document.getElementById("subQueue-div");
 	subQueueDiv.appendChild(entry.subQueueDivButton);
 }
 
-function remove_entry_from_subQueue(entryDivId) {
-	var entry = get_entry_by_id(entryDivId);
-	subQueue.splice(entry.get_subQueue_pos(),1);
-	remove_entry_from_subQueue_div(entry);
-	entry.modify_queue_buttons("remove");
+function removeEntryFromSubQueue(entryDivId) {
+	var entry = getEntryById(entryDivId);
+	subQueue.splice(entry.getSubQueuePos(),1);
+	removeEntryFromSubQueueDiv(entry);
+	entry.modifyQueueButtons("remove");
 	for (let entry of subQueue) {
-		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.get_subQueue_pos() + ")";
+		document.getElementById(entry.entryDivId + "-add-sub-queue-btn").innerHTML = "(" + entry.getSubQueuePos() + ")";
 	}
 }
 
-function remove_entry_from_subQueue_div(entry) {
-	//remove_entry_from_subQueue(entry.entryDivId);
+function removeEntryFromSubQueueDiv(entry) {
+	//removeEntryFromSubQueue(entry.entryDivId);
 	document.getElementById(entry.entryDivId + "-subQueue-div-btn").remove();
 }
 
-function get_queue_length() {
+function getQueueLength() {
 	var queueLength = document.getElementById("log_length").innerHTML;
 	return queueLength;
 }
 
-function shuffle_queue() {
+function shuffleQueue() {
 	var queueLength = queueIndex.length;
 	for (i = 0; i <= 3; i++) {
 		for (index = 0; index < queueLength; index++) {
 			var randomPos = Math.floor(Math.random() * queueLength);
-			queueIndex[index].shift_in_queue(randomPos);
+			queueIndex[index].shiftInQueue(randomPos);
 		}
 	}
-	autoplay_next_entry();
+	autoPlayNextEntry();
 }
 
-function move_entry(entryDivId,direction,number) { //need to add validation so that it checks direction to be either "up" or "down", though this isn't a  big deal
+function moveEntry(entryDivId,direction,number) { //need to add validation so that it checks direction to be either "up" or "down", though this isn't a  big deal
 	var moveMod = 0;
 	if (direction == "up") {number *= -1;}
 	else if (direction == "down") {moveMod = 1;}
-	var entry = get_entry_by_id(entryDivId);
-	var isEndEntry = is_end_entry_by_id(entryDivId);
+	var entry = getEntryById(entryDivId);
+	var isEndEntry = isEndEntryById(entryDivId);
 	if (isEndEntry == 1 && number < 0) {number = 0;}
 	else if (isEndEntry == -1 && number > 0) {number = 0;}
-	var queueStartPos = entry.get_queueIndex_pos();
-	number = move_distance_in_bounds(queueStartPos,number);
+	var queueStartPos = entry.getQueueIndexPos();
+	number = moveDistanceInBounds(queueStartPos,number);
 	var queueDestinationPos = queueStartPos + number + moveMod;
-	entry.shift_in_queue(queueDestinationPos);
+	entry.shiftInQueue(queueDestinationPos);
 }
 
-function move_distance_in_bounds(currentPos,number) {
+function moveDistanceInBounds(currentPos,number) {
 	//make sure number is less than or equal to the bounds of the queue
 	if (currentPos + number < 0) {number = -1 * currentPos;}
 	else if (currentPos + number > queueIndex.length) {number = queueIndex.length - currentPos;}
 	return number;
 }
 
-function autoplay_next_entry() {
+function autoPlayNextEntry() {
 	if (subQueue.length != 0) {
-		play_entry(subQueue[0].entryDivId);
-		remove_entry_from_subQueue(subQueue[0].entryDivId);
+		playEntry(subQueue[0].entryDivId);
+		removeEntryFromSubQueue(subQueue[0].entryDivId);
 	}
 	else {
-		play_entry(get_end_entry_id("top"));
+		playEntry(getEndEntryId("top"));
 	}
 }
 
-function play_entry(entryDivId) {
-	var entry = get_entry_by_id(entryDivId);
-	entry.remove_from_queue();
-	entry.add_to_queue();
-	entry.replace_player_src();
+function playEntry(entryDivId) {
+	var entry = getEntryById(entryDivId);
+	entry.removeFromQueue();
+	entry.addToQueue();
+	entry.replacePlayerSrc();
 }
 
-function is_end_entry_by_id(entryId) {
+function isEndEntryById(entryId) {
 	var topId;
-	topId = get_end_entry_id("top");
+	topId = getEndEntryId("top");
 	var bottomId;
-	botomId = get_end_entry_id("bottom");
+	botomId = getEndEntryId("bottom");
 
 	if (entryId == topId) {
 		return 1;
@@ -288,7 +318,7 @@ function is_end_entry_by_id(entryId) {
 	}
 }
 
-function get_end_entry_id(whichEnd) {
+function getEndEntryId(whichEnd) {
 	var endIndex;
 	var queueEntryNodeList = document.querySelectorAll("#queue div.entry-div");
 	switch (whichEnd) {
@@ -309,7 +339,7 @@ function get_end_entry_id(whichEnd) {
 	return endEntryId
 }
 
-function get_entry_by_id(id) {
+function getEntryById(id) { //this function is really stupid and it's mega dumb how much the script relies on it.
 	for (let entry of queueIndex) {
 		if (id == entry.entryDivId) {
 			return entry;
@@ -321,14 +351,14 @@ function get_entry_by_id(id) {
 	return 0
 }
 
-function get_log() {
+function getLog() {
 	var log = document.getElementById("log").innerHTML;
 	var _Line_Pos = 0;
 	var _Line_EndPos;
 	var next_Line_Pos = 0;
 	var _Line_String;
 	var logEntryText;
-	var length = get_queue_length();
+	var length = getQueueLength();
 	for (index = 0; index <= length; index++) {
 		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
 		_Line_String = "_LINE_" + index;
@@ -342,7 +372,7 @@ function get_log() {
 }
 
 /*****************************YOUTUBE API*****************************************************************************************************/
-function load_youtube_iframe_api_script() {
+function loadYoutubeIframeAPIScript() {
 	var tag = document.createElement('script');
 
 	tag.src = "https://www.youtube.com/iframe_api";
@@ -372,14 +402,14 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
 	document.getElementById("queue-test-text").innerHTML = "onPlayerReady";
-	shuffle_queue();
+	shuffleQueue();
 	//event.target.playVideo();
 }
 
 function onPlayerStateChange(event) {
 	document.getElementById("queue-test-text").innerHTML = "onPlayerStateChange";
 	if (event.data == YT.PlayerState.ENDED) {
-		autoplay_next_entry();
+		autoPlayNextEntry();
 	}
 }
 
@@ -390,13 +420,13 @@ function stopVideo() {
 
 /*****************************EXECUTION BLOCK AND TEST FUNCTIONS*****************************************************************************/
 function main() {
-	load_youtube_iframe_api_script();
-	get_log();
+	loadYoutubeIframeAPIScript();
+	getLog();
 }
 
 function button_test() {
-	document.getElementById("queue-test-text").innerHTML = "queueLength is " + get_queue_length();
-	autoplay_next_entry();
+	document.getElementById("queue-test-text").innerHTML = "queueLength is " + getQueueLength();
+	autoPlayNextEntry();
 }
 
 main()
