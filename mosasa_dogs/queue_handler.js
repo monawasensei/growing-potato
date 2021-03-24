@@ -113,7 +113,7 @@ class queueEntry extends entry {
 		this.createEntryButton(
 			"remove-queue-entry-btn",
 			"entry-btn",
-			"this.destroy()",	//this will be a fun experiment, if this works I can rewrite even more stuff to just be methods instead of being functions with id arguments
+			"/*this.destroy()*/",	//predictably, this doesn't work LOL
 			"Remove"  				//no onclick function for this button has been written yet
 		);
 	}
@@ -225,8 +225,11 @@ function moveEntry(entryDivId,direction,number) { //need to add validation so th
 
 function moveDistanceInBounds(currentPos,number) {
 	//make sure number is less than or equal to the bounds of the queue
-	if (currentPos + number < 0) {number = -1 * currentPos;}
-	else if (currentPos + number > mainEntryIndex.length) {number = mainEntryIndex.length - currentPos;}
+	if (currentPos + number < 0) {
+		number = -1 * currentPos;
+	}else if (currentPos + number > mainEntryIndex.length) {
+		number = mainEntryIndex.length - currentPos;
+	}
 	return number;
 }
 
@@ -311,7 +314,7 @@ function getLog() {
 		_Line_EndPos = next_Line_Pos - "\n<br>".length;
 		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
 		let logLineObject = new logLine(logEntryText,index);
-		let playlistQueueEntry = new queueEntry(logLineObject);
+		let playlistQueueEntry = new mainEntry(logLineObject);
 	}
 }
 
