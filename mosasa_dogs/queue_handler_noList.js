@@ -267,7 +267,8 @@ function getLog() { //parses each line of the invisible log div and makes a main
 		let logLineObject = new logLine(logEntryText,index);
 		let playlistQueueEntry = new mainEntry(logLineObject);
 	}
-	
+}
+
 function getLogLength() {
 	var logLength = document.getElementById("log_length").innerHTML;
 	return logLength;
