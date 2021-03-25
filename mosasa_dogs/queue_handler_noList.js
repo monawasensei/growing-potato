@@ -303,6 +303,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
+	getLog();
 	shuffleMain();
 	//event.target.playVideo();
 }
@@ -320,7 +321,6 @@ function stopVideo() {
 
 function main() {
 	loadYoutubeIframeAPIScript();
-	getLog();
 }
 
 main()
