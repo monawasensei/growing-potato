@@ -233,7 +233,9 @@ function updateCurrentlyPlayingDisplay() {
 /***************************************ABSTRACT FUNCTIONS****************************************************************************************************/
 function entryObjFromElement(entryElement) { //we are right back to listfaggotry but it's at least a little less retarded than last time.
 	for (let entry of entryRegistry) {
-		if (entry.div === entryElement) { //hopefully this will be an accurate check and won't cuck me on some logic I don't understand
+		var entryId = entry.div.getAttribute("id");
+		var entryElementId = entryElement.getAttribute("id");
+		if (entryId == entryElementId) {
 			return entry;
 		}
 	}
