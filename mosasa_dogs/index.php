@@ -25,6 +25,12 @@
 	#subQueue-div .entry-btn {
   		border: none;
 	}
+	
+	#currently-playing-title {
+	height: 50px;
+	max-height: 50px;
+	overflow: hidden;
+	}
 	</style>
 </head>
 <body>
@@ -45,7 +51,8 @@
 	</div>
 
 	<div class="contents-box">
-		<h1 class="contents-title">The Mosasa Dogs Present: Potatofields Radio!</h1>
+		<h1 class="contents-title">Currently playing:</h1>
+		<h2 id="currently-playing-title" class="contents-title">N/A</h2>
 
 		<div id="player-toplevel" class="contents-video">
 			<div id="player">
@@ -55,22 +62,21 @@
 		<div id="queue">
 			<p><a href="log_display.php" class="link">Temporary link to the playlist log</a></p>
 
-			<p id="queue-test-text" style="display:none">Queue goes here</p>
-
 			<div id="queue-control-div">
 				<button type="button" onclick="autoPlayNextEntry()" class="btn-primary">Play Next</button>
-				<button type="button" onclick="shuffleQueue()" class="btn-primary">Shuffle</button>
-				<!--<
-				button type="button" onclick="makeRandomSubQueue10()" class="btn-primary">Random 10</button>
-				-->
+				<button type="button" onclick="shuffleMain()" class="btn-primary">Shuffle</button>
+			</div>
+			<div id="queue-entry-container"> <!--Actual entry items go here-->
 			</div>
 		</div>
 	</div>
 
 	<div class="contents-box-secondary" id="subQueue-div">
 		<h2 class="contents-title">Playlist Queue</h2>
-		<button type="button" class="btn-primary" onclick="encodeSubQueueToURL()">Encode URL</button>
-		<button type="button" class="btn-primary" onclick="decodeSubQueueFromURL()">Decode URL</button>
+		<!--<button type="button" class="btn-primary" onclick="encodeSubQueueToURL()">Encode URL</button>
+		<button type="button" class="btn-primary" onclick="decodeSubQueueFromURL()">Decode URL</button> -->
+		<div id="subQueue-entry-container">
+		</div>
 	</div>
 
 	<noscript>sdob usingg mothra and durn on ur jabasgridb :DDDDDDDD</noscript>
