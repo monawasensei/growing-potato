@@ -25,6 +25,12 @@
 	#subQueue-div .entry-btn {
   		border: none;
 	}
+	
+	#currently-playing-title {
+	height: 50px;
+	max-height: 50px;
+	overflow: hidden;
+	}
 	</style>
 </head>
 <body>
