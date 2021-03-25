@@ -179,30 +179,6 @@ class logLine {
 	}
 }
 /*************CLASS LOGLINE********************************************************************************/
-/*required methodology
-	methodology encompasses any actions that need to be or can be methods
-	these are determined mostly by whether or not the are done or performed on a single object
-	rather than a group of objects simultaneously. hopefully, most actions can fit in this section.
-	the more methods the easier, as far as I anticipate at least.
-
-****replacePlayerSrc()
-****remove()
-****moveEntry()
-*/
-
-/*required functionality
-	any action or functionality which works on multiple objects simultaneously or queue divs as a whole
-	shuffle(), getEndEntry(), and autoPlayNextEntry() are examples of this. The goal of these functions
-	is not to actually do anything themselves but rather to call the correct method for a given circumstance
-	the correct number of times.
-
-getEndEntry() {} //don't think I actually need this
-****playEntry()
-****autoplayNextEntry()
-****shuffle()
-add/removeEntryQueue() //handled in methodology
-**entryObjFromElement()
-*/
 
 //FUNCTIONS
 function autoPlayNextEntry() {
@@ -239,7 +215,6 @@ function entryObjFromElement(entryElement) { //we are right back to listfaggotry
 			return entry;
 		}
 	}
-	//throw new ArithmeticException("in the function entryObjFromElement(), no JS object was found which matched the specified element"); //throws error if no matching entry is found, this should never happen
 }
 
 function getLog() { //parses each line of the invisible log div and makes a mainEntry object for each one
