@@ -142,7 +142,7 @@ class queueEntry extends entry {
 		this.createEntryButton(
 			"remove-queue-entry-btn",
 			"entry-btn",
-			this.destroy, 		//will this work?
+			"this.destroy", 		//will this work?
 			"Remove"  				
 		);
 	}
