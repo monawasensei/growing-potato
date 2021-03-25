@@ -320,3 +320,10 @@ function stopVideo() {
 	mosasaYTPlayer.stopVideo();
 }
 /*****************************YOUTUBE API*****************************************************************************************************/
+
+function main() {
+	loadYoutubeIframeAPIScript();
+	getLog();
+}
+
+main()
