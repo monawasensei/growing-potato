@@ -161,17 +161,29 @@ class logLine {
 	}
 }
 /*************CLASS LOGLINE********************************************************************************/
-//required methodology
-//replacePlayerSrc()
-//remove()
+/*required methodology
+	methodology encompasses any actions that need to be or can be methods
+	these are determined mostly by whether or not the are done or performed on a single object
+	rather than a group of objects simultaneously. hopefully, most actions can fit in this section.
+	the more methods the easier, as far as I anticipate at least.
 
-//required functionality
-//getEndEntry() {}
-//playEntry()
-//autoplayNextEntry()
-//moveEntry()
-//shuffle()
-//add/removeEntryQueue()
+replacePlayerSrc()
+remove()
+*/
+
+/*required functionality
+	any action or functionality which works on multiple objects simultaneously or queue divs as a whole
+	shuffle(), getEndEntry(), and autoPlayNextEntry() are examples of this. The goal of these functions
+	is not to actually do anything themselves but rather to call the correct method for a given circumstance
+	the correct number of times.
+
+getEndEntry() {}
+playEntry()
+autoplayNextEntry()
+moveEntry()
+shuffle()
+add/removeEntryQueue()
+*/
 
 //FUNCTIONS
 function getLog() { //parses each line of the invisible log div and makes a mainEntry object for each one
@@ -215,7 +227,7 @@ function onYouTubeIframeAPIReady() {
 		videoId: 'FcZOnrL9VKM',
 		playerVars: {
 			'autoplay': 1,
-			'disablekb': 1,
+			'disablekb': 0,
 			'origin': 'https://holedigging.club',
 			'enablejsapi': 1
 			},
