@@ -292,7 +292,7 @@ function onYouTubeIframeAPIReady() {
 		playerVars: {
 			'autoplay': 1,
 			'disablekb': 0,
-			'origin': 'https://holedigging.club',
+			'origin': 'https://cool.holedigging.club',
 			'enablejsapi': 1
 			},
 		events: {
