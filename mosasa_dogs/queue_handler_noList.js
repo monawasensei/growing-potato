@@ -76,13 +76,13 @@ class mainEntry extends entry {
 		this.createEntryButton( 		//play button
 			"play-btn", 						//id suffix
 			"entry-btn", 						//class
-			function(){playEntry(this.divId)}, 	//onclick=
+			function(){playEntry(this.divId)};, 	//onclick=
 			"Play" 								//text
 		);
 		this.createEntryButton( 		//add to queue button
 			"add-sub-queue-btn",
 			"entry-btn",
-			function(){addEntryToSubQueue(this.divId)},
+			function(){addEntryToSubQueue(this.divId)};,
 			"Queue"
 		);
 		this.createEntryButton( 		//remove from main button
