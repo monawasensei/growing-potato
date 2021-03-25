@@ -30,13 +30,13 @@ class entry {
 		this.div.appendChild(this.buttonDiv);
 	}
 
-	createEntryButton(buttonIdSuffix,buttonClass,onClickFunction,nodeText) {
+	createEntryButton(buttonIdSuffix,buttonClass,onClickAnonymousFunction,nodeText) {
 		var button = document.createElement("button");
 		button.setAttribute("type","button");
 		var buttonId = this.divId + "-" + buttonIdSuffix;
 		button.setAttribute("id",buttonId);
 		button.setAttribute("class",buttonClass);
-		button.setAttribute("onclick",onClickFunction);
+		button.addEventListener("click",onClickAnonymousFunction); //I have no idea if I can pass a function as an arg.. probably not
 		button.appendChild(document.createTextNode(nodeText));
 		this.buttonDiv.appendChild(button);
 	}
@@ -62,22 +62,23 @@ class mainEntry extends entry {
 			queueContainer 				//parent node
 		);
 		this.createEntryButton( 		//play button
-			"play-btn", 				//id suffix
-			"entry-btn", 				//class
-			"playEntry(\"" + this.divId + "\")", 	//onclick=
-			"Play" 					//text
+			"play-btn", 						//id suffix
+			"entry-btn", 						//class
+			function(){playEntry(this.divId)}, 	//onclick=
+			"Play" 								//text
 		);
 		this.createEntryButton( 		//add to queue button
 			"add-sub-queue-btn",
 			"entry-btn",
-			"addEntryToSubQueue(\"" + this.divId + "\")",
+			function(){addEntryToSubQueue(this.divId)},
 			"Queue"
 		);
 		this.createEntryButton( 		//remove from main button
 			"remove-entry-btn",
-			"entry-btn","getEntryById(\"" + this.divId + "\").removeFromMain()",
+			this.removeFromMain,
 			"Delete"
 		);
+		
 	}
 
 	shiftInQueue(index) { //rename to shiftInMain //should be functional now
@@ -113,8 +114,8 @@ class queueEntry extends entry {
 		this.createEntryButton(
 			"remove-queue-entry-btn",
 			"entry-btn",
-			"/*this.destroy()*/",	//predictably, this doesn't work LOL
-			"Remove"  				//no onclick function for this button has been written yet
+			this.destroy, 		//will this work?
+			"Remove"  				
 		);
 	}
 
