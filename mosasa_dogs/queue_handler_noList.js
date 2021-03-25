@@ -50,8 +50,8 @@ class entry {
 		mosasaYTPlayer.loadVideoById(this.lineData.url);
 	}
 	
-	removeFromDiv() {
-		document.removeChild(this.div);
+	removeFromDiv(parentDiv) {
+		parentDiv.removeChild(this.div);
 	}
 	
 	addToDiv(parentDiv,index) { //I think I'll be able to use this to move entries so I will plan on that
@@ -117,6 +117,10 @@ class mainEntry extends entry {
 	
 	addToQueue() {
 		newQueueEntry = new queueEntry(this.lineData);
+	}
+	
+	removeFromDiv() {
+		super.removeFromDiv(mainContainer);	
 	}
 }
 /**********************************************************************************************************/
