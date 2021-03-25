@@ -98,11 +98,11 @@ class mainEntry extends entry {
 			mainContainer 				//parent node
 		);
 		let playButton = this.createEntryButton("play-btn","entry-btn","Play");
-		playButton.addEventListener("click",this.playEntry);
+		playButton.addEventListener("click",this.playEntry());
 		let addToQueueButton = this.createEntryButton("add-sub-queue-btn","entry-btn","Queue");
-		addToQueueButton.addEventListener("click",this.addToQueue);
+		addToQueueButton.addEventListener("click",this.addToQueue());
 		let removeEntryButton = this.createEntryButton("remove-entry-btn","entry-btn","Delete");
-		removeEntryButton.addEventListener("click",this.removeFromDiv);
+		removeEntryButton.addEventListener("click",this.removeFromDiv());
 		
 		
 	}
@@ -135,7 +135,7 @@ class queueEntry extends entry {
 			queueContainer
 		);
 		let removeFromQueueButton = this.createEntryButton("remove-queue-entry-btn","entry-btn","Remove" );
-		removeFromQueueButton.addEventListener("click",this.destroy);
+		removeFromQueueButton.addEventListener("click",this.destroy());
 	}
 	
 	playEntry() {
