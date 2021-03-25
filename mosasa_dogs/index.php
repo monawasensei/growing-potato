@@ -73,8 +73,8 @@
 
 	<div class="contents-box-secondary" id="subQueue-div">
 		<h2 class="contents-title">Playlist Queue</h2>
-		<button type="button" class="btn-primary" onclick="encodeSubQueueToURL()">Encode URL</button>
-		<button type="button" class="btn-primary" onclick="decodeSubQueueFromURL()">Decode URL</button>
+		<!--<button type="button" class="btn-primary" onclick="encodeSubQueueToURL()">Encode URL</button>
+		<button type="button" class="btn-primary" onclick="decodeSubQueueFromURL()">Decode URL</button> -->
 		<div id="subQueue-entry-container">
 		</div>
 	</div>
