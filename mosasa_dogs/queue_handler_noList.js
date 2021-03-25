@@ -67,7 +67,7 @@ class entry {
 	}
 	
 	playEntry(parentDiv) {
-		this.removeFromDiv();
+		this.removeFromDiv(parentDiv);
 		this.addToDiv(parentDiv,-1);
 		this.replacePlayerSrc();
 		currentlyPlaying = this;
@@ -145,7 +145,7 @@ class queueEntry extends entry {
 
 	destroy() {
 		entryRegistry.splice(entryRegistry.indexOf(this),1);
-		this.div.remove();
+		this.div.remove(); //this may cause issues but idk
 	}
 	
 	moveEntry(distance) {
