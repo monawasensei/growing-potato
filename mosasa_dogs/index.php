@@ -58,7 +58,7 @@
 
 			<div id="queue-control-div">
 				<button type="button" onclick="autoPlayNextEntry()" class="btn-primary">Play Next</button>
-				<button type="button" onclick="shuffleQueue()" class="btn-primary">Shuffle</button>
+				<button type="button" onclick="shuffleMain()" class="btn-primary">Shuffle</button>
 			</div>
 			<div id="queue-entry-container"> <!--Actual entry items go here-->
 			</div>
