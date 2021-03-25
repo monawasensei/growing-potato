@@ -56,7 +56,7 @@ class entry {
 	
 	addToDiv(parentDiv,index) { //I think I'll be able to use this to move entries so I will plan on that
 		if (index == 0) { //add to the top
-			var currentFirstEntry = parentDiv.firstChild;
+			var currentFirstEntry = parentDiv.firstElementChild;
 			parentDiv.insertBefore(this.div,currentFirstEntry);
 		} else if (index == -1) { //add to the bottom
 			parentDiv.appendChild(this.div);
@@ -208,9 +208,9 @@ add/removeEntryQueue() //handled in methodology
 function autoPlayNextEntry() {
 	var lengthOfQueue = queueContainer.childElementCount;
 	if (lengthOfQueue > 0) { //if there is something currently queued
-		var currentFirstEntryDiv = queueContainer.firstChild
+		var currentFirstEntryDiv = queueContainer.firstElementChild
 	} else { //plays next main entry if there is nothing in the queue
-		var currentFirstEntryDiv = mainContainer.firstChild;
+		var currentFirstEntryDiv = mainContainer.firstElementChild;
 	}
 	var entry = entryObjFromElement(currentFirstEntryDiv);
 	entry.playEntry();
