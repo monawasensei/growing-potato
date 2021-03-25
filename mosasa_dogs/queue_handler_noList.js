@@ -99,18 +99,18 @@ class mainEntry extends entry {
 		this.createEntryButton( 		//play button
 			"play-btn", 						//id suffix
 			"entry-btn", 						//class
-			this.playEntry, 					//onclick=
+			"this.playEntry", 					//onclick=
 			"Play" 								//text
 		);
 		this.createEntryButton( 		//add to queue button
 			"add-sub-queue-btn",
 			"entry-btn",
-			this.addToQueue,
+			"this.addToQueue",
 			"Queue"
 		);
 		this.createEntryButton( 		//remove from main button
 			"remove-entry-btn",
-			this.removeFromMain,
+			"this.removeFromMain",
 			"Delete"
 		);
 		
@@ -284,7 +284,6 @@ function loadYoutubeIframeAPIScript() {
 }
 
 function onYouTubeIframeAPIReady() {
-	document.getElementById("queue-test-text").innerHTML = "youtubeAPI ready";
 	mosasaYTPlayer = new YT.Player('player', {
 		height: '200',
 		width: '200',
