@@ -116,7 +116,7 @@ class mainEntry extends entry {
 	}
 	
 	addToQueue() {
-		newQueueEntry = new queueEntry(this.lineData);
+		var newQueueEntry = new queueEntry(this.lineData);
 	}
 	
 	removeFromDiv() {
