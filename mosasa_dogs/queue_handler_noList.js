@@ -1,11 +1,11 @@
 /*
-I'm removing the lists, so I'm anticipating selecting entries either directly as method calls
-from event listeners or using CSS selectors to get their div element
-	this will be used specifically for moving entries and getting the first and last entry.
+I have to have at least one global registry becasue otherwise there is no way to work from element -> object. it is only possible to go from object -> element.
 */
-var queueContainer = document.getElementById("queue");
-var subQueueContainer = document.getElementById("subQueue-div");
+var entryRegistry = new Array(); //it doesn't have to be ordered but I do have to remove queueEntries as they are played
+var mainContainer = document.getElementById("queue-entry-container");
+var queueContainer = document.getElementById("subQueue-entry-container");
 var mosasaYTPlayer;
+var currentlyPlaying;
 /**********************************************************************************************************/
 
 /**********************************************************************************************************/
@@ -17,6 +17,7 @@ class entry {
 
 	createEntryDiv(divIdPrefix,divClass,divParentNode) {
 		this.div = document.createElement("div");
+		entryRegistry.push(this);
 		this.divId = divIdPrefix + "-" + this.idNumber; //previously .entryDivId
 		this.div.setAttribute("id",this.divId);
 		this.div.setAttribute("class",divClass);
@@ -44,23 +45,45 @@ class entry {
 		this.buttonDiv.appendChild(button);
 	}
 
-	replacePlayerSRC() {
+	replacePlayerSrc() {
 		mosasaYTPlayer.loadVideoById(this.lineData.url);
 	}
 	
-	playEntry() {
-		this.removeFromQueue();
-		this.addToQueue();
-		this.replacePlayerSrc();
+	removeFromDiv() {
+		document.removeChild(this.div);
 	}
-	/*
-	function playEntry(entryDivId) {
-	var entry = getEntryById(entryDivId);
-	entry.removeFromQueue();
-	entry.addToQueue();
-	entry.replacePlayerSrc();
-}
-	*/
+	
+	addToDiv(parentDiv,index) { //I think I'll be able to use this to move entries so I will plan on that
+		if (index == 0) { //add to the top
+			var currentFirstEntry = parentDiv.firstChild;
+			parentDiv.insertBefore(this.div,currentFirstEntry);
+		} if else (index == -1) { //add to the bottom
+			parentDiv.appendChild(this.div);
+		} else { //add to a certain location in the list
+			var childrenList = parentDiv.children;
+			parentDiv.insertBefore(this.div,childrenList[index]);
+		}
+	}
+	
+	playEntry(parentDiv) {
+		this.removeFromDiv();
+		this.addToDiv(parentDiv,-1);
+		this.replacePlayerSrc();
+		currentlyPlaying = this;
+		updateCurrentlyPlayingDisplay();
+	}
+	
+	moveEntry(parentDiv,distance) { //negative distance moves up
+		if (distance > 0) {distance -= 1} //to account for the moving indeces of the list when an entry is removed
+		var childrenList = parentDiv.children;
+		var currentIndex = childrenList.indexOf(this);
+		var nextIndex = currentIndex + distance;
+		if (nextIndex < 0) {nextIndex = 0} 
+		else if (nextIndex >= childrenList.length-1) {nextIndex = -1} //to ensure
+		this.removeFromDiv();
+		this.addToDiv(parentDiv,nextIndex);
+	}
+	
 }
 /**********************************************************************************************************/
 
@@ -71,18 +94,18 @@ class mainEntry extends entry {
 		this.createEntryDiv( 			//create main entry div
 			"main-entry", 				//id prefix
 			"entry-div", 				//class
-			queueContainer 				//parent node
+			mainContainer 				//parent node
 		);
 		this.createEntryButton( 		//play button
 			"play-btn", 						//id suffix
 			"entry-btn", 						//class
-			function(){playEntry(this.divId)};, 	//onclick=
+			this.playEntry, 					//onclick=
 			"Play" 								//text
 		);
 		this.createEntryButton( 		//add to queue button
 			"add-sub-queue-btn",
 			"entry-btn",
-			function(){addEntryToSubQueue(this.divId)};,
+			this.addToQueue,
 			"Queue"
 		);
 		this.createEntryButton( 		//remove from main button
@@ -93,22 +116,16 @@ class mainEntry extends entry {
 		
 	}
 
-	shiftInQueue(index) { //rename to shiftInMain //should be functional now
-		var previousPos = mainEntryIndex.indexOf(this);
-		if (index < previousPos) {previousPos += 1;}
-		mainEntryIndex.splice(index,0,this);
-		if (index >= mainEntryIndex.length-1) {
-			queueContainer.appendChild(this.div);
-		}else {
-		var beforeDiv = mainEntryIndex[index + 1].div;
-		queueContainer.insertBefore(this.div,beforeDiv);
-		}
-		mainEntryIndex.splice(previousPos,1);
+	playEntry() {
+		super.playEntry(mainContainer);
 	}
-
-	removeFromMain() {
-		mainEntryIndex.splice(mainEntryIndex.indexOf(this),1);
-		queueContainer.removeChild(this.div);
+	
+	moveEntry(distance) {
+		super.moveEntry(mainContainer,distance);
+	}
+	
+	addToQueue() {
+		newQueueEntry = new queueEntry(this.lineData);
 	}
 }
 /**********************************************************************************************************/
@@ -120,7 +137,7 @@ class queueEntry extends entry {
 		this.createEntryDiv(
 			"queue-entry",
 			"entry-div",
-			subQueueContainer
+			queueContainer
 		);
 		this.createEntryButton(
 			"remove-queue-entry-btn",
@@ -129,9 +146,19 @@ class queueEntry extends entry {
 			"Remove"  				
 		);
 	}
+	
+	playEntry() {
+		super.playEntry(queueContainer);
+		this.destroy();
+	}
 
 	destroy() {
+		entryRegistry.splice(entryRegistry.indexOf(this),1);
 		this.div.remove();
+	}
+	
+	moveEntry(distance) {
+		super.moveEntry(queueContainer,distance);
 	}
 }
 /**********************************************************************************************************/
@@ -167,8 +194,9 @@ class logLine {
 	rather than a group of objects simultaneously. hopefully, most actions can fit in this section.
 	the more methods the easier, as far as I anticipate at least.
 
-replacePlayerSrc()
-remove()
+****replacePlayerSrc()
+****remove()
+****moveEntry()
 */
 
 /*required functionality
@@ -177,15 +205,50 @@ remove()
 	is not to actually do anything themselves but rather to call the correct method for a given circumstance
 	the correct number of times.
 
-getEndEntry() {}
-playEntry()
-autoplayNextEntry()
-moveEntry()
-shuffle()
-add/removeEntryQueue()
+getEndEntry() {} //don't think I actually need this
+****playEntry()
+****autoplayNextEntry()
+****shuffle()
+add/removeEntryQueue() //handled in methodology
+**entryObjFromElement()
 */
 
 //FUNCTIONS
+function autoPlayNextEntry() {
+	var lengthOfQueue = queueContainer.childElementCount;
+	if (lengthOfQueue > 0) { //if there is something currently queued
+		var currentFirstEntryDiv = queueContainer.firstChild
+	} else { //plays next main entry if there is nothing in the queue
+		var currentFirstEntryDiv = mainContainer.firstChild;
+	}
+	var entry = entryObjFromElement(currentFirstEntryDiv);
+	entry.playEntry();
+}
+
+function shuffleMain() {
+	var lengthOfList = mainContainer.children.length;
+	for (i=0; i<=3; i++) {
+		for (let div of mainContainer.children) { //hopefully I can loop over a collection like this
+			var entry = entryObjFromElement(div);
+			var randomPos = Math.floor(Math.random() * lengthOfList); //this will result in a lot of things being appended or added to the beginning FYI, because this is technically an index and not a distance
+			entry.moveEntry(randomPos);
+		}
+	}
+}
+
+function updateCurrentlyPlayingDisplay() {
+	document.getElementById("currently-playing-title").innerHTML = currentlyPlaying.lineData.title;
+}
+/***************************************ABSTRACT FUNCTIONS****************************************************************************************************/
+function entryObjFromElement(entryElement) { //we are right back to listfaggotry but it's at least a little less retarded than last time.
+	for (let entry of entryRegistry) {
+		if (entry.div === entryElement) { //hopefully this will be an accurate check and won't cuck me on some logic I don't understand
+			return entry;
+		}
+	}
+	throw new ArithmeticException("in the function entryObjFromElement(), no JS object was found which matched the specified element"); //throws error if no matching entry is found, this should never happen
+}
+
 function getLog() { //parses each line of the invisible log div and makes a mainEntry object for each one
 	var log = document.getElementById("log").innerHTML;
 	var _Line_Pos = 0;
