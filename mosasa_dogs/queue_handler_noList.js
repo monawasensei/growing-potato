@@ -57,7 +57,7 @@ class entry {
 		if (index == 0) { //add to the top
 			var currentFirstEntry = parentDiv.firstChild;
 			parentDiv.insertBefore(this.div,currentFirstEntry);
-		} if else (index == -1) { //add to the bottom
+		} else if (index == -1) { //add to the bottom
 			parentDiv.appendChild(this.div);
 		} else { //add to a certain location in the list
 			var childrenList = parentDiv.children;
