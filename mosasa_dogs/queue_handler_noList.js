@@ -304,7 +304,6 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
 	getLog();
-	shuffleMain();
 	//event.target.playVideo();
 }
 
