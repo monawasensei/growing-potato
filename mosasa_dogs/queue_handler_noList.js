@@ -246,7 +246,7 @@ function entryObjFromElement(entryElement) { //we are right back to listfaggotry
 			return entry;
 		}
 	}
-	throw new ArithmeticException("in the function entryObjFromElement(), no JS object was found which matched the specified element"); //throws error if no matching entry is found, this should never happen
+	//throw new ArithmeticException("in the function entryObjFromElement(), no JS object was found which matched the specified element"); //throws error if no matching entry is found, this should never happen
 }
 
 function getLog() { //parses each line of the invisible log div and makes a mainEntry object for each one
@@ -299,17 +299,14 @@ function onYouTubeIframeAPIReady() {
 			'onStateChange': onPlayerStateChange
 			}
 		});
-	document.getElementById("queue-test-text").innerHTML = "mosasaYTPlayer object created";
 }
 
 function onPlayerReady(event) {
-	document.getElementById("queue-test-text").innerHTML = "onPlayerReady";
 	shuffleMain();
 	//event.target.playVideo();
 }
 
 function onPlayerStateChange(event) {
-	document.getElementById("queue-test-text").innerHTML = "onPlayerStateChange";
 	if (event.data == YT.PlayerState.ENDED) {
 		autoPlayNextEntry();
 	}
