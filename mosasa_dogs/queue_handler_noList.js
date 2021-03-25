@@ -34,15 +34,16 @@ class entry {
 		this.div.appendChild(this.buttonDiv);
 	}
 
-	createEntryButton(buttonIdSuffix,buttonClass,onClickAnonymousFunction,nodeText) {
+	createEntryButton(buttonIdSuffix,buttonClass,nodeText) {
 		var button = document.createElement("button");
 		button.setAttribute("type","button");
 		var buttonId = this.divId + "-" + buttonIdSuffix;
 		button.setAttribute("id",buttonId);
 		button.setAttribute("class",buttonClass);
-		button.addEventListener("click",onClickAnonymousFunction); //I have no idea if I can pass a function as an arg.. probably not
+		//button.addEventListener("click",onClickAnonymousFunction); //I have no idea if I can pass a function as an arg.. probably not
 		button.appendChild(document.createTextNode(nodeText));
 		this.buttonDiv.appendChild(button);
+		return button;
 	}
 
 	replacePlayerSrc() {
@@ -76,7 +77,7 @@ class entry {
 	moveEntry(parentDiv,distance) { //negative distance moves up
 		if (distance > 0) {distance -= 1} //to account for the moving indeces of the list when an entry is removed
 		var childrenList = parentDiv.children;
-		var currentIndex = childrenList.indexOf(this);
+		var currentIndex = getListIndex(childrenList,this); //I really hope this works
 		var nextIndex = currentIndex + distance;
 		if (nextIndex < 0) {nextIndex = 0} 
 		else if (nextIndex >= childrenList.length-1) {nextIndex = -1} //to ensure
@@ -96,23 +97,13 @@ class mainEntry extends entry {
 			"entry-div", 				//class
 			mainContainer 				//parent node
 		);
-		this.createEntryButton( 		//play button
-			"play-btn", 						//id suffix
-			"entry-btn", 						//class
-			"this.playEntry", 					//onclick=
-			"Play" 								//text
-		);
-		this.createEntryButton( 		//add to queue button
-			"add-sub-queue-btn",
-			"entry-btn",
-			"this.addToQueue",
-			"Queue"
-		);
-		this.createEntryButton( 		//remove from main button
-			"remove-entry-btn",
-			"this.removeFromMain",
-			"Delete"
-		);
+		let playButton = this.createEntryButton("play-btn","entry-btn","Play");
+		playButton.addEventListener("click",this.playEntry);
+		let addToQueueButton = this.createEntryButton("add-sub-queue-btn","entry-btn","Queue");
+		addToQueueButton.addEventListener("click",this.addToQueue);
+		let removeEntryButton = this.createEntryButton("remove-entry-btn","entry-btn","Delete");
+		removeEntryButton.addEventListener("click",this.removeFromDiv);
+		
 		
 	}
 
@@ -139,12 +130,8 @@ class queueEntry extends entry {
 			"entry-div",
 			queueContainer
 		);
-		this.createEntryButton(
-			"remove-queue-entry-btn",
-			"entry-btn",
-			"this.destroy", 		//will this work?
-			"Remove"  				
-		);
+		let removeFromQueueButton = this.createEntryButton("remove-queue-entry-btn","entry-btn","Remove" );
+		removeFromQueueButton.addEventListener("click",this.destroy);
 	}
 	
 	playEntry() {
@@ -273,6 +260,16 @@ function getLogLength() {
 	var logLength = document.getElementById("log_length").innerHTML;
 	return logLength;
 }
+
+function getListIndex(list,item) {
+		var count = 0;
+		for (let entry of list) {
+			if (entry === item) {
+				return count;
+			}
+			count++;
+		}
+	}
 	
 /*****************************YOUTUBE API*****************************************************************************************************/
 function loadYoutubeIframeAPIScript() {
