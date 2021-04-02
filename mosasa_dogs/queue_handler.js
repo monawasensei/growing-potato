@@ -318,7 +318,7 @@ function parseValuePairFromCookie(value) {
 	var valuePairList = decodedCookie.split(";");
 	for (let valuePair of valuePairList) {
 		if (valuePair.indexOf(valueExpression) != -1) {
-			return valuePair.split("=")[1]; //returns the string of all removed entries
+			return valuePair.split("=")[1]; //returns the string of the value from the value pair
 		}
 	}
 	return "";
