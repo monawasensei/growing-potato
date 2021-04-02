@@ -65,7 +65,6 @@
 			<div id="queue-control-div">
 				<button type="button" onclick="autoPlayNextEntry()" class="btn-primary">Play Next</button>
 				<button type="button" onclick="shuffleMain()" class="btn-primary">Shuffle</button>
-				<button type="button" onclick="autoRemoveFromList()" class="btn-primary">test AutoRmv</button>
 			</div>
 			<div id="queue-entry-container"> <!--Actual entry items go here-->
 			</div>
@@ -74,6 +73,8 @@
 
 	<div class="contents-box-secondary" id="subQueue-div">
 		<h2 class="contents-title">Playlist Queue</h2>
+		<button type="button" onclick="savePlaylistToCookie()" class="btn-primary">Save</button>
+		<button type="button" onclick="getPlaylistFromCookie()" class="btn-primary">Load</button>
 		<!--<button type="button" class="btn-primary" onclick="encodeSubQueueToURL()">Encode URL</button>
 		<button type="button" class="btn-primary" onclick="decodeSubQueueFromURL()">Decode URL</button> -->
 		<div id="subQueue-entry-container">
