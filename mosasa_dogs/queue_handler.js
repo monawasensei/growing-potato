@@ -297,7 +297,7 @@ function parseValuePairFromCookie(value) {
 function createNewCookie() {
 	var date = new Date();
 	var expiry;
-	date.setTime(d.getTime() + (30*24*60*60*1000)); //date = 30 days from now
+	date.setTime(date.getTime() + (30*24*60*60*1000)); //date = 30 days from now
 	expiry  = "expires=" + date.toUTCString();
 	document.cookie = expires + ";path=/"; // creates a cookie with expiry date and path=/, no other info.
 }
