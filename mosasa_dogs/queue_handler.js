@@ -281,7 +281,7 @@ function getListIndex(list,item) {
 
 function saveRemovedListToCookie() {
 	if (REMOVED_LIST.length > 0)
-	createNewCookie("removedList",REMOVED_LIST.JOIN("_"));
+	createNewCookie("removedList",REMOVED_LIST.join("_"));
 	//document.cookie = "removedList=" + REMOVED_LIST.join("_");
 }
 
