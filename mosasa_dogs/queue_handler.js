@@ -118,7 +118,7 @@ class mainEntry extends entry {
 	}
 	
 	addToQueue() {
-		var newQueueEntry = new queueEntry(this.lineData);
+		var newQueueEntry = new queueEntry(this.lineData,this);
 	}
 	
 	removeFromDiv() {
@@ -130,8 +130,9 @@ class mainEntry extends entry {
 
 /**********************************************************************************************************/
 class queueEntry extends entry {
-	constructor(logLineObject) {
+	constructor(logLineObject, parentMainEntry) {
 		super(logLineObject);
+		this.parentMainEntry = parentMainEntry;
 		this.createEntryDiv(
 			"queue-entry",
 			"entry-div",
@@ -208,17 +209,30 @@ function shuffleMain() {
 
 function autoRemoveFromList() { //for each entry in the cookie, remove that entry //to be called after log is getted
 	var cookieString;
-	var tempRemovedList = new Array();
-	//createNewCookie();
 	cookieString = parseValuePairFromCookie("removedList");
 	if (cookieString == "") {
 		//REMOVED_LIST = []; //initialize the array
 		return 0; //there is nothing to remove if this is true
-	}	
+	}
+	var tempRemovedList = new Array();
+	var entry;
 	tempRemovedList = cookieString.split("_"); //
 	for (let entryId of tempRemovedList) {
-		let entry = entryObjFromElementId(entryId); //this probably works but I will double check
+		entry = entryObjFromElementId(entryId); //this probably works but I will double check
 		entry.removeFromDiv();
+	}
+}
+
+function getPlaylistFromCookie() {
+	var cookieString = parseValuePairFromCookie("playlist");
+	if (cookieString == "") {
+		return 0;
+	}
+	var tempPlaylistArray = cookieString.split("_");
+	var mainEntry;
+	for (let mainEntryId of tempPlaylistArray) {
+		mainEntry = entryObjFromElementId(mainEntryId);
+		mainEntry.addToQueue();
 	}
 }
 
@@ -285,13 +299,26 @@ function saveRemovedListToCookie() {
 	//document.cookie = "removedList=" + REMOVED_LIST.join("_");
 }
 
+function savePlaylistToCookie() {
+	if (QUEUE_CONTAINER.children.length == 0) {
+		return 0;
+	}
+	var tempPlaylistArray = new Array();
+	var entry;
+	for (let div of QUEUE_CONTAINER.children) {
+		entry = entryObjFromElement(div);
+		tempPlaylistArray.push(entry.parentMainEntry.divId);
+	}
+	createNewCookie("playlist",tempPlaylistArray.join("_"));
+}
+
 function parseValuePairFromCookie(value) {
 	var valueExpression = value + "=";
 	var decodedCookie = decodeURIComponent(document.cookie);
 	var valuePairList = decodedCookie.split(";");
 	for (let valuePair of valuePairList) {
 		if (valuePair.indexOf(valueExpression) != -1) {
-			return valuePair.split("=")[1]; //returns the string of all removed entries
+			return valuePair.split("=")[1]; //returns the string of the value from the value pair
 		}
 	}
 	return "";
