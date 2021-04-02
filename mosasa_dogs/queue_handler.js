@@ -106,7 +106,7 @@ class mainEntry extends entry {
 		let addToQueueButton = this.createEntryButton("add-sub-queue-btn","entry-btn","Queue");
 		addToQueueButton.addEventListener("click",this.addToQueue.bind(this));
 		let removeEntryButton = this.createEntryButton("remove-entry-btn","entry-btn","Delete");
-		removeEntryButton.addEventListener("click",this.removeFromDiv.bind(this));	
+		removeEntryButton.addEventListener("click",this.manualRemoveFromDiv.bind(this));	
 	}
 
 	playEntry() {
@@ -122,6 +122,10 @@ class mainEntry extends entry {
 	}
 	
 	removeFromDiv() {
+		super.removeFromDiv(MAIN_CONTAINER);
+	}
+	
+	manualRemoveFromDiv() {
 		super.removeFromDiv(MAIN_CONTAINER);
 		REMOVED_LIST.push(this.divId);
 	}
