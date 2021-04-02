@@ -65,7 +65,6 @@
 			<div id="queue-control-div">
 				<button type="button" onclick="autoPlayNextEntry()" class="btn-primary">Play Next</button>
 				<button type="button" onclick="shuffleMain()" class="btn-primary">Shuffle</button>
-				<button type="button" onclick="autoRemoveFromList()" class="btn-primary">test AutoRmv</button>
 			</div>
 			<div id="queue-entry-container"> <!--Actual entry items go here-->
 			</div>
