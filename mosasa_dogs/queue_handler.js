@@ -209,7 +209,7 @@ function shuffleMain() {
 function autoRemoveFromList() { //for each entry in the cookie, remove that entry //to be called after log is getted
 	var cookieString;
 	var tempRemovedList = new Array();
-	createNewCookie();
+	//createNewCookie();
 	cookieString = parseValuePairFromCookie("removedList");
 	if (cookieString == "") {
 		//REMOVED_LIST = []; //initialize the array
@@ -281,7 +281,8 @@ function getListIndex(list,item) {
 
 function saveRemovedListToCookie() {
 	if (REMOVED_LIST.length > 0)
-	document.cookie = "removedList=" + REMOVED_LIST.join("_");
+	createNewCookie("removedList",REMOVED_LIST.JOIN("_"));
+	//document.cookie = "removedList=" + REMOVED_LIST.join("_");
 }
 
 function parseValuePairFromCookie(value) {
@@ -296,12 +297,12 @@ function parseValuePairFromCookie(value) {
 	return "";
 }
 	
-function createNewCookie() {
+function createNewCookie(cookieName, cookieValue) {
 	var date = new Date();
 	var expiry;
 	date.setTime(date.getTime() + (30*24*60*60*1000)); //date = 30 days from now
 	expiry  = "expires=" + date.toUTCString();
-	document.cookie = expiry + ";path=/"; // creates a cookie with expiry date and path=/, no other info.
+	document.cookie = cookieName + "=" + cookieValue + ";" + expiry + ";path=/"; // creates a cookie with expiry date and path=/, no other info.
 }
 	
 /*****************************YOUTUBE API*****************************************************************************************************/
