@@ -206,15 +206,17 @@ function shuffleMain() {
 	}
 }
 
-function autoRemoveFromList() { //for each entry in REMOVED_LIST, remove that entry //to be called after log is getted
-	createNewCookie(); //pretty sure this is fine since it's just making an expire= and path= value pair
-	var cookieString = parseValuePairFromCookie("removedList");
+function autoRemoveFromList() { //for each entry in the cookie, remove that entry //to be called after log is getted
+	var cookieString;
+	var tempRemovedList = new Array();
+	createNewCookie();
+	cookieString = parseValuePairFromCookie("removedList");
 	if (cookieString == "") {
-		REMOVED_LIST = []; //initialize the array
+		//REMOVED_LIST = []; //initialize the array
 		return 0; //there is nothing to remove if this is true
 	}	
-	REMOVED_LIST = cookieString.split("_"); //
-	for (let entryId of REMOVED_LIST) {
+	tempRemovedList = cookieString.split("_"); //
+	for (let entryId of tempRemovedList) {
 		let entry = entryObjFromElementId(entryId); //this probably works but I will double check
 		entry.removeFromDiv();
 	}
