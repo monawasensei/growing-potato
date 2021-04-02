@@ -7,6 +7,7 @@ var MAIN_CONTAINER = document.getElementById("queue-entry-container");
 var QUEUE_CONTAINER = document.getElementById("subQueue-entry-container");
 var MOSASA_YT_PLAYER;
 var CURRENTLY_PLAYING;
+var LOG_LENGTH;
 /**********************************************************************************************************/
 
 /**********************************************************************************************************/
@@ -208,7 +209,7 @@ function shuffleMain() {
 function autoRemoveFromList() { //for each entry in REMOVED_LIST, remove that entry //to be called after log is getted
 	createNewCookie(); //pretty sure this is fine since it's just making an expire= and path= value pair
 	var cookieString = parseValuePairFromCookie("removedList");
-	if (cookieString == 0) {
+	if (cookieString == "") {
 		REMOVED_LIST = []; //initialize the array
 		return 0; //there is nothing to remove if this is true
 	}	
@@ -249,8 +250,8 @@ function getLog() { //parses each line of the invisible log div and makes a main
 	var next_Line_Pos = 0;
 	var _Line_String;
 	var logEntryText;
-	var length = getLogLength();
-	for (index = 0; index <= length; index++) {
+	getLogLength();
+	for (index = 0; index <= LOG_LENGTH; index++) {
 		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
 		_Line_String = "_LINE_" + index;
 		_Line_Pos = _Line_Pos + _Line_String.length;
@@ -263,8 +264,7 @@ function getLog() { //parses each line of the invisible log div and makes a main
 }
 
 function getLogLength() {
-	var logLength = document.getElementById("log_length").innerHTML;
-	return logLength;
+	LOG_LENGTH = document.getElementById("log_length").innerHTML;
 }
 
 function getListIndex(list,item) {
@@ -331,6 +331,8 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
 	getLog();
+	autoRemoveFromList();
+	window.addEventListener("unload", saveRemovedListToCookie);
 	//event.target.playVideo();
 }
 
