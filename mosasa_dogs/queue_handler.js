@@ -285,7 +285,7 @@ function saveRemovedListToCookie() {
 function parseValuePairFromCookie(value) {
 	var valueExpression = value + "=";
 	var decodedCookie = decodeURIComponent(document.cookie);
-	var valuePairList = decodedCookie.split("=");
+	var valuePairList = decodedCookie.split(";");
 	for (let valuePair of valuePairList) {
 		if (valuePair.indexOf(valueExpression) != -1) {
 			return valuePair.split("=")[1]; //returns the string of all removed entries
