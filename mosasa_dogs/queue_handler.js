@@ -1,11 +1,13 @@
 /*
 I have to have at least one global registry becasue otherwise there is no way to work from element -> object. it is only possible to go from object -> element.
 */
-var entryRegistry = new Array(); //it doesn't have to be ordered but I do have to remove queueEntries as they are played
-var mainContainer = document.getElementById("queue-entry-container");
-var queueContainer = document.getElementById("subQueue-entry-container");
-var mosasaYTPlayer;
-var currentlyPlaying;
+var ENTRY_REGISTRY = new Array(); //it doesn't have to be ordered but I do have to remove queueEntries as they are played
+var REMOVED_LIST = new Array();
+var MAIN_CONTAINER = document.getElementById("queue-entry-container");
+var QUEUE_CONTAINER = document.getElementById("subQueue-entry-container");
+var MOSASA_YT_PLAYER;
+var CURRENTLY_PLAYING;
+var LOG_LENGTH;
 /**********************************************************************************************************/
 
 /**********************************************************************************************************/
@@ -16,8 +18,8 @@ class entry {
 	}
 
 	createEntryDiv(divIdPrefix,divClass,divParentNode) {
+		ENTRY_REGISTRY.push(this);
 		this.div = document.createElement("div");
-		entryRegistry.push(this);
 		this.divId = divIdPrefix + "-" + this.idNumber; //previously .entryDivId
 		this.div.setAttribute("id",this.divId);
 		this.div.setAttribute("class",divClass);
@@ -40,14 +42,13 @@ class entry {
 		var buttonId = this.divId + "-" + buttonIdSuffix;
 		button.setAttribute("id",buttonId);
 		button.setAttribute("class",buttonClass);
-		//button.addEventListener("click",onClickAnonymousFunction); //I have no idea if I can pass a function as an arg.. probably not
 		button.appendChild(document.createTextNode(nodeText));
 		this.buttonDiv.appendChild(button);
 		return button;
 	}
 
 	replacePlayerSrc() {
-		mosasaYTPlayer.loadVideoById(this.lineData.url);
+		MOSASA_YT_PLAYER.loadVideoById(this.lineData.url);
 	}
 	
 	removeFromDiv(parentDiv) {
@@ -70,17 +71,20 @@ class entry {
 		this.removeFromDiv(parentDiv);
 		this.addToDiv(parentDiv,-1);
 		this.replacePlayerSrc();
-		currentlyPlaying = this;
+		CURRENTLY_PLAYING = this;
 		updateCurrentlyPlayingDisplay();
 	}
 	
 	moveEntry(parentDiv,distance) { //negative distance moves up
 		if (distance > 0) {distance -= 1} //to account for the moving indeces of the list when an entry is removed
 		var childrenList = parentDiv.children;
-		var currentIndex = getListIndex(childrenList,this); //I really hope this works
+		var currentIndex = getListIndex(childrenList,this);
 		var nextIndex = currentIndex + distance;
-		if (nextIndex < 0) {nextIndex = 0} 
-		else if (nextIndex >= childrenList.length-1) {nextIndex = -1} //to ensure
+		if (nextIndex < 0) {
+			nextIndex = 0
+		} else if (nextIndex >= childrenList.length-1) {
+			nextIndex = -1
+		} //to ensure
 		this.removeFromDiv();
 		this.addToDiv(parentDiv,nextIndex);
 	}
@@ -95,24 +99,22 @@ class mainEntry extends entry {
 		this.createEntryDiv( 			//create main entry div
 			"main-entry", 				//id prefix
 			"entry-div", 				//class
-			mainContainer 				//parent node
+			MAIN_CONTAINER 				//parent node
 		);
 		let playButton = this.createEntryButton("play-btn","entry-btn","Play");
 		playButton.addEventListener("click",this.playEntry.bind(this));
 		let addToQueueButton = this.createEntryButton("add-sub-queue-btn","entry-btn","Queue");
 		addToQueueButton.addEventListener("click",this.addToQueue.bind(this));
 		let removeEntryButton = this.createEntryButton("remove-entry-btn","entry-btn","Delete");
-		removeEntryButton.addEventListener("click",this.removeFromDiv.bind(this));
-		
-		
+		removeEntryButton.addEventListener("click",this.removeFromDiv.bind(this));	
 	}
 
 	playEntry() {
-		super.playEntry(mainContainer);
+		super.playEntry(MAIN_CONTAINER);
 	}
 	
 	moveEntry(distance) {
-		super.moveEntry(mainContainer,distance);
+		super.moveEntry(MAIN_CONTAINER,distance);
 	}
 	
 	addToQueue() {
@@ -120,7 +122,8 @@ class mainEntry extends entry {
 	}
 	
 	removeFromDiv() {
-		super.removeFromDiv(mainContainer);	
+		super.removeFromDiv(MAIN_CONTAINER);
+		REMOVED_LIST.push(this.divId);
 	}
 }
 /**********************************************************************************************************/
@@ -132,24 +135,24 @@ class queueEntry extends entry {
 		this.createEntryDiv(
 			"queue-entry",
 			"entry-div",
-			queueContainer
+			QUEUE_CONTAINER
 		);
 		let removeFromQueueButton = this.createEntryButton("remove-queue-entry-btn","entry-btn","Remove" );
 		removeFromQueueButton.addEventListener("click",this.destroy.bind(this));
 	}
 	
 	playEntry() {
-		super.playEntry(queueContainer);
+		super.playEntry(QUEUE_CONTAINER);
 		this.destroy();
 	}
 
 	destroy() {
-		entryRegistry.splice(entryRegistry.indexOf(this),1);
+		ENTRY_REGISTRY.splice(ENTRY_REGISTRY.indexOf(this),1);
 		this.div.remove(); //this may cause issues but idk
 	}
 	
 	moveEntry(distance) {
-		super.moveEntry(queueContainer,distance);
+		super.moveEntry(QUEUE_CONTAINER,distance);
 	}
 }
 /**********************************************************************************************************/
@@ -182,20 +185,20 @@ class logLine {
 
 //FUNCTIONS
 function autoPlayNextEntry() {
-	var lengthOfQueue = queueContainer.childElementCount;
+	var lengthOfQueue = QUEUE_CONTAINER.childElementCount;
 	if (lengthOfQueue > 0) { //if there is something currently queued
-		var currentFirstEntryDiv = queueContainer.firstElementChild
+		var currentFirstEntryDiv = QUEUE_CONTAINER.firstElementChild
 	} else { //plays next main entry if there is nothing in the queue
-		var currentFirstEntryDiv = mainContainer.firstElementChild;
+		var currentFirstEntryDiv = MAIN_CONTAINER.firstElementChild;
 	}
 	var entry = entryObjFromElement(currentFirstEntryDiv);
 	entry.playEntry();
 }
 
 function shuffleMain() {
-	var lengthOfList = mainContainer.children.length;
+	var lengthOfList = MAIN_CONTAINER.children.length;
 	for (i=0; i<=3; i++) {
-		for (let div of mainContainer.children) { //hopefully I can loop over a collection like this
+		for (let div of MAIN_CONTAINER.children) { //hopefully I can loop over a collection like this
 			var entry = entryObjFromElement(div);
 			var randomPos = Math.floor(Math.random() * lengthOfList); //this will result in a lot of things being appended or added to the beginning FYI, because this is technically an index and not a distance
 			entry.moveEntry(randomPos);
@@ -203,14 +206,39 @@ function shuffleMain() {
 	}
 }
 
+function autoRemoveFromList() { //for each entry in the cookie, remove that entry //to be called after log is getted
+	var cookieString;
+	var tempRemovedList = new Array();
+	createNewCookie();
+	cookieString = parseValuePairFromCookie("removedList");
+	if (cookieString == "") {
+		//REMOVED_LIST = []; //initialize the array
+		return 0; //there is nothing to remove if this is true
+	}	
+	tempRemovedList = cookieString.split("_"); //
+	for (let entryId of tempRemovedList) {
+		let entry = entryObjFromElementId(entryId); //this probably works but I will double check
+		entry.removeFromDiv();
+	}
+}
+
 function updateCurrentlyPlayingDisplay() {
-	document.getElementById("currently-playing-title").innerHTML = currentlyPlaying.lineData.title;
+	document.getElementById("currently-playing-title").innerHTML = CURRENTLY_PLAYING.lineData.title;
 }
 /***************************************ABSTRACT FUNCTIONS****************************************************************************************************/
 function entryObjFromElement(entryElement) { //we are right back to listfaggotry but it's at least a little less retarded than last time.
-	for (let entry of entryRegistry) {
-		var entryId = entry.div.getAttribute("id");
+	for (let entry of ENTRY_REGISTRY) {
+		var entryId = entry.divId; //var entryId = entry.div.getAttribute("id"); //this will only not work if the objects are not stored in ENTRY_REGISTRY
 		var entryElementId = entryElement.getAttribute("id");
+		if (entryId == entryElementId) {
+			return entry;
+		}
+	}
+}
+
+function entryObjFromElementId(entryElementId) { //basically the same as the above function but with one step removed
+	for (let entry of ENTRY_REGISTRY) {
+		var entryId = entry.divId;
 		if (entryId == entryElementId) {
 			return entry;
 		}
@@ -224,8 +252,8 @@ function getLog() { //parses each line of the invisible log div and makes a main
 	var next_Line_Pos = 0;
 	var _Line_String;
 	var logEntryText;
-	var length = getLogLength();
-	for (index = 0; index <= length; index++) {
+	getLogLength();
+	for (index = 0; index <= LOG_LENGTH; index++) {
 		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
 		_Line_String = "_LINE_" + index;
 		_Line_Pos = _Line_Pos + _Line_String.length;
@@ -238,8 +266,7 @@ function getLog() { //parses each line of the invisible log div and makes a main
 }
 
 function getLogLength() {
-	var logLength = document.getElementById("log_length").innerHTML;
-	return logLength;
+	LOG_LENGTH = document.getElementById("log_length").innerHTML;
 }
 
 function getListIndex(list,item) {
@@ -250,7 +277,32 @@ function getListIndex(list,item) {
 			}
 			count++;
 		}
+}
+
+function saveRemovedListToCookie() {
+	if (REMOVED_LIST.length > 0)
+	document.cookie = "removedList=" + REMOVED_LIST.join("_");
+}
+
+function parseValuePairFromCookie(value) {
+	var valueExpression = value + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var valuePairList = decodedCookie.split(";");
+	for (let valuePair of valuePairList) {
+		if (valuePair.indexOf(valueExpression) != -1) {
+			return valuePair.split("=")[1]; //returns the string of all removed entries
+		}
 	}
+	return "";
+}
+	
+function createNewCookie() {
+	var date = new Date();
+	var expiry;
+	date.setTime(date.getTime() + (30*24*60*60*1000)); //date = 30 days from now
+	expiry  = "expires=" + date.toUTCString();
+	document.cookie = expiry + ";path=/"; // creates a cookie with expiry date and path=/, no other info.
+}
 	
 /*****************************YOUTUBE API*****************************************************************************************************/
 function loadYoutubeIframeAPIScript() {
@@ -262,7 +314,7 @@ function loadYoutubeIframeAPIScript() {
 }
 
 function onYouTubeIframeAPIReady() {
-	mosasaYTPlayer = new YT.Player('player', {
+	MOSASA_YT_PLAYER = new YT.Player('player', {
 		height: '200',
 		width: '200',
 		videoId: 'FcZOnrL9VKM',
@@ -281,6 +333,8 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
 	getLog();
+	autoRemoveFromList();
+	window.addEventListener("unload", saveRemovedListToCookie);
 	//event.target.playVideo();
 }
 
@@ -291,7 +345,7 @@ function onPlayerStateChange(event) {
 }
 
 function stopVideo() {
-	mosasaYTPlayer.stopVideo();
+	MOSASA_YT_PLAYER.stopVideo();
 }
 /*****************************YOUTUBE API*****************************************************************************************************/
 
