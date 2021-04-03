@@ -223,7 +223,7 @@ function autoRemoveFromList() { //for each entry in the cookie, remove that entr
 	tempRemovedList = cookieString.split("_"); //
 	for (let entryId of tempRemovedList) {
 		entry = entryObjFromElementId(entryId); //this probably works but I will double check
-		entry.removeFromDiv();
+		entry.manualRemoveFromDiv();
 	}
 }
 
