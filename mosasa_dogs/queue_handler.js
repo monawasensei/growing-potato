@@ -340,7 +340,7 @@ function changePlaylistVisibility() {
 	var visibility = document.getElementById("subQueue-div").getAttribute("visibility");
 	
 	
-	/debugging
+	//debugging
 	document.getElementById("currently-playing-title").innerHTML = visibility;
 }
 	
