@@ -75,6 +75,7 @@
 			<div id="queue-control-div">
 				<button type="button" onclick="autoPlayNextEntry()" class="btn-primary">Play Next</button>
 				<button type="button" onclick="shuffleMain()" class="btn-primary">Shuffle</button>
+				<button type="button" onclick="changePlaylistVisibility()" class="btn-primary">Playlist</button>
 			</div>
 			<div id="queue-entry-container"> <!--Actual entry items go here-->
 			</div>
@@ -86,7 +87,6 @@
 		<div id="subQueue-control-div">
 			<button type="button" onclick="savePlaylistToCookie()" class="btn-primary">Save</button>
 			<button type="button" onclick="getPlaylistFromCookie()" class="btn-primary">Load</button>
-			<button type="button" onclick="changePlaylistVisibility()" class="btn-primary">Playlist</button>
 			<!--
 			<p id="saved-queue-number">1</p>
 			<div id="saved-queue-number-select-div" style="visibilty: hidden">
