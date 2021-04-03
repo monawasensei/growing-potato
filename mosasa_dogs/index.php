@@ -73,10 +73,12 @@
 
 	<div class="contents-box-secondary" id="subQueue-div">
 		<h2 class="contents-title">Playlist Queue</h2>
-		<button type="button" onclick="savePlaylistToCookie()" class="btn-primary">Save</button>
-		<button type="button" onclick="getPlaylistFromCookie()" class="btn-primary">Load</button>
-		<!--<button type="button" class="btn-primary" onclick="encodeSubQueueToURL()">Encode URL</button>
-		<button type="button" class="btn-primary" onclick="decodeSubQueueFromURL()">Decode URL</button> -->
+		<div id="subQueue-control-div">
+			<button type="button" onclick="savePlaylistToCookie()" class="btn-primary">Save</button>
+			<button type="button" onclick="getPlaylistFromCookie()" class="btn-primary">Load</button>
+			<!--<button type="button" class="btn-primary" onclick="encodeSubQueueToURL()">Encode URL</button>
+			<button type="button" class="btn-primary" onclick="decodeSubQueueFromURL()">Decode URL</button> -->
+		</div>
 		<div id="subQueue-entry-container">
 		</div>
 	</div>
