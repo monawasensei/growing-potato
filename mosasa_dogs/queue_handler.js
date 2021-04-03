@@ -335,6 +335,14 @@ function createNewCookie(cookieName, cookieValue) {
 	expiry  = "expires=" + date.toUTCString();
 	document.cookie = cookieName + "=" + cookieValue + ";" + expiry + ";path=/"; // creates a cookie with expiry date and path=/, no other info.
 }
+
+function changePlaylistVisibility() {
+	var visibility = document.getElementById("subQueue-div").getAttribute("visibility");
+	
+	
+	/debugging
+	document.getElementById("currently-playing-title").innerHTML = visibility;
+}
 	
 /*****************************YOUTUBE API*****************************************************************************************************/
 function loadYoutubeIframeAPIScript() {

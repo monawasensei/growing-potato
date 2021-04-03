@@ -31,7 +31,7 @@
 		float: left;
 		margin: 2px;
 	}
-
+	
 	#subQueue-div .entry-btn {
   		border: none;
 	}
@@ -86,8 +86,14 @@
 		<div id="subQueue-control-div">
 			<button type="button" onclick="savePlaylistToCookie()" class="btn-primary">Save</button>
 			<button type="button" onclick="getPlaylistFromCookie()" class="btn-primary">Load</button>
-			<!--<button type="button" class="btn-primary" onclick="encodeSubQueueToURL()">Encode URL</button>
-			<button type="button" class="btn-primary" onclick="decodeSubQueueFromURL()">Decode URL</button> -->
+			<button type="button" onclick="changePlaylistVisibility()" class="btn-primary">Playlist</button>
+			<!--
+			<p id="saved-queue-number">1</p>
+			<div id="saved-queue-number-select-div" style="visibilty: hidden">
+				<button type="button" class="btn-primary">+</button>
+				<button type="button" class="btn-primary">-</button>
+			</div>
+			-->
 		</div>
 		<div id="subQueue-entry-container">
 		</div>
