@@ -21,6 +21,16 @@
 	#queue-control-div button {
 	  display: inline;
 	}
+	
+	#subQueue-control-div {
+	margin: auto;
+	padding-bottom: 80px;
+	}
+
+	#subQueue-control-div .btn-primary {
+		float: left;
+		margin: 2px;
+	}
 
 	#subQueue-div .entry-btn {
   		border: none;
