@@ -75,14 +75,14 @@
 			<div id="queue-control-div">
 				<button type="button" onclick="autoPlayNextEntry()" class="btn-primary">Play Next</button>
 				<button type="button" onclick="shuffleMain()" class="btn-primary">Shuffle</button>
-				<button type="button" onclick="changePlaylistVisibility()" class="btn-primary">Playlist</button>
+				<button type="button" onclick="changePlaylistVisibility()" class="btn-primary">Show Playlist</button>
 			</div>
 			<div id="queue-entry-container"> <!--Actual entry items go here-->
 			</div>
 		</div>
 	</div>
 
-	<div class="contents-box-secondary" id="subQueue-div">
+	<div class="contents-box-secondary" id="subQueue-div" style="visibility: hidden">
 		<h2 class="contents-title">Playlist Queue</h2>
 		<div id="subQueue-control-div">
 			<button type="button" onclick="savePlaylistToCookie()" class="btn-primary">Save</button>

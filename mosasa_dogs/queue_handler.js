@@ -337,11 +337,13 @@ function createNewCookie(cookieName, cookieValue) {
 }
 
 function changePlaylistVisibility() {
-	var visibility = document.getElementById("subQueue-div").getAttribute("visibility");
-	
-	
-	/debugging
-	document.getElementById("currently-playing-title").innerHTML = visibility;
+	var visibility = document.getElementById("subQueue-div").style.visibility;
+	if (visibility != "hidden") {
+		visibility = "hidden";	
+	} else {
+		visibility = "visible";	
+	}
+	document.getElementById("subQueue-div").style.visibility = visibility;
 }
 	
 /*****************************YOUTUBE API*****************************************************************************************************/
