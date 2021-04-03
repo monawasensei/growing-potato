@@ -87,13 +87,9 @@
 		<div id="subQueue-control-div">
 			<button type="button" onclick="savePlaylistToCookie()" class="btn-primary">Save</button>
 			<button type="button" onclick="getPlaylistFromCookie()" class="btn-primary">Load</button>
-			<!--
+			<button type="button" onclick="changeSavedQueueNumber(-1)" class="btn-primary">-</button>
 			<p id="saved-queue-number">1</p>
-			<div id="saved-queue-number-select-div" style="visibilty: hidden">
-				<button type="button" class="btn-primary">+</button>
-				<button type="button" class="btn-primary">-</button>
-			</div>
-			-->
+			<button type="button" onclick="changeSavedQueueNumber(1)" class="btn-primary">+</button>
 		</div>
 		<div id="subQueue-entry-container">
 		</div>

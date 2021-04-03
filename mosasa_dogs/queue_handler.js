@@ -228,7 +228,8 @@ function autoRemoveFromList() { //for each entry in the cookie, remove that entr
 }
 
 function getPlaylistFromCookie() {
-	var cookieString = parseValuePairFromCookie("playlist");
+	var playlistCookieName = "playlist_" + document.getElementById("saved-queue-number").innerHTML;
+	var cookieString = parseValuePairFromCookie(playlistCookieName);
 	if (cookieString == "") {
 		return 0;
 	}
@@ -309,11 +310,12 @@ function savePlaylistToCookie() {
 	}
 	var tempPlaylistArray = new Array();
 	var entry;
+	var playlistCookieName = "playlist_" + document.getElementById("saved-queue-number").innerHTML;
 	for (let div of QUEUE_CONTAINER.children) {
 		entry = entryObjFromElement(div);
 		tempPlaylistArray.push(entry.parentMainEntry.divId);
 	}
-	createNewCookie("playlist",tempPlaylistArray.join("_"));
+	createNewCookie(playlistCookieName,tempPlaylistArray.join("_"));
 }
 
 function parseValuePairFromCookie(value) {
@@ -344,6 +346,16 @@ function changePlaylistVisibility() {
 		visibility = "visible";	
 	}
 	document.getElementById("subQueue-div").style.visibility = visibility;
+}
+
+function changeSavedQueueNumber(value) { //value is pretty much gonna be -1 or 1
+	value = parseInt(value);
+	var currentValue = parseInt(document.getElementById("saved-queue-number").innerHTML);
+	if ((currentValue + value) < 1 || (currentValue + value) > 5) {
+		return 0;
+	} else {
+		document.getElementById("saved-queue-number").innerHTML = (currentValue + value);
+	}
 }
 	
 /*****************************YOUTUBE API*****************************************************************************************************/
