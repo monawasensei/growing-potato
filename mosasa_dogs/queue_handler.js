@@ -142,8 +142,33 @@ class queueEntry extends entry {
 			"entry-div",
 			QUEUE_CONTAINER
 		);
-		let removeFromQueueButton = this.createEntryButton("remove-queue-entry-btn","entry-btn","Remove" );
+		let removeFromQueueButton = this.createEntryButton("remove-queue-entry-btn","entry-btn","Remove");
 		removeFromQueueButton.addEventListener("click",this.destroy.bind(this));
+		let moveEntryUpButton = this.createEntryButton("move-queue-entry-up-btn","entry-btn","Move Up");
+		moveEntryUpButton.addEventListener("click",this.moveEntryUp.bind(this));
+		let moveEntryDownButton = this.createEntryButton("move-queue-entry-down-btn","entry-btn","Move Down");
+		moveEntryUpButton.addEventListener("click",this.moveEntryDown.bind(this));
+		let moveEntryTopButton = this.createEntryButton("move-queue-entry-top-btn","entry-btn","Top");
+		moveEntryUpButton.addEventListener("click",this.moveEntryTop.bind(this));
+		let moveEntryBottomButton = this.createEntryButton("move-queue-entry-bottom-btn","entry-btn","Bottom");
+		moveEntryUpButton.addEventListener("click",this.moveEntryBottom.bind(this));
+	}
+	
+	//not a big fan of these four methods, but I can't into binding and passing args in an event listener
+	moveEntryUp() {
+		super.moveEntry(QUEUE_CONTAINER, -1);
+	}
+	
+	moveEntryDown() {
+		super.moveEntry(QUEUE_CONTAINER, 1);
+	}
+	
+	moveEntryTop() {
+		super.moveEntry(QUEUE_CONTAINER, -1000);
+	}
+	
+	moveEntryBottom() {
+		super.moveEntry(QUEUE_CONTAINER, 1000);
 	}
 	
 	playEntry() {
