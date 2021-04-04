@@ -147,11 +147,11 @@ class queueEntry extends entry {
 		let moveEntryUpButton = this.createEntryButton("move-queue-entry-up-btn","entry-btn","Move Up");
 		moveEntryUpButton.addEventListener("click",this.moveEntryUp.bind(this));
 		let moveEntryDownButton = this.createEntryButton("move-queue-entry-down-btn","entry-btn","Move Down");
-		moveEntryUpButton.addEventListener("click",this.moveEntryDown.bind(this));
+		moveEntryDownButton.addEventListener("click",this.moveEntryDown.bind(this));
 		let moveEntryTopButton = this.createEntryButton("move-queue-entry-top-btn","entry-btn","Top");
-		moveEntryUpButton.addEventListener("click",this.moveEntryTop.bind(this));
+		moveEntryTopButton.addEventListener("click",this.moveEntryTop.bind(this));
 		let moveEntryBottomButton = this.createEntryButton("move-queue-entry-bottom-btn","entry-btn","Bottom");
-		moveEntryUpButton.addEventListener("click",this.moveEntryBottom.bind(this));
+		moveEntryBottomButton.addEventListener("click",this.moveEntryBottom.bind(this));
 	}
 	
 	//not a big fan of these four methods, but I can't into binding and passing args in an event listener
