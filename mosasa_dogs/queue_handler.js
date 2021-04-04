@@ -316,7 +316,7 @@ function getLogLength() {
 function getListIndex(list,item) {
 		var count = 0;
 		for (let entry of list) {
-			if (entry === item) {
+			if (entry == item.div) {
 				return count;
 			}
 			count++;
