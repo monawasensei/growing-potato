@@ -253,7 +253,8 @@ function autoRemoveFromList() { //for each entry in the cookie, remove that entr
 }
 
 function clearQueue() {
-	for (let entryDiv of QUEUE_CONTAINER.children) {
+	var childrenList = QUEUE_CONTAINER.children;
+	for (let entryDiv of childrenList) {
 		entryObjFromElement(entryDiv).destroy();
 	}
 }
