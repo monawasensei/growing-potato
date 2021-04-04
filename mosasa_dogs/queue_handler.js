@@ -85,7 +85,7 @@ class entry {
 		} else if (nextIndex >= childrenList.length-1) {
 			nextIndex = -1
 		} //to ensure
-		this.removeFromDiv();
+		this.removeFromDiv(parentDiv); //I *doubt* anything bad will happen by adding this arg, since for some reason. it was not here before
 		this.addToDiv(parentDiv,nextIndex);
 	}
 	
