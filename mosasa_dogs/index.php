@@ -90,6 +90,7 @@
 			<button type="button" onclick="changeSavedQueueNumber(-1)" class="btn-primary">-</button>
 			<p id="saved-queue-number">1</p>
 			<button type="button" onclick="changeSavedQueueNumber(1)" class="btn-primary">+</button>
+			<button type="button" onclick="clearQueue()" class="btn-primary">Clear</button>
 		</div>
 		<div id="subQueue-entry-container">
 		</div>
