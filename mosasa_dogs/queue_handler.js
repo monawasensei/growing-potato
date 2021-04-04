@@ -252,6 +252,12 @@ function autoRemoveFromList() { //for each entry in the cookie, remove that entr
 	}
 }
 
+function clearQueue() {
+	for (let entryDiv of QUEUE_CONTAINER.children) {
+		entryObjFromElement(entryDiv).destroy();
+	}
+}
+
 function getPlaylistFromCookie() {
 	var playlistCookieName = "playlist_" + document.getElementById("saved-queue-number").innerHTML;
 	var cookieString = parseValuePairFromCookie(playlistCookieName);
@@ -260,6 +266,7 @@ function getPlaylistFromCookie() {
 	}
 	var tempPlaylistArray = cookieString.split("_");
 	var mainEntry;
+	clearQueue();
 	for (let mainEntryId of tempPlaylistArray) {
 		mainEntry = entryObjFromElementId(mainEntryId);
 		mainEntry.addToQueue();
