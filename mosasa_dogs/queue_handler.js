@@ -76,7 +76,7 @@ class entry {
 	}
 	
 	moveEntry(parentDiv,distance) { //negative distance moves up
-		if (distance > 0) {distance -= 1} //to account for the moving indeces of the list when an entry is removed
+		//if (distance > 0) {distance -= 1} //to account for the moving indeces of the list when an entry is removed
 		var childrenList = parentDiv.children;
 		var currentIndex = getListIndex(childrenList,this);
 		var nextIndex = currentIndex + distance;
