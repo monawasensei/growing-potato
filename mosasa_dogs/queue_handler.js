@@ -76,7 +76,7 @@ class entry {
 	}
 	
 	moveEntry(parentDiv,distance) { //negative distance moves up
-		if (distance > 0) {distance -= 1} //to account for the moving indeces of the list when an entry is removed
+		//if (distance > 0) {distance -= 1} //to account for the moving indeces of the list when an entry is removed
 		var childrenList = parentDiv.children;
 		var currentIndex = getListIndex(childrenList,this);
 		var nextIndex = currentIndex + distance;
@@ -85,7 +85,7 @@ class entry {
 		} else if (nextIndex >= childrenList.length-1) {
 			nextIndex = -1
 		} //to ensure
-		this.removeFromDiv();
+		this.removeFromDiv(parentDiv); //I *doubt* anything bad will happen by adding this arg, since for some reason. it was not here before
 		this.addToDiv(parentDiv,nextIndex);
 	}
 	
@@ -147,11 +147,11 @@ class queueEntry extends entry {
 		let moveEntryUpButton = this.createEntryButton("move-queue-entry-up-btn","entry-btn","Move Up");
 		moveEntryUpButton.addEventListener("click",this.moveEntryUp.bind(this));
 		let moveEntryDownButton = this.createEntryButton("move-queue-entry-down-btn","entry-btn","Move Down");
-		moveEntryUpButton.addEventListener("click",this.moveEntryDown.bind(this));
+		moveEntryDownButton.addEventListener("click",this.moveEntryDown.bind(this));
 		let moveEntryTopButton = this.createEntryButton("move-queue-entry-top-btn","entry-btn","Top");
-		moveEntryUpButton.addEventListener("click",this.moveEntryTop.bind(this));
+		moveEntryTopButton.addEventListener("click",this.moveEntryTop.bind(this));
 		let moveEntryBottomButton = this.createEntryButton("move-queue-entry-bottom-btn","entry-btn","Bottom");
-		moveEntryUpButton.addEventListener("click",this.moveEntryBottom.bind(this));
+		moveEntryBottomButton.addEventListener("click",this.moveEntryBottom.bind(this));
 	}
 	
 	//not a big fan of these four methods, but I can't into binding and passing args in an event listener
@@ -252,7 +252,8 @@ function autoRemoveFromList() {
 }
 
 function clearQueue() {
-	for (let entryDiv of QUEUE_CONTAINER.children) {
+	var childrenList = QUEUE_CONTAINER.children;
+	for (let entryDiv of childrenList) {
 		entryObjFromElement(entryDiv).destroy();
 	}
 }
@@ -300,15 +301,10 @@ function entryObjFromURL(url) { //hopefully the try/catch clauses will allow me 
 	for (let entry of ENTRY_REGISTRY) {
 		var entryURL = entry.lineData.url;
 		if (entryURL == url) {
-			try {
-				returnEntry = entry.parentMainEntry;
-			}
-			catch(error) {
-				console.log(entry.divId + " not a queue object " + error);
-				returnEntry = entry;
-			}
-			finally {
-				return returnEntry;
+			if (entry.parentMainEntry != "object") {
+				return entry;	
+			} else {
+				return entry.parentMainEntry;
 			}
 		}
 	}
@@ -341,7 +337,7 @@ function getLogLength() {
 function getListIndex(list,item) {
 		var count = 0;
 		for (let entry of list) {
-			if (entry === item) {
+			if (entry == item.div) {
 				return count;
 			}
 			count++;
