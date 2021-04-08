@@ -253,8 +253,9 @@ function autoRemoveFromList() {
 
 function clearQueue() {
 	var childrenList = QUEUE_CONTAINER.children;
-	for (i = 0; i < childrenList.length; i++) {
-		entryObjFromElement(childrenList[i]).destroy();
+	var childrenListLength = childrenList.length;
+	for (i = 0; i < childrenListLength; i++) {
+		entryObjFromElement(childrenList[0]).destroy();
 	}
 }
 
