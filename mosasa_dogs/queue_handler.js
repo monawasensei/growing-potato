@@ -301,15 +301,10 @@ function entryObjFromURL(url) { //hopefully the try/catch clauses will allow me 
 	for (let entry of ENTRY_REGISTRY) {
 		var entryURL = entry.lineData.url;
 		if (entryURL == url) {
-			try {
-				returnEntry = entry.parentMainEntry;
-			}
-			catch(error) {
-				console.log(entry.divId + " not a queue object " + error);
-				returnEntry = entry;
-			}
-			finally {
-				return returnEntry;
+			if (entry.parentMainEntry != "object") {
+				return entry;	
+			} else {
+				return entry.parentMainEntry;
 			}
 		}
 	}
