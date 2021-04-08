@@ -255,7 +255,7 @@ function clearQueue() {
 	var childrenList = QUEUE_CONTAINER.children;
 	var childrenListLength = childrenList.length;
 	for (i = 0; i < childrenListLength; i++) {
-		entryObjFromElement(childrenList[i]).destroy();
+		entryObjFromElement(childrenList[0]).destroy();
 	}
 }
 
