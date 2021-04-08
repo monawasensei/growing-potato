@@ -127,7 +127,7 @@ class mainEntry extends entry {
 	
 	manualRemoveFromDiv() {
 		super.removeFromDiv(MAIN_CONTAINER);
-		REMOVED_LIST.push(this.divId);
+		REMOVED_LIST.push(this.lineData.url);
 	}
 }
 /**********************************************************************************************************/
@@ -236,18 +236,17 @@ function shuffleMain() {
 	}
 }
 
-function autoRemoveFromList() { //for each entry in the cookie, remove that entry //to be called after log is getted
+function autoRemoveFromList() {
 	var cookieString;
 	cookieString = parseValuePairFromCookie("removedList");
 	if (cookieString == "") {
-		//REMOVED_LIST = []; //initialize the array
-		return 0; //there is nothing to remove if this is true
+		return 0;
 	}
 	var tempRemovedList = new Array();
 	var entry;
-	tempRemovedList = cookieString.split("_"); //
-	for (let entryId of tempRemovedList) {
-		entry = entryObjFromElementId(entryId); //this probably works but I will double check
+	tempRemovedList = cookieString.split("_");
+	for (let entryURL of tempRemovedList) {
+		entry = entryObjFromURL(entryURL); //this probably works but I will double check
 		entry.manualRemoveFromDiv();
 	}
 }
@@ -267,8 +266,8 @@ function getPlaylistFromCookie() {
 	var tempPlaylistArray = cookieString.split("_");
 	var mainEntry;
 	clearQueue();
-	for (let mainEntryId of tempPlaylistArray) {
-		mainEntry = entryObjFromElementId(mainEntryId);
+	for (let mainEntryURL of tempPlaylistArray) {
+		mainEntry = entryObjFromURL(mainEntryURL);
 		mainEntry.addToQueue();
 	}
 }
@@ -292,6 +291,25 @@ function entryObjFromElementId(entryElementId) { //basically the same as the abo
 		var entryId = entry.divId;
 		if (entryId == entryElementId) {
 			return entry;
+		}
+	}
+}
+
+function entryObjFromURL(url) { //hopefully the try/catch clauses will allow me to only return a mainEntry
+	var returnEntry;
+	for (let entry of ENTRY_REGISTRY) {
+		var entryURL = entry.lineData.url;
+		if (entryURL == url) {
+			try {
+				returnEntry = entry.parentMainEntry;
+			}
+			catch(error) {
+				console.log(entry.divId + " not a queue object " + error);
+				returnEntry = entry;
+			}
+			finally {
+				return returnEntry;
+			}
 		}
 	}
 }
@@ -333,7 +351,6 @@ function getListIndex(list,item) {
 function saveRemovedListToCookie() {
 	if (REMOVED_LIST.length > 0)
 	createNewCookie("removedList",REMOVED_LIST.join("_"));
-	//document.cookie = "removedList=" + REMOVED_LIST.join("_");
 }
 
 function savePlaylistToCookie() {
@@ -345,7 +362,7 @@ function savePlaylistToCookie() {
 	var playlistCookieName = "playlist_" + document.getElementById("saved-queue-number").innerHTML;
 	for (let div of QUEUE_CONTAINER.children) {
 		entry = entryObjFromElement(div);
-		tempPlaylistArray.push(entry.parentMainEntry.divId);
+		tempPlaylistArray.push(entry.parentMainEntry.lineData.url);
 	}
 	createNewCookie(playlistCookieName,tempPlaylistArray.join("_"));
 }
@@ -373,9 +390,11 @@ function createNewCookie(cookieName, cookieValue) {
 function changePlaylistVisibility() {
 	var visibility = document.getElementById("subQueue-div").style.visibility;
 	if (visibility != "hidden") {
-		visibility = "hidden";	
+		visibility = "hidden";
+		document.getElementById("playlist-visibility-btn").innerHTML = "Show Playlist";
 	} else {
-		visibility = "visible";	
+		visibility = "visible";
+		document.getElementById("playlist-visibility-btn").innerHTML = "Hide Playlist";
 	}
 	document.getElementById("subQueue-div").style.visibility = visibility;
 }
