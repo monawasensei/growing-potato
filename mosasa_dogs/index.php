@@ -50,14 +50,9 @@
 	$logIndexer = 0;
 	$log = fopen("potatofields_playlist_formatted_log.txt","r") or die("could not read log");
 
-	while (!feof($log)) {
-		echo "_LINE_" . $logIndexer++ . fgets($log) . "<br>";
-	}
-
+	echo $log;
 	fclose($log);
-	echo "<p id=\"log_length\">" . ($logIndexer-=2) . "</p>";
 	?>
-
 	</div>
 
 	<div class="contents-box">

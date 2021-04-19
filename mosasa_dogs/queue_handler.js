@@ -310,7 +310,7 @@ function entryObjFromURL(url) { //hopefully the try/catch clauses will allow me 
 		}
 	}
 }
-
+/*
 function getLog() { //parses each line of the invisible log div and makes a mainEntry object for each one
 	var log = document.getElementById("log").innerHTML;
 	var _Line_Pos = 0;
@@ -328,6 +328,17 @@ function getLog() { //parses each line of the invisible log div and makes a main
 		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
 		let logLineObject = new logLine(logEntryText,index);
 		let playlistQueueEntry = new mainEntry(logLineObject);
+	}
+}
+*/
+function getJSON() {
+	var log = document.getElementById("log".innerHTML;
+	var JSONArray = new Array();
+	var lineObject;
+	JSONArray = JSON.parse(log);
+	for (let line of JSONArray) {
+		lineObject = line;
+		let playlistQueueEntry = new mainEntry(lineObject);
 	}
 }
 
@@ -434,7 +445,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
-	getLog();
+	getJSON();
 	autoRemoveFromList();
 	window.addEventListener("unload", saveRemovedListToCookie);
 	//event.target.playVideo();
