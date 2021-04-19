@@ -251,7 +251,6 @@ function autoRemoveFromList() {
 			entry.manualRemoveFromDiv();
 		} catch(err) {
 			console.log("unable to retrieve entry with url" + entryURL);
-			throw err;
 		}
 		
 	}
@@ -305,17 +304,23 @@ function entryObjFromElementId(entryElementId) { //basically the same as the abo
 
 function entryObjFromURL(url) { //hopefully the try/catch clauses will allow me to only return a mainEntry
 	var returnEntry;
+	var entryURL;
 	for (let entry of ENTRY_REGISTRY) {
-		var entryURL = entry.lineData.url;
+		entryURL = entry.lineData.url;
 		if (entryURL == url) {
 			if (entry.parentMainEntry != "object") {
-				return entry;	
+				returnEntry = entry;
+				break;
 			} else {
-				console.log(entry.parentMainEntry.lineData.url);
-				return entry.parentMainEntry;
+				returnEntry = entry.parentMainEntry;
+				break;
 			}
 		}
 	}
+	if (returnEntry == undefined) {
+			throw("unable to retrieve entry with url of " + url);
+	}
+	return returnEntry;
 }
 /*
 function getLog() { //parses each line of the invisible log div and makes a mainEntry object for each one
