@@ -332,7 +332,7 @@ function getLog() { //parses each line of the invisible log div and makes a main
 }
 */
 function getJSON() {
-	var log = document.getElementById("log".innerHTML;
+	var log = document.getElementById("log").innerHTML;
 	var JSONArray = new Array();
 	var lineObject;
 	JSONArray = JSON.parse(log);
