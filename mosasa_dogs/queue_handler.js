@@ -247,7 +247,12 @@ function autoRemoveFromList() {
 	tempRemovedList = cookieString.split("_");
 	for (let entryURL of tempRemovedList) {
 		entry = entryObjFromURL(entryURL); //this probably works but I will double check
-		entry.manualRemoveFromDiv();
+		try {
+			entry.manualRemoveFromDiv();
+		} catch(err) {
+			console.log("unable to retrieve entry with url" + entryURL);
+		}
+		
 	}
 }
 
@@ -299,18 +304,25 @@ function entryObjFromElementId(entryElementId) { //basically the same as the abo
 
 function entryObjFromURL(url) { //hopefully the try/catch clauses will allow me to only return a mainEntry
 	var returnEntry;
+	var entryURL;
 	for (let entry of ENTRY_REGISTRY) {
-		var entryURL = entry.lineData.url;
+		entryURL = entry.lineData.url;
 		if (entryURL == url) {
 			if (entry.parentMainEntry != "object") {
-				return entry;	
+				returnEntry = entry;
+				break;
 			} else {
-				return entry.parentMainEntry;
+				returnEntry = entry.parentMainEntry;
+				break;
 			}
 		}
 	}
+	if (returnEntry == undefined) {
+			throw("unable to retrieve entry with url of " + url);
+	}
+	return returnEntry;
 }
-
+/*
 function getLog() { //parses each line of the invisible log div and makes a mainEntry object for each one
 	var log = document.getElementById("log").innerHTML;
 	var _Line_Pos = 0;
@@ -328,6 +340,17 @@ function getLog() { //parses each line of the invisible log div and makes a main
 		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
 		let logLineObject = new logLine(logEntryText,index);
 		let playlistQueueEntry = new mainEntry(logLineObject);
+	}
+}
+*/
+function getJSON() {
+	var log = document.getElementById("log").innerHTML;
+	var JSONArray = new Array();
+	var lineObject;
+	JSONArray = JSON.parse(log);
+	for (let line of JSONArray) {
+		lineObject = line;
+		let playlistQueueEntry = new mainEntry(lineObject);
 	}
 }
 
@@ -434,7 +457,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
-	getLog();
+	getJSON();
 	autoRemoveFromList();
 	window.addEventListener("unload", saveRemovedListToCookie);
 	//event.target.playVideo();
