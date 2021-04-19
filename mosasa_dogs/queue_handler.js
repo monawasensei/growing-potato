@@ -247,7 +247,13 @@ function autoRemoveFromList() {
 	tempRemovedList = cookieString.split("_");
 	for (let entryURL of tempRemovedList) {
 		entry = entryObjFromURL(entryURL); //this probably works but I will double check
-		entry.manualRemoveFromDiv();
+		try {
+			entry.manualRemoveFromDiv();
+		} catch(err) {
+			console.log("unable to retrieve entry with url" + entryURL);
+			throw err;
+		}
+		
 	}
 }
 
