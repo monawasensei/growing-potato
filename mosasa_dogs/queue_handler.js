@@ -305,6 +305,7 @@ function entryObjFromURL(url) { //hopefully the try/catch clauses will allow me 
 			if (entry.parentMainEntry != "object") {
 				return entry;	
 			} else {
+				console.log(entry.parentMainEntry.lineData.url);
 				return entry.parentMainEntry;
 			}
 		}
