@@ -50,7 +50,7 @@
 	$logIndexer = 0;
 	$log = fopen("potatofields_playlist_formatted_log.txt","r") or die("could not read log");
 
-	echo $log;
+	echo fread($log, filesize("potatofields_playlist_formatted_log.txt"));
 	fclose($log);
 	?>
 	</div>
