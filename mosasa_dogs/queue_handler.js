@@ -8,6 +8,7 @@ var QUEUE_CONTAINER = document.getElementById("subQueue-entry-container");
 var MOSASA_YT_PLAYER;
 var CURRENTLY_PLAYING;
 var LOG_LENGTH;
+var PROBLEM_DICT = {"xOKY_wL9I_k": "Jinrui wa Suitai Shimashita OST - Fushigi na Jikan"};
 /**********************************************************************************************************/
 
 /**********************************************************************************************************/
@@ -428,7 +429,38 @@ function changeSavedQueueNumber(value) { //value is pretty much gonna be -1 or 1
 		document.getElementById("saved-queue-number").innerHTML = (currentValue + value);
 	}
 }
-	
+/*****************************Debugging and maintenance functions*****************************************************************************/
+function cookieVersionSync() {
+	var potentialCookieList = ["removedList", "playlist_1", "playlist_2", "playlist_3", "playlist_4", "playlist_5"];
+	var currentCookieList = getCurrentCookieList(potentialCookieList);
+	findAndRemoveProblemValues(currentCookieList);
+}
+
+function findAndRemoveProblemValues(currentCookieList) {
+	var errorList = new Array();
+	for (let valueString of currentCookieList) {
+		for (let URLKey of PROBLEM_DICT) {
+			if (valueString.search(URLKey) == -1) {
+				errorList.push(PROBLEM_DICT[URLKey]);
+			}
+		}
+	}
+	if (errorList.length > 0) {
+		alert("The following damaged cookies were found: \n\n" + errorList + "\n\nThese aren't being fixed yet, but they will be soon :^)");
+	}
+}
+
+function getCurrentCookieList(potentialCookieList) {
+	var populatedCookieList = new Array();
+	var cookieValues;
+	for (let cookieName of potentialCookieList) {
+		cookieValues = parseValuePairFromCookie(cookieName);
+		if (cookieValues != "") {
+			populatedCookieList.push(cookieValues);
+		}
+	}
+	return populatedCookieList;
+}
 /*****************************YOUTUBE API*****************************************************************************************************/
 function loadYoutubeIframeAPIScript() {
 	var tag = document.createElement('script');
@@ -460,6 +492,7 @@ function onPlayerReady(event) {
 	getJSON();
 	autoRemoveFromList();
 	window.addEventListener("unload", saveRemovedListToCookie);
+	cookieVersionSync();
 	//event.target.playVideo();
 }
 
