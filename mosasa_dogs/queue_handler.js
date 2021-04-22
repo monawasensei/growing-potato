@@ -391,16 +391,16 @@ function cookieVersionSync() {
 }
 
 function findAndRemoveProblemValues(currentCookieList) {
-	var errorList = new Array();
+	var errorString;
 	for (let valueString of currentCookieList) {
 		for (let URLKey of PROBLEM_DICT) {
 			if (valueString.search(URLKey) != -1) {
-				errorList.push(URLKey);
+				errorString += "\n" + URLKey + " in the cookie containing the data: " + valueString;
 			}
 		}
 	}
 	if (errorList.length > 0) {
-		alert("The following damaged cookies were found: \n\n" + errorList + "\n\nThese aren't being fixed yet, but they will be soon :^)");
+		alert("The following damaged cookies were found: \n\n" + errorString + "\n\nThese aren't being fixed yet, but they will be soon :^)");
 	}
 }
 
