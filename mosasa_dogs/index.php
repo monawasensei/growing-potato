@@ -65,8 +65,6 @@
 		</div>
 
 		<div id="queue">
-			<p><a href="log_display.php" class="link">Temporary link to the playlist log</a></p>
-
 			<div id="queue-control-div">
 				<button type="button" onclick="autoPlayNextEntry()" class="btn-primary">Play Next</button>
 				<button type="button" onclick="shuffleMain()" class="btn-primary">Shuffle</button>
