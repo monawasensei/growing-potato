@@ -188,32 +188,6 @@ class queueEntry extends entry {
 }
 /**********************************************************************************************************/
 
-/*************CLASS LOGLINE********************************************************************************/
-class logLine {
-	constructor(logLine,lineId) {
-		this.line = logLine;
-		this.getIndeces();
-		this.getTitle();
-		this.getURL();
-		this.lineId = lineId;
-	}
-
-	getIndeces() {
-		this.titleEndPos = this.line.indexOf("\t")-1; //may have to look into changing this from \t to a better delimiter - Mar 20 2021 monax
-		this.youtubeSubURLStartPos = this.line.indexOf("\t") + "\t".length;
-		//this.youtubeSubURLEndPos = this.line.indexOf("\n<br>",this.youtubeSubURLStartPos); //consider also, making a better endline delimiter too, instead of a potentially ubiquitous "/n<br>" - Mar 20 2021 monax
-	}
-
-	getTitle() {
-		this.title = this.line.slice(0,this.titleEndPos+1);
-	}
-
-	getURL() {
-		this.url = this.line.slice(this.youtubeSubURLStartPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
-	}
-}
-/*************CLASS LOGLINE********************************************************************************/
-
 //FUNCTIONS
 function autoPlayNextEntry() {
 	var lengthOfQueue = QUEUE_CONTAINER.childElementCount;
@@ -323,27 +297,7 @@ function entryObjFromURL(url) { //hopefully the try/catch clauses will allow me 
 	}
 	return returnEntry;
 }
-/*
-function getLog() { //parses each line of the invisible log div and makes a mainEntry object for each one
-	var log = document.getElementById("log").innerHTML;
-	var _Line_Pos = 0;
-	var _Line_EndPos;
-	var next_Line_Pos = 0;
-	var _Line_String;
-	var logEntryText;
-	getLogLength();
-	for (index = 0; index <= LOG_LENGTH; index++) {
-		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
-		_Line_String = "_LINE_" + index;
-		_Line_Pos = _Line_Pos + _Line_String.length;
-		next_Line_Pos = log.indexOf("_LINE_",_Line_Pos);
-		_Line_EndPos = next_Line_Pos - "\n<br>".length;
-		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
-		let logLineObject = new logLine(logEntryText,index);
-		let playlistQueueEntry = new mainEntry(logLineObject);
-	}
-}
-*/
+
 function getJSON() {
 	var log = document.getElementById("log").innerHTML;
 	var JSONArray = new Array();
