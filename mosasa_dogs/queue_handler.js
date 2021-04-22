@@ -394,7 +394,7 @@ function findAndRemoveProblemValues(currentCookieList) {
 	var errorList = new Array();
 	for (let valueString of currentCookieList) {
 		for (let URLKey of PROBLEM_DICT) {
-			if (valueString.search(URLKey) == -1) {
+			if (valueString.search(URLKey) != -1) {
 				errorList.push(URLKey);
 			}
 		}
