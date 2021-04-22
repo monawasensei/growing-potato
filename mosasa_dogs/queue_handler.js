@@ -399,7 +399,7 @@ function findAndRemoveProblemValues(currentCookieList) {
 			}
 		}
 	}
-	if (errorList.length > 0) {
+	if (errorString.length > 0) {
 		alert("The following damaged cookies were found: \n\n" + errorString + "\n\nThese aren't being fixed yet, but they will be soon :^)");
 	}
 }
