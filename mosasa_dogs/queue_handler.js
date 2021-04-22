@@ -8,7 +8,7 @@ var QUEUE_CONTAINER = document.getElementById("subQueue-entry-container");
 var MOSASA_YT_PLAYER;
 var CURRENTLY_PLAYING;
 var LOG_LENGTH;
-var PROBLEM_DICT = {"xOKY_wL9I_k": "Jinrui wa Suitai Shimashita OST - Fushigi na Jikan"};
+var PROBLEM_DICT = ["xOKY_wL9I_k"];
 /**********************************************************************************************************/
 
 /**********************************************************************************************************/
@@ -395,7 +395,7 @@ function findAndRemoveProblemValues(currentCookieList) {
 	for (let valueString of currentCookieList) {
 		for (let URLKey of PROBLEM_DICT) {
 			if (valueString.search(URLKey) == -1) {
-				errorList.push(PROBLEM_DICT[URLKey]);
+				errorList.push(URLKey);
 			}
 		}
 	}
