@@ -386,7 +386,7 @@ function cookieVersionSync() {
 	var potentialCookieList = ["removedList", "playlist_1", "playlist_2", "playlist_3", "playlist_4", "playlist_5"];
 	var currentCookieList = getCurrentCookieList(potentialCookieList);
 	PROBLEM_COOKIE_URL_LIST = generateProblemCookieURLList();
-	if (!hasDeprecatedCookieFormat()) { //quits if the cookies are not deprecated
+	if (!hasDeprecatedCookieFormat(currentCookieList)) { //quits if the cookies are not deprecated
 		return 0;
 	}
 	findProblemValues(currentCookieList);
