@@ -1,14 +1,12 @@
-/*
-I have to have at least one global registry becasue otherwise there is no way to work from element -> object. it is only possible to go from object -> element.
-*/
-var ENTRY_REGISTRY = new Array(); //it doesn't have to be ordered but I do have to remove queueEntries as they are played
+
+var ENTRY_REGISTRY = new Array();
 var REMOVED_LIST = new Array();
 var MAIN_CONTAINER = document.getElementById("queue-entry-container");
 var QUEUE_CONTAINER = document.getElementById("subQueue-entry-container");
 var MOSASA_YT_PLAYER;
 var CURRENTLY_PLAYING;
 var LOG_LENGTH;
-var PROBLEM_DICT = ["xOKY_wL9I_k"];
+var PROBLEM_COOKIE_URL_LIST = new Array();
 /**********************************************************************************************************/
 
 /**********************************************************************************************************/
@@ -187,7 +185,6 @@ class queueEntry extends entry {
 	}
 }
 /**********************************************************************************************************/
-
 //FUNCTIONS
 function autoPlayNextEntry() {
 	var lengthOfQueue = QUEUE_CONTAINER.childElementCount;
@@ -256,6 +253,28 @@ function getPlaylistFromCookie() {
 
 function updateCurrentlyPlayingDisplay() {
 	document.getElementById("currently-playing-title").innerHTML = CURRENTLY_PLAYING.lineData.title;
+}
+
+function changePlaylistVisibility() {
+	var visibility = document.getElementById("subQueue-div").style.visibility;
+	if (visibility != "hidden") {
+		visibility = "hidden";
+		document.getElementById("playlist-visibility-btn").innerHTML = "Show Playlist";
+	} else {
+		visibility = "visible";
+		document.getElementById("playlist-visibility-btn").innerHTML = "Hide Playlist";
+	}
+	document.getElementById("subQueue-div").style.visibility = visibility;
+}
+
+function changeSavedQueueNumber(value) { //value is pretty much gonna be -1 or 1
+	value = parseInt(value);
+	var currentValue = parseInt(document.getElementById("saved-queue-number").innerHTML);
+	if ((currentValue + value) < 1 || (currentValue + value) > 5) {
+		return 0;
+	} else {
+		document.getElementById("saved-queue-number").innerHTML = (currentValue + value);
+	}
 }
 /***************************************ABSTRACT FUNCTIONS****************************************************************************************************/
 function entryObjFromElement(entryElement) { //we are right back to listfaggotry but it's at least a little less retarded than last time.
@@ -361,36 +380,46 @@ function createNewCookie(cookieName, cookieValue) {
 	expiry  = "expires=" + date.toUTCString();
 	document.cookie = cookieName + "=" + cookieValue + ";" + expiry + ";path=/"; // creates a cookie with expiry date and path=/, no other info.
 }
-
-function changePlaylistVisibility() {
-	var visibility = document.getElementById("subQueue-div").style.visibility;
-	if (visibility != "hidden") {
-		visibility = "hidden";
-		document.getElementById("playlist-visibility-btn").innerHTML = "Show Playlist";
-	} else {
-		visibility = "visible";
-		document.getElementById("playlist-visibility-btn").innerHTML = "Hide Playlist";
-	}
-	document.getElementById("subQueue-div").style.visibility = visibility;
-}
-
-function changeSavedQueueNumber(value) { //value is pretty much gonna be -1 or 1
-	value = parseInt(value);
-	var currentValue = parseInt(document.getElementById("saved-queue-number").innerHTML);
-	if ((currentValue + value) < 1 || (currentValue + value) > 5) {
-		return 0;
-	} else {
-		document.getElementById("saved-queue-number").innerHTML = (currentValue + value);
-	}
-}
 /*****************************Debugging and maintenance functions*****************************************************************************/
+//these are a suite of temporary functions which I will remove at a future date, they simply evaluate a user's cookies, and updates them to the newer format, JSON format.
 function cookieVersionSync() {
 	var potentialCookieList = ["removedList", "playlist_1", "playlist_2", "playlist_3", "playlist_4", "playlist_5"];
 	var currentCookieList = getCurrentCookieList(potentialCookieList);
-	findAndRemoveProblemValues(currentCookieList);
+	PROBLEM_COOKIE_URL_LIST = generateProblemCookieURLList();
+	if (!hasDeprecatedCookieFormat()) { //quits if the cookies are not deprecated
+		return 0;
+	}
+	findProblemValues(currentCookieList);
 }
 
-function findAndRemoveProblemValues(currentCookieList) {
+function generateProblemCookieURLList() { //should be called when no entries are the queue, shouldn't be a problem but I will keep that in mind.
+	var tempList = new Array();
+	for (let entry of ENTRY_REGISTRY) {
+		if (entry.lineData.url.search("_") != -1) {
+			tempList.push(entry.lineData.url);
+		}
+	}
+	return tempList;
+}
+
+function hasDeprecatedCookieFormat(currentCookieList) {
+	for (let cookieValue of currentCookieList) {
+		if (cookieValue.search("_") != - 1) {
+			for (let problemUrl of PROBLEM_COOKIE_URL_LIST) { //check for problem url's
+				if (cookieValue.search(problemUrl) != - 1) {
+					if (cookieValue.replace(problemUrl, "").search("_") != -1) { //remove the problem url from the string and search again
+						return true;
+					}
+				} else { //if "_" are found and the cookie DOES NOT contain a problem URL, it is out of date
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+function findProblemValues(currentCookieList) {
 	var errorString;
 	for (let valueString of currentCookieList) {
 		for (let URLKey of PROBLEM_DICT) {
