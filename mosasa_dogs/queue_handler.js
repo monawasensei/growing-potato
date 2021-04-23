@@ -422,7 +422,7 @@ function hasDeprecatedCookieFormat(currentCookieList) {
 function findProblemValues(currentCookieList) {
 	var errorString;
 	for (let valueString of currentCookieList) {
-		for (let URLKey of PROBLEM_DICT) {
+		for (let URLKey of PROBLEM_COOKIE_URL_LIST) {
 			if (valueString.search(URLKey) != -1) {
 				errorString += "\n" + URLKey + " in the cookie containing the data: " + valueString;
 			}
