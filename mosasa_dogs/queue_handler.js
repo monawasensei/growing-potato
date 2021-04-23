@@ -420,7 +420,7 @@ function hasDeprecatedCookieFormat(currentCookieList) {
 }
 
 function findProblemValues(currentCookieList) {
-	var errorString;
+	var errorString = "";
 	for (let valueString of currentCookieList) {
 		for (let URLKey of PROBLEM_COOKIE_URL_LIST) {
 			if (valueString.search(URLKey) != -1) {
