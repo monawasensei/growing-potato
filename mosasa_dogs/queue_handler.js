@@ -413,12 +413,11 @@ function hasDeprecatedCookieFormat(currentCookieList) {
 		if (cookieValue.search("_") != - 1) {
 			for (let problemUrl of PROBLEM_COOKIE_URL_LIST) { //check for problem url's
 				if (cookieValue.search(problemUrl) != - 1) {
-					if (cookieValue.replace(problemUrl, "").search("_") != -1) { //remove the problem url from the string and search again
-						return true;
-					}
-				} else { //if "_" are found and the cookie DOES NOT contain a problem URL, it is out of date
-					return true;
+					cookieValue = cookieValue.replace(problemUrl, "");
 				}
+			}
+			if (cookieValue.search("_") != -1) {
+				return true;	
 			}
 		}
 	}
