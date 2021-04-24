@@ -495,9 +495,9 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
 	getJSON();
+	cookieVersionSync();
 	autoRemoveFromList();
 	window.addEventListener("unload", saveRemovedListToCookie);
-	cookieVersionSync();
 	//event.target.playVideo();
 }
 
