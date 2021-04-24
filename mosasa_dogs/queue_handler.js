@@ -429,6 +429,11 @@ function updateCookieFormat(cookieName, valueString) {
 	var problemArray = findProblemValues(valueString);
 	valueString = removeProblemValues(valueString, problemArray);
 	var valueStringContents = valueString.split("_");
+	for (var i = valueStringContents.length - 1; i >= 0; i--) {
+		if (valueStringContents[i] == "") {
+			valueStringContents.splice(i,1);	
+		}
+	}
 	for (let problem of problemArray) {
 		valueStringContents.push(problem);
 	}
