@@ -442,6 +442,7 @@ function findProblemValues(valueString) {
 			errorArray.push(URLKey);
 		}
 	}
+	return errorArray;
 }
 
 function removeProblemValues(cookieValueString, problemArray) {
