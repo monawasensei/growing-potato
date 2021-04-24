@@ -393,7 +393,7 @@ function cookieVersionSync() {
 	if (!hasDeprecatedCookieFormat(currentCookieObject.cookieStrings)) { //quits if the cookies are not deprecated
 		return 0;
 	}
-	for (var i = 0; i < currentCookieObject.cookieStrings; i++;) {
+	for (var i = 0; i < currentCookieObject.cookieStrings; i++) {
 		updateCookieFormat(currentCookieObject.cookieNames[i], currentCookieObject.cookieStrings[i]);
 	}
 }
@@ -457,7 +457,7 @@ function getCurrentCookieList(potentialCookieList) {
 		"cookieStrings": []
 	};
 	var cookieValues;
-	for (var i == 0; i < potentialCookieList.length; i++;) {
+	for (var i == 0; i < potentialCookieList.length; i++) {
 		cookieValues = parseValuePairFromCookie(cookieName);
 		if (cookieValues != "") {
 			populatedCookieList.cookieNames = potentialCookieList[i];
