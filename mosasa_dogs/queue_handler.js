@@ -393,7 +393,7 @@ function cookieVersionSync() {
 	if (!hasDeprecatedCookieFormat(currentCookieObject.cookieStrings)) { //quits if the cookies are not deprecated
 		return 0;
 	}
-	for (var i = 0; i < currentCookieObject.cookieStrings; i++) {
+	for (var i = 0; i < currentCookieObject.cookieStrings.length; i++) {
 		updateCookieFormat(currentCookieObject.cookieNames[i], currentCookieObject.cookieStrings[i]);
 	}
 }
