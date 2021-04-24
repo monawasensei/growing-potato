@@ -445,8 +445,8 @@ function findProblemValues(valueString) {
 }
 
 function removeProblemValues(cookieValueString, problemArray) {
-	for (let problemString of problemArray) {
-		cookieValueString.replace(problemString, "");
+	for (i = 0; i < problemArray.length; i++) {
+		cookieValueString.replace(problemArray[i], "");
 	}
 	return cookieValueString;
 }
