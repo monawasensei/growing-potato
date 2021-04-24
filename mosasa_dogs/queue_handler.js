@@ -1,13 +1,12 @@
-/*
-I have to have at least one global registry becasue otherwise there is no way to work from element -> object. it is only possible to go from object -> element.
-*/
-var ENTRY_REGISTRY = new Array(); //it doesn't have to be ordered but I do have to remove queueEntries as they are played
+
+var ENTRY_REGISTRY = new Array();
 var REMOVED_LIST = new Array();
 var MAIN_CONTAINER = document.getElementById("queue-entry-container");
 var QUEUE_CONTAINER = document.getElementById("subQueue-entry-container");
 var MOSASA_YT_PLAYER;
 var CURRENTLY_PLAYING;
 var LOG_LENGTH;
+var PROBLEM_COOKIE_URL_LIST = new Array();
 /**********************************************************************************************************/
 
 /**********************************************************************************************************/
@@ -186,33 +185,6 @@ class queueEntry extends entry {
 	}
 }
 /**********************************************************************************************************/
-
-/*************CLASS LOGLINE********************************************************************************/
-class logLine {
-	constructor(logLine,lineId) {
-		this.line = logLine;
-		this.getIndeces();
-		this.getTitle();
-		this.getURL();
-		this.lineId = lineId;
-	}
-
-	getIndeces() {
-		this.titleEndPos = this.line.indexOf("\t")-1; //may have to look into changing this from \t to a better delimiter - Mar 20 2021 monax
-		this.youtubeSubURLStartPos = this.line.indexOf("\t") + "\t".length;
-		//this.youtubeSubURLEndPos = this.line.indexOf("\n<br>",this.youtubeSubURLStartPos); //consider also, making a better endline delimiter too, instead of a potentially ubiquitous "/n<br>" - Mar 20 2021 monax
-	}
-
-	getTitle() {
-		this.title = this.line.slice(0,this.titleEndPos+1);
-	}
-
-	getURL() {
-		this.url = this.line.slice(this.youtubeSubURLStartPos); //will have to add handling for urls of other types later, probably will be easier to implement on the server side
-	}
-}
-/*************CLASS LOGLINE********************************************************************************/
-
 //FUNCTIONS
 function autoPlayNextEntry() {
 	var lengthOfQueue = QUEUE_CONTAINER.childElementCount;
@@ -244,7 +216,7 @@ function autoRemoveFromList() {
 	}
 	var tempRemovedList = new Array();
 	var entry;
-	tempRemovedList = cookieString.split("_");
+	tempRemovedList = cookieString.split("♪");
 	for (let entryURL of tempRemovedList) {
 		entry = entryObjFromURL(entryURL); //this probably works but I will double check
 		try {
@@ -270,7 +242,7 @@ function getPlaylistFromCookie() {
 	if (cookieString == "") {
 		return 0;
 	}
-	var tempPlaylistArray = cookieString.split("_");
+	var tempPlaylistArray = cookieString.split("♪");
 	var mainEntry;
 	clearQueue();
 	for (let mainEntryURL of tempPlaylistArray) {
@@ -281,6 +253,28 @@ function getPlaylistFromCookie() {
 
 function updateCurrentlyPlayingDisplay() {
 	document.getElementById("currently-playing-title").innerHTML = CURRENTLY_PLAYING.lineData.title;
+}
+
+function changePlaylistVisibility() {
+	var visibility = document.getElementById("subQueue-div").style.visibility;
+	if (visibility != "hidden") {
+		visibility = "hidden";
+		document.getElementById("playlist-visibility-btn").innerHTML = "Show Playlist";
+	} else {
+		visibility = "visible";
+		document.getElementById("playlist-visibility-btn").innerHTML = "Hide Playlist";
+	}
+	document.getElementById("subQueue-div").style.visibility = visibility;
+}
+
+function changeSavedQueueNumber(value) { //value is pretty much gonna be -1 or 1
+	value = parseInt(value);
+	var currentValue = parseInt(document.getElementById("saved-queue-number").innerHTML);
+	if ((currentValue + value) < 1 || (currentValue + value) > 5) {
+		return 0;
+	} else {
+		document.getElementById("saved-queue-number").innerHTML = (currentValue + value);
+	}
 }
 /***************************************ABSTRACT FUNCTIONS****************************************************************************************************/
 function entryObjFromElement(entryElement) { //we are right back to listfaggotry but it's at least a little less retarded than last time.
@@ -322,27 +316,7 @@ function entryObjFromURL(url) { //hopefully the try/catch clauses will allow me 
 	}
 	return returnEntry;
 }
-/*
-function getLog() { //parses each line of the invisible log div and makes a mainEntry object for each one
-	var log = document.getElementById("log").innerHTML;
-	var _Line_Pos = 0;
-	var _Line_EndPos;
-	var next_Line_Pos = 0;
-	var _Line_String;
-	var logEntryText;
-	getLogLength();
-	for (index = 0; index <= LOG_LENGTH; index++) {
-		_Line_Pos = log.indexOf("_LINE_",next_Line_Pos);
-		_Line_String = "_LINE_" + index;
-		_Line_Pos = _Line_Pos + _Line_String.length;
-		next_Line_Pos = log.indexOf("_LINE_",_Line_Pos);
-		_Line_EndPos = next_Line_Pos - "\n<br>".length;
-		logEntryText = log.slice(_Line_Pos,_Line_EndPos);
-		let logLineObject = new logLine(logEntryText,index);
-		let playlistQueueEntry = new mainEntry(logLineObject);
-	}
-}
-*/
+
 function getJSON() {
 	var log = document.getElementById("log").innerHTML;
 	var JSONArray = new Array();
@@ -370,7 +344,7 @@ function getListIndex(list,item) {
 
 function saveRemovedListToCookie() {
 	if (REMOVED_LIST.length > 0)
-	createNewCookie("removedList",REMOVED_LIST.join("_"));
+	createNewCookie("removedList",REMOVED_LIST.join("♪"));
 }
 
 function savePlaylistToCookie() {
@@ -384,7 +358,7 @@ function savePlaylistToCookie() {
 		entry = entryObjFromElement(div);
 		tempPlaylistArray.push(entry.parentMainEntry.lineData.url);
 	}
-	createNewCookie(playlistCookieName,tempPlaylistArray.join("_"));
+	createNewCookie(playlistCookieName,tempPlaylistArray.join("♪"));
 }
 
 function parseValuePairFromCookie(value) {
@@ -406,29 +380,97 @@ function createNewCookie(cookieName, cookieValue) {
 	expiry  = "expires=" + date.toUTCString();
 	document.cookie = cookieName + "=" + cookieValue + ";" + expiry + ";path=/"; // creates a cookie with expiry date and path=/, no other info.
 }
-
-function changePlaylistVisibility() {
-	var visibility = document.getElementById("subQueue-div").style.visibility;
-	if (visibility != "hidden") {
-		visibility = "hidden";
-		document.getElementById("playlist-visibility-btn").innerHTML = "Show Playlist";
-	} else {
-		visibility = "visible";
-		document.getElementById("playlist-visibility-btn").innerHTML = "Hide Playlist";
-	}
-	document.getElementById("subQueue-div").style.visibility = visibility;
-}
-
-function changeSavedQueueNumber(value) { //value is pretty much gonna be -1 or 1
-	value = parseInt(value);
-	var currentValue = parseInt(document.getElementById("saved-queue-number").innerHTML);
-	if ((currentValue + value) < 1 || (currentValue + value) > 5) {
+/*****************************Debugging and maintenance functions*****************************************************************************/
+//these are a suite of temporary functions which I will remove at a future date, they simply evaluate a user's cookies, and updates them to the newer format, JSON format.
+function cookieVersionSync() {
+	var potentialCookieList = ["removedList", "playlist_1", "playlist_2", "playlist_3", "playlist_4", "playlist_5"];
+	var currentCookieObject = {
+		"cookieNames": [],
+		"cookieStrings": []
+	};
+	currentCookieObject = getCurrentCookieList(potentialCookieList);
+	PROBLEM_COOKIE_URL_LIST = generateProblemCookieURLList();
+	if (!hasDeprecatedCookieFormat(currentCookieObject.cookieStrings)) { //quits if the cookies are not deprecated
 		return 0;
-	} else {
-		document.getElementById("saved-queue-number").innerHTML = (currentValue + value);
+	}
+	for (var i = 0; i < currentCookieObject.cookieStrings.length; i++) {
+		updateCookieFormat(currentCookieObject.cookieNames[i], currentCookieObject.cookieStrings[i]);
 	}
 }
-	
+
+function generateProblemCookieURLList() { //should be called when no entries are the queue, shouldn't be a problem but I will keep that in mind.
+	var tempList = new Array();
+	for (let entry of ENTRY_REGISTRY) {
+		if (entry.lineData.url.search("_") != -1) {
+			tempList.push(entry.lineData.url);
+		}
+	}
+	return tempList;
+}
+
+function hasDeprecatedCookieFormat(currentCookieList) {
+	for (let cookieValue of currentCookieList) {
+		if (cookieValue.search("_") != - 1) {
+			for (let problemUrl of PROBLEM_COOKIE_URL_LIST) { //check for problem url's
+				if (cookieValue.search(problemUrl) != - 1) {
+					cookieValue = cookieValue.replace(problemUrl, "");
+				}
+			}
+			if (cookieValue.search("_") != -1) {
+				return true;	
+			}
+		}
+	}
+	return false;
+}
+
+function updateCookieFormat(cookieName, valueString) {
+	var problemArray = findProblemValues(valueString);
+	valueString = removeProblemValues(valueString, problemArray);
+	var valueStringContents = valueString.split("_");
+	for (var i = valueStringContents.length - 1; i >= 0; i--) {
+		if (valueStringContents[i] == "") {
+			valueStringContents.splice(i,1);	
+		}
+	}
+	for (let problem of problemArray) {
+		valueStringContents.push(problem);
+	}
+	createNewCookie(cookieName, valueStringContents.join("♪"));
+}
+
+function findProblemValues(valueString) {
+	var errorArray = new Array();
+	for (let URLKey of PROBLEM_COOKIE_URL_LIST) {
+		if (valueString.search(URLKey) != -1) {
+			errorArray.push(URLKey);
+		}
+	}
+	return errorArray;
+}
+
+function removeProblemValues(cookieValueString, problemArray) {
+	for (i = 0; i < problemArray.length; i++) {
+		cookieValueString = cookieValueString.replace(problemArray[i], "");
+	}
+	return cookieValueString;
+}
+
+function getCurrentCookieList(potentialCookieList) {
+	var populatedCookieList = {
+		"cookieNames": [],
+		"cookieStrings": []
+	};
+	var cookieValues;
+	for (var i = 0; i < potentialCookieList.length; i++) {
+		cookieValues = parseValuePairFromCookie(potentialCookieList[i]);
+		if (cookieValues != "") {
+			populatedCookieList.cookieNames.push(potentialCookieList[i]);
+			populatedCookieList.cookieStrings.push(cookieValues);
+		}
+	}
+	return populatedCookieList;
+}
 /*****************************YOUTUBE API*****************************************************************************************************/
 function loadYoutubeIframeAPIScript() {
 	var tag = document.createElement('script');
@@ -458,6 +500,7 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
 	getJSON();
+	cookieVersionSync();
 	autoRemoveFromList();
 	window.addEventListener("unload", saveRemovedListToCookie);
 	//event.target.playVideo();
