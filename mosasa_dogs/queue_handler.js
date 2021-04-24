@@ -460,8 +460,8 @@ function getCurrentCookieList(potentialCookieList) {
 	for (var i = 0; i < potentialCookieList.length; i++) {
 		cookieValues = parseValuePairFromCookie(potentialCookieList[i]);
 		if (cookieValues != "") {
-			populatedCookieList.cookieNames = potentialCookieList[i];
-			populatedCookieList.cookieStrings = cookieValues;
+			populatedCookieList.cookieNames.push(potentialCookieList[i]);
+			populatedCookieList.cookieStrings.push(cookieValues);
 		}
 	}
 	return populatedCookieList;
