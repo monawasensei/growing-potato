@@ -216,7 +216,7 @@ function autoRemoveFromList() {
 	}
 	var tempRemovedList = new Array();
 	var entry;
-	tempRemovedList = cookieString.split("_");
+	tempRemovedList = cookieString.split("♪");
 	for (let entryURL of tempRemovedList) {
 		entry = entryObjFromURL(entryURL); //this probably works but I will double check
 		try {
@@ -242,7 +242,7 @@ function getPlaylistFromCookie() {
 	if (cookieString == "") {
 		return 0;
 	}
-	var tempPlaylistArray = cookieString.split("_");
+	var tempPlaylistArray = cookieString.split("♪");
 	var mainEntry;
 	clearQueue();
 	for (let mainEntryURL of tempPlaylistArray) {
@@ -344,7 +344,7 @@ function getListIndex(list,item) {
 
 function saveRemovedListToCookie() {
 	if (REMOVED_LIST.length > 0)
-	createNewCookie("removedList",REMOVED_LIST.join("_"));
+	createNewCookie("removedList",REMOVED_LIST.join("♪"));
 }
 
 function savePlaylistToCookie() {
@@ -358,7 +358,7 @@ function savePlaylistToCookie() {
 		entry = entryObjFromElement(div);
 		tempPlaylistArray.push(entry.parentMainEntry.lineData.url);
 	}
-	createNewCookie(playlistCookieName,tempPlaylistArray.join("_"));
+	createNewCookie(playlistCookieName,tempPlaylistArray.join("♪"));
 }
 
 function parseValuePairFromCookie(value) {
@@ -384,12 +384,18 @@ function createNewCookie(cookieName, cookieValue) {
 //these are a suite of temporary functions which I will remove at a future date, they simply evaluate a user's cookies, and updates them to the newer format, JSON format.
 function cookieVersionSync() {
 	var potentialCookieList = ["removedList", "playlist_1", "playlist_2", "playlist_3", "playlist_4", "playlist_5"];
-	var currentCookieList = getCurrentCookieList(potentialCookieList);
+	var currentCookieObject = {
+		"cookieNames": [],
+		"cookieStrings": []
+	};
+	currentCookieObject = getCurrentCookieList(potentialCookieList);
 	PROBLEM_COOKIE_URL_LIST = generateProblemCookieURLList();
-	if (!hasDeprecatedCookieFormat(currentCookieList)) { //quits if the cookies are not deprecated
+	if (!hasDeprecatedCookieFormat(currentCookieObject.cookieStrings)) { //quits if the cookies are not deprecated
 		return 0;
 	}
-	findProblemValues(currentCookieList);
+	for (var i = 0; i < currentCookieObject.cookieStrings; i++) {
+		updateCookieFormat(currentCookieObject.cookieNames[i], currentCookieObject.cookieStrings[i]);
+	}
 }
 
 function generateProblemCookieURLList() { //should be called when no entries are the queue, shouldn't be a problem but I will keep that in mind.
@@ -419,27 +425,43 @@ function hasDeprecatedCookieFormat(currentCookieList) {
 	return false;
 }
 
-function findProblemValues(currentCookieList) {
-	var errorString = "";
-	for (let valueString of currentCookieList) {
-		for (let URLKey of PROBLEM_COOKIE_URL_LIST) {
-			if (valueString.search(URLKey) != -1) {
-				errorString += "\n" + URLKey + " in the cookie containing the data: " + valueString;
-			}
-		}
+function updateCookieFormat(cookieName, valueString) {
+	var problemArray = findProblemValues(valueString);
+	valueString = removeProblemValues(valueString, problemArray);
+	var valueStringContents = valueString.split("_");
+	for (let problem of problemArray) {
+		valueStringContents.push(problem);
 	}
-	if (errorString.length > 0) {
-		alert("The following damaged cookies were found: \n\n" + errorString + "\n\nThese aren't being fixed yet, but they will be soon :^)");
+	createNewCookie(cookieName, valueStringContents.join("♪"));
+}
+
+function findProblemValues(valueString) {
+	var errorArray = new Array();
+	for (let URLKey of PROBLEM_COOKIE_URL_LIST) {
+		if (valueString.search(URLKey) != -1) {
+			errorArray.push(URLKey);
+		}
 	}
 }
 
+function removeProblemValues(cookieValueString, problemArray) {
+	for (let problemString of problemArray) {
+		cookieValueString.replace(problemString, "");
+	}
+	return cookieValueString;
+}
+
 function getCurrentCookieList(potentialCookieList) {
-	var populatedCookieList = new Array();
+	var populatedCookieList = {
+		"cookieNames": [],
+		"cookieStrings": []
+	};
 	var cookieValues;
-	for (let cookieName of potentialCookieList) {
+	for (var i == 0; i < potentialCookieList.length; i++) {
 		cookieValues = parseValuePairFromCookie(cookieName);
 		if (cookieValues != "") {
-			populatedCookieList.push(cookieValues);
+			populatedCookieList.cookieNames = potentialCookieList[i];
+			populatedCookieList.cookieStrings = cookieValues;
 		}
 	}
 	return populatedCookieList;
