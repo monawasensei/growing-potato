@@ -10,14 +10,22 @@
 		<div class="essay">
             <?php
 
+                function parseTitle($fileString) {
+                    $regexPattern = "/n/n$";
+                    $fileString = "<h1 style=\"text-align: center\">" . $fileString;
+                    $fileString = preg_replace($regexPattern, "<br></h1>");
+                    return $fileString;
+                }
+                
                 function parseParagraphs($fileString) {
-                    $fileString = "<h1 style=\"text-align:center\">" . $fileString;
-                    $count = substr_count($fileString, "\t");
+                    $regexPattern = "\t";
+                    //$fileString = "<h1 style=\"text-align:center\">" . $fileString;
+                    $count = preg_match_all($regexPattern, $fileString);
                     for ($i = 0; $i <= $count; $i++) {
                         if ($i == 0) {
-                            $fileString = str_replace("\t", "<br></h1><p class=\"essay-text\">", $fileString);
+                            $fileString = preg_replace("\t", "<p class=\"essay-text\">", $fileString);
                         } else {
-                            $fileString = str_replace("\t", "<br></p><p class=\"essay-text\">", $fileString);
+                            $fileString = preg_replace("\t", "<br></p><p class=\"essay-text\">", $fileString);
                         }
                     }
                     $fileString = $fileString . "</p>";
@@ -38,6 +46,7 @@
  */               
                 function parseFile($file,$filepath) {
                     $fileString = fread($file, filesize($filepath));
+                    $fileString = parseTitle($fileString);
                     $fileString = parseParagraphs($fileString);
                     echo $fileString;
                 }
