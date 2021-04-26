@@ -11,23 +11,23 @@
             <?php
 
                 function parseParagraphs($fileString) {
+                    $fileString = "<h1 style=\"text-align:center\">" . $fileString;
                     $count = substr_count($fileString, "\t");
                     for ($i = 0; $i <= $count; $i++) {
                         if ($i == 0) {
-                            $fileString = str_replace("\t", "<p class=\"essay-text\">", $fileString);
+                            $fileString = str_replace("\t", "</h1><br><p class=\"essay-text\">", $fileString);
                         } else {
                             $fileString = str_replace("\t", "</p><br><p class=\"essay-text\">", $fileString);
                         }
                     }
                     $fileString = $fileString . "</p>";
-                    echo $fileString;
                     return $fileString;
                 }
                 
                 function parseFile($file,$filepath) {
                     $fileString = fread($file, filesize($filepath));
                     $fileString = parseParagraphs($fileString);
-                    //echo $fileString;
+                    echo $fileString;
                 }
 
                 function getFile() {
