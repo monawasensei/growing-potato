@@ -11,9 +11,9 @@
             <?php
 
                 function parseTitle($fileString) {
-                    $regexPattern = ".*/n/n.*";
+                    $regexPattern = "T*";
                     $fileString = "<h1 style=\"text-align: center\">" . $fileString;
-                    $fileString = preg_replace($regexPattern, "<br></h1>");
+                    $fileString = preg_replace($regexPattern, "B");
                     return $fileString;
                 }
                 
