@@ -17,9 +17,7 @@
                     $currentDirContents = scandir($currentDir);
                     //echo "currentDirContents" . $currentDirContents;
                     foreach ($currentDirContents as $item) {
-                        if (is_dir($item)) {
-                            echo "fairu wo mitsuketa desu wa <br>"; //I think this will only echo ""
-                        }
+                        echo $item . "<br>";
                     }
                 }
 
