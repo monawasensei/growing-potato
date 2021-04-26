@@ -46,7 +46,7 @@
  */               
                 function parseFile($file,$filepath) {
                     $fileString = fread($file, filesize($filepath));
-                    $fileString = parseTitle($fileString);
+                    //$fileString = parseTitle($fileString);
                     //$fileString = parseParagraphs($fileString);
                     echo $fileString;
                 }
