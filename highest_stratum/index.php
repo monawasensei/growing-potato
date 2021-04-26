@@ -23,7 +23,19 @@
                     $fileString = $fileString . "</p>";
                     return $fileString;
                 }
-                
+/*
+                function parseQuotes($fileString) { //will need to use regex for this probably //will not work if there are non-quote quotation marks elsewhere in the document
+                    $count = substr_count($fileString, "\"");
+                    for ($i = 0; $i <= $count; $i++) {
+                        if ($i == 0) {
+                            $fileString = str_replace("\'", "<div class=\"")
+                        } else {
+
+                        }
+                    }
+                    $fileString = $fileString . "</div>";
+                }
+ */               
                 function parseFile($file,$filepath) {
                     $fileString = fread($file, filesize($filepath));
                     $fileString = parseParagraphs($fileString);

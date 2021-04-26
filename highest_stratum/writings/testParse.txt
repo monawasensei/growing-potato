@@ -6,7 +6,7 @@ I am here to test the parsing functions on this page.
 This should be in the same paragraph.
 ((This should be highlighted text)with this text as a supplement).
 	Here is another new paragraph.
-[(This text should be highlighted with an image as a supplement)\"writings/testimage.jpg\"].
+[(This text should be highlighted with an image as a supplement)writings/testimage.jpg].
 "Here is some quoted text.
 Quoted text on a new line.
 Here is the end of the quoted text->"
