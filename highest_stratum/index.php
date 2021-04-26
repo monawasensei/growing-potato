@@ -14,7 +14,7 @@
                 function getArticles() {
                     $currentDir = dir(getcwd());
                     echo "currentDir" . $currentDir->handle . "<br>" . $currentDir->path . "<br>";
-                    $currentDirContents = scandir($currentDir);
+                    $currentDirContents = scandir($currentDir . "/writings/");
                     print_r($currentDirContents);
                     foreach ($currentDirContents as $item) {
                         echo $item . "<br>";
