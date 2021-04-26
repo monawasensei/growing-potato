@@ -12,7 +12,7 @@
                 echo "desding sum bhb :DDD";
 
                 function getArticles() {
-                    $currentDir = dir("/writings/");
+                    $currentDir = dir(getcwd());
                     echo "currentDir" . $currentDir->handle . "<br>" . $currentDir->path . "<br>";
                     $currentDirContents = scandir($currentDir);
                     //echo "currentDirContents" . $currentDirContents;
