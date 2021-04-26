@@ -13,7 +13,9 @@
 
                 function getArticles() {
                     $currentDir = dir(getcwd());
+                    echo "currentDir" . $currentDir;
                     $currentDirContents = scandir($currentDir);
+                    echo "currentDirContents" . $currentDirContents;
                     foreach ($currentDirContents as $item) {
                         if (is_dir($item)) {
                             echo $item; //I think this will only echo "writings"
