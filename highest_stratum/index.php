@@ -13,7 +13,7 @@
                     $filename = $_GET['post'];
                     $filepath = "writings/" . $filename;
                     $file = fopen($filepath, "r") or die("could not open file");
-                    parseFile($file, $filepath);
+                    echo fread($file, $file);
                 }
 
                 getFile();
