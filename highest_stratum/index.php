@@ -18,7 +18,7 @@
                     //echo "currentDirContents" . $currentDirContents;
                     foreach ($currentDirContents as $item) {
                         if (is_dir($item)) {
-                            echo $item; //I think this will only echo ""
+                            echo $item->handle; //I think this will only echo ""
                         }
                     }
                 }
