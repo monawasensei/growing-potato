@@ -15,7 +15,7 @@
                     $currentDir = dir(getcwd());
                     echo "currentDir" . $currentDir->handle . "<br>" . $currentDir->path . "<br>";
                     $currentDirContents = scandir($currentDir);
-                    //echo "currentDirContents" . $currentDirContents;
+                    print_r($currentDirContents);
                     foreach ($currentDirContents as $item) {
                         echo $item . "<br>";
                     }
