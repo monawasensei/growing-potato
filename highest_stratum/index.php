@@ -20,13 +20,14 @@
                         }
                     }
                     $fileString = $fileString . "</p>";
+                    echo $fileString;
                     return $fileString;
                 }
                 
                 function parseFile($file,$filepath) {
                     $fileString = fread($file, filesize($filepath));
                     $fileString = parseParagraphs($fileString);
-                    echo $fileString;
+                    //echo $fileString;
                 }
 
                 function getFile() {
