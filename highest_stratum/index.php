@@ -9,19 +9,15 @@
 	<body>
 		<div class="essay">
             <?php
-                echo "desding sum bhb :DDD";
+                $filepath = "writings/testParse.txt";
+                $file = fopen($filepath, "r") or die("could not open file");
 
-                function getArticles() {
-                    $currentDir = dir(getcwd());
-                    echo "currentDir" . $currentDir->handle . "<br>" . $currentDir->path . "<br>";
-                    $currentDirContents = scandir($currentDir . "/writings/");
-                    print_r($currentDirContents);
-                    foreach ($currentDirContents as $item) {
-                        echo $item . "<br>";
-                    }
+                function parseFile($file,$filepath) {
+                    echo fread($file, filesize($filepath));
                 }
 
-                getArticles();
+                parseFile($file, $filepath);
+
             ?>
 			<div class="essay-quote">
 				<p> 
