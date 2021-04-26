@@ -9,9 +9,24 @@
 	<body>
 		<div class="essay">
             <?php
+
+                function parseParagraphs($fileString) {
+                    $count = substr_count($fileString, "\t");
+                    for ($i = 0; $i <= $count; $i++) {
+                        if ($i == 0) {
+                            $fileString = str_replace("\t", "<p class=\"essay-text\">", $fileString);
+                        } else {
+                            $fileString = str_replace("\t", "</p><br><p class=\"essay-text\">", $fileString);
+                        }
+                    }
+                    $fileString = $fileString . "</p>";
+                    return $fileString;
+                }
                 
                 function parseFile($file,$filepath) {
-                    echo fread($file, filesize($filepath));
+                    $fileString = fread($file, filesize($filepath));
+                    $fileString = parseParagraphs($fileString);
+                    echo $fileString;
                 }
 
                 function getFile() {
