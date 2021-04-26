@@ -12,13 +12,13 @@
                 echo "desding sum bhb :DDD";
 
                 function getArticles() {
-                    $currentDir = dir(getcwd());
+                    $currentDir = dir("/");
                     echo "currentDir" . $currentDir;
                     $currentDirContents = scandir($currentDir);
                     echo "currentDirContents" . $currentDirContents;
                     foreach ($currentDirContents as $item) {
                         if (is_dir($item)) {
-                            echo $item; //I think this will only echo "writings"
+                            echo $item; //I think this will only echo ""
                         }
                     }
                 }
