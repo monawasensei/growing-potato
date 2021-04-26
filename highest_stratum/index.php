@@ -15,9 +15,9 @@
                     $count = substr_count($fileString, "\t");
                     for ($i = 0; $i <= $count; $i++) {
                         if ($i == 0) {
-                            $fileString = str_replace("\t", "</h1><br><p class=\"essay-text\">", $fileString);
+                            $fileString = str_replace("\t", "<br></h1><p class=\"essay-text\">", $fileString);
                         } else {
-                            $fileString = str_replace("\t", "</p><br><p class=\"essay-text\">", $fileString);
+                            $fileString = str_replace("\t", "<br></p><p class=\"essay-text\">", $fileString);
                         }
                     }
                     $fileString = $fileString . "</p>";
