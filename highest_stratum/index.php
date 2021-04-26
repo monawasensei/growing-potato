@@ -13,9 +13,9 @@
 
                 function getArticles() {
                     $currentDir = dir("/");
-                    echo "currentDir" . $currentDir;
+                    echo "currentDir" . $currentDir->handle . "<br>" . $currentDir->path . "<br>";
                     $currentDirContents = scandir($currentDir);
-                    echo "currentDirContents" . $currentDirContents;
+                    //echo "currentDirContents" . $currentDirContents;
                     foreach ($currentDirContents as $item) {
                         if (is_dir($item)) {
                             echo $item; //I think this will only echo ""
