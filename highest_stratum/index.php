@@ -24,5 +24,6 @@
                 getFile();
             ?>
 		</div>
+        <a href="?post=testParse.txt">test</a>
 	</body>
 </html> 
