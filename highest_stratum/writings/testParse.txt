@@ -1,6 +1,6 @@
 Test Parse
 
-	\tHello, I am test parse.
+	Hello, I am test parse.
 I am here to test the parsing functions on this page.
 	This should be a new paragraph.
 This should be in the same paragraph.
