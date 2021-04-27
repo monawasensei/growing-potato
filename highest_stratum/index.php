@@ -9,16 +9,22 @@
 	<body>
 		<div class="essay">
             <?php
-                function getFile() {
-                    $filename = $_GET['post'];
-                    $filepath = "writings/" . $filename;
-                    $file = fopen($filepath, "r") or die("could not open file");
-                    echo fread($file, $filepath);
+
+                function getArticles() {
+                    $directoryName = "/writings/";
+                    if (is_dir($directoryName)) {
+                        if ($directory = opendir($directoryName)) {
+                            while ($file = readdir($directory) !== false) {
+                                echo $file . "<br>";
+                            }
+                        }
+                    }
+                    closedir($directory);
                 }
 
-                getFile();
+                getArticles();
+
             ?>
 		</div>
-        <a href="?post=highestStratumExample.html">test</a>
 	</body>
 </html> 
