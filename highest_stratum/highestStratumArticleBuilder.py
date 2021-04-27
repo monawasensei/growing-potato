@@ -48,12 +48,12 @@ def parse_supp(paragraph, style = "text"):
         paragraph = re.sub(pattern["whole"], match, paragraph, 1)
     return paragraph
 
-def parse_quote(paragraph):
+def parse_quote(paragraph): #a quote should automatically make a new paragraph below it
     pattern = "\"\".*"
     allMatches = re.findall(pattern, paragraph, re.S)
     for match in allMatches:
-        match = re.sub("\"\"", "<span class=\"essay-quote\">\'", match, 1, re.S)
-        match = re.sub("\"\"", "\'</span>", match, 1, re.S)
+        match = re.sub("\"\"", "</p><div class=\"essay-quote\">\'", match, 1, re.S)
+        match = re.sub("\"\"", "\'</div><p class=\"essay-text\">", match, 1, re.S)
         match = re.sub("\n", "<br>", match, int(), re.S)
         paragraph = re.sub(pattern, match, paragraph, 1, re.S)
     return paragraph
@@ -88,7 +88,7 @@ def main():
     for para in splitFile:
         writeString = writeString + para
     writeString = finish_HTML(writeString)
-    #writeFile.write(writeString)
+    writeFile.write(writeString)
     print(writeString)
     readFile.close()
     writeFile.close()
