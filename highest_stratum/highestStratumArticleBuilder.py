@@ -64,7 +64,7 @@ def parse_paragraphs(splitFile):
         paragraph = parse_supp(paragraph)
         paragraph = parse_supp(paragraph, "image")
         paragraph = parse_quote(paragraph)
-        paragraph = "<p class=\"essay-text\">" + paragraph + "<br></p>\n"
+        paragraph = "<span class=\"tab\"></span><p class=\"essay-text\">" + paragraph + "<br></p>\n"
         splitFile[i] = paragraph
     return splitFile
 
