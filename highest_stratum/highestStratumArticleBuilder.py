@@ -11,8 +11,8 @@ def parse_title(splitFile):
 def parse_supp(paragraph, style = "text"):
     pattern = {"text": ("\(\(","\)","\)","\(\(.*\).*\)"), 
         "image": ("\[\(","\)","\]","\[\(.*\).*\]")}[style]
-    replacementText = {"text": ("<div class=\"essay-supplement-a\">","<span class=\"essay-supplement\">","</span></div>"), 
-        "image": ("<div class=\"essay-supplement-a\">","<img class=\"essay-supplement\" src=\"","\"></div>")}[style]
+    replacementText = {"text": ("<span class=\"essay-supplement-a\">","<span class=\"essay-supplement\">","</span></span>"), 
+        "image": ("<span class=\"essay-supplement-a\">","<img class=\"essay-supplement\" src=\"","\"></span>")}[style]
     allMatches = re.findall(pattern[3], paragraph)
     for match in allMatches:
         match = re.sub(pattern[0], replacementText[0], match)
@@ -25,8 +25,8 @@ def parse_quote(paragraph):
     pattern = "\"\".*"
     allMatches = re.findall(pattern, paragraph, re.S)
     for match in allMatches:
-        match = re.sub("\"\"", "<div class=\"essay-quote\"><pre>\'", match, 1, re.S)
-        match = re.sub("\"\"", "\'</pre></div>", match, 1, re.S)
+        match = re.sub("\"\"", "<span class=\"essay-quote\"><pre>\'", match, 1, re.S)
+        match = re.sub("\"\"", "\'</pre></span>", match, 1, re.S)
         paragraph = re.sub(pattern, match, paragraph, 1, re.S)
     return paragraph
 
@@ -53,7 +53,7 @@ def main():
     writeString = str()
     writeString = construct_HTML(writeString)
     readFile = open("highestStratumExample.txt", "r")
-    writeFile = open("highestStratumExample.html", "w")
+    writeFile = open("writings/highestStratumExample.html", "w")
     fileString = readFile.read()
     splitFile = split_paragraphs(fileString)
     splitFile = parse_title(splitFile)
