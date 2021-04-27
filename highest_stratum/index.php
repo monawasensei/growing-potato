@@ -8,10 +8,12 @@
 	</head>
 	<body>
 		<div class="essay">
-           <a href="writings/highestStratumExample.html" class="link-to-essay">Highest Stratum Example HTML</a>
-           <br>
-           <a href="writings/BeowulfAndGrendel.html" class="link-to-essay">Beowulf and Grendel</a>
-           <br>
+            <a href="writings/highestStratumExample.html" class="link-to-essay">Highest Stratum Example HTML</a>
+            <br>
+            <a href="highestStratumExample.txt" class="link-to-essay">Highest Stratum Example Raw Text</a>
+            <br>
+            <a href="writings/BeowulfAndGrendel.html" class="link-to-essay">Beowulf and Grendel</a>
+            <br>
 		</div>
 	</body>
 </html> 
