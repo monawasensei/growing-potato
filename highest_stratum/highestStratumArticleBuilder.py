@@ -32,7 +32,8 @@ def parse_quote(paragraph):
 
 def parse_paragraphs(splitFile):
     index = 0
-    for paragraph in splitFile: #this will also run through the title at index = 0, but that shouldn't matter.
+    for i in range(1, len(splitFile) - 1):
+        paragraph = splitFile[i]
         paragraph = parse_supp(paragraph)
         paragraph = parse_supp(paragraph, "image")
         paragraph = parse_quote(paragraph)
