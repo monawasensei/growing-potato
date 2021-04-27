@@ -1,5 +1,6 @@
-* {
-	margin: 0px;
+
+p {
+	display: inline;
 }
 
 a {
@@ -28,42 +29,28 @@ body {
 
 .essay {
 	display: box;
-	float: left;
-	position: fixed;
-	attachment: fixed;
 	left: 25%;
-	//top: 30%;
-	margin: auto;
-	margin: 5px;
-	overflow: scroll;
+	margin: 10px auto auto auto;
 	font-family: monospace;
 	background-color: #010101;
 	width: 50%;
 	max-width: 50%;
-	max-height: 100%;
 	padding: 5px;
 	border-style: ridge;
 	border-width: 2px;
 	border-color: #ffffff;
-	text-overflow: ellipsis;
 }
 
 .essay-quote {
 	font-style: italic;
-	//font-size: 1.2em;
 	text-align: center;
 	padding: 20px;
 }
 
 .essay-text {
-	//font-size: 1.4em;
 	text-align: left;
 	margin: auto;
 	word-wrap: break-word;
-}
-
-div.essay-text > p {
-	text-indent: 20px;
 }
 
 .link-to-essay {

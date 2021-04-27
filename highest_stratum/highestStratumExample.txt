@@ -1,0 +1,23 @@
+Some stuff
+
+	Here is an example on how to format a text entry for highest_stratum.
+The parser that builds an html file out of these text files ((uses regex.)it's written in python.)
+You have to use some of my own made-up formatting, so it's kind of ((stupid.)hehe)
+But with this, you can embed ((supplemental)Testing what adding a bunch of text to the far right side of the div looks like, hopefully it doesn't get pushed off the page but we will see lololololololol :DDDDDDDDDDDDDDDDDDDDDDD) text and [(images)https://holedigging.club/fanart/fanart/1577855626612.jpg] as a way to insert parenthetical statements, citations,
+or anything else you want.
+	To start a new paragraph, just tab. It doesn't even have to be a new line. I won't explain how to write parenthetical text because I'm literally ((too lazy.)will this get put on a new line?)
+test.
+	Even quotes have their own styling. You can even use new lines in them, to get them to look nicer:
+""sometimes 
+my 
+genius 
+is 
+almost 
+frightening.""
+	I haven't made a way to add a cool attribution to whoever said a quote ((yet.) but I will soon.)
+anyways. Here is another quote then another picture, to round things out:
+""egg egg, egg.
+egg egg, egg egg egg.
+egg. egg egg.""
+and [(here)https://holedigging.club/fanart/fanart/1580.jpg] is the picture.
+	[(bye bye.)https://holedigging.club/screencaps/screencaps/SS/1582911251936.jpg]
