@@ -11,7 +11,7 @@
             <?php
 
                 function getArticles() {
-                    $directoryName = "/writings/";
+                    $directoryName = "https://cool.holedigging.club/highest_stratum/writings/";
                     if (is_dir($directoryName)) {
                         if ($directory = opendir($directoryName)) {
                             while ($file = readdir($directory) !== false) {
