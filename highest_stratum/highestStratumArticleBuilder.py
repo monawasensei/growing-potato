@@ -27,6 +27,7 @@ def parse_quote(paragraph):
     for match in allMatches:
         match = re.sub("\"\"", "<span class=\"essay-quote\">\'", match, 1, re.S)
         match = re.sub("\"\"", "\'</span>", match, 1, re.S)
+        match = re.sub("\n", "<br>", match, int(), re.S)
         paragraph = re.sub(pattern, match, paragraph, 1, re.S)
     return paragraph
 
