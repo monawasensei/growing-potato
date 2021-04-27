@@ -8,24 +8,8 @@
 	</head>
 	<body>
 		<div class="essay">
-            <?php
-
-                function getArticles() {
-                    $directoryName = "https://cool.holedigging.club/highest_stratum/writings/";
-                    if (is_dir($directoryName)) {
-                        if ($directory = opendir($directoryName)) {
-                            while (($file = readdir($directory)) !== false) {
-                                echo $file . "<br>";
-                            }
-                        }
-                    }
-                    closedir($directory);
-                    echo "end getArticles()";
-                }
-
-                getArticles();
-
-            ?>
+           <a href="writings/highestStratumExample.html" class="link-to-essay">Highest Stratum Example HTML</a>
+           <a href="writings/BeowulfAndGrendel.html" class="link-to-essay">Beowulf and Grendel</a>
 		</div>
 	</body>
 </html> 
