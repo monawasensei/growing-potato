@@ -31,15 +31,13 @@ def parse_quote(paragraph):
     return paragraph
 
 def parse_paragraphs(splitFile):
-    index = 0
-    for i in range(1, len(splitFile) - 1):
+    for i in range(1, len(splitFile)):
         paragraph = splitFile[i]
         paragraph = parse_supp(paragraph)
         paragraph = parse_supp(paragraph, "image")
         paragraph = parse_quote(paragraph)
         paragraph = "<p class=\"essay-text\">" + paragraph + "<br></p>"
-        splitFile[index] = paragraph
-        index += 1
+        splitFile[i] = paragraph
     return splitFile
 
 def construct_HTML(writeString):
