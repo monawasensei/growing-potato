@@ -20,6 +20,7 @@
                         }
                     }
                     closedir($directory);
+                    echo "end getArticles()";
                 }
 
                 getArticles();
