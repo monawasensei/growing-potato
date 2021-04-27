@@ -55,6 +55,10 @@ body {
 	font-size: 1.1em;
 }
 
+.tab {
+	padding-right: 50px;
+}
+
 .link-to-essay {
 	font-style: bold;
 	font-size: 1.2em;
