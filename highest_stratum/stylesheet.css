@@ -48,9 +48,15 @@ body {
 }
 
 .essay-text {
+	line-height: 1.25;
 	text-align: left;
 	margin: auto;
 	word-wrap: break-word;
+	font-size: 1.1em;
+}
+
+.tab {
+	padding-right: 50px;
 }
 
 .link-to-essay {
