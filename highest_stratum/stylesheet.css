@@ -2,6 +2,10 @@
 	margin: 0px;
 }
 
+p {
+	display: inline;
+}
+
 a {
 	text-decoration: none;
 }	
@@ -32,7 +36,6 @@ body {
 	position: fixed;
 	attachment: fixed;
 	left: 25%;
-	//top: 30%;
 	margin: auto;
 	margin: 5px;
 	overflow: scroll;
@@ -50,13 +53,11 @@ body {
 
 .essay-quote {
 	font-style: italic;
-	//font-size: 1.2em;
 	text-align: center;
 	padding: 20px;
 }
 
 .essay-text {
-	//font-size: 1.4em;
 	text-align: left;
 	margin: auto;
 	word-wrap: break-word;
