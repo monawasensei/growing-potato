@@ -6,7 +6,7 @@ def split_paragraphs(fileString):
 
 def parse_title(splitFile):
     splitFile[0] = "<h1 style=\"text-align: center\">" + splitFile[0]
-    splitFile[0] = re.sub("\n\n", "<br></h1>", splitFile[0])
+    splitFile[0] = re.sub("\n\n", "</h1>", splitFile[0])
     return splitFile
 
 def parse_supp(paragraph, style = "text"):
@@ -49,8 +49,9 @@ def parse_supp(paragraph, style = "text"):
     return paragraph
 
 def parse_quote(paragraph): #a quote should automatically make a new paragraph below it
-    pattern = "\"\".*"
+    pattern = "\"\".*\"\""
     allMatches = re.findall(pattern, paragraph, re.S)
+    print(allMatches)
     for match in allMatches:
         match = re.sub("\"\"", "</p><div class=\"essay-quote\">\'", match, 1, re.S)
         match = re.sub("\"\"", "\'</div><p class=\"essay-text\">", match, 1, re.S)
@@ -76,6 +77,12 @@ def finish_HTML(writeString):
     writeString = writeString + "</div>\n</div>\n</body>\n</html>"
     return writeString
 
+def remove_patterns(documentString, patterns = ["<p class=\"essay-text\">\n<br></p>"]):
+    for pattern in patterns:
+        allMatches = re.findall(pattern, documentString, re.S)
+        documentString = re.sub(pattern, "", documentString, int(), re.S)
+    return documentString
+
 def main():
     writeString = str()
     writeString = construct_HTML(writeString)
@@ -88,8 +95,9 @@ def main():
     for para in splitFile:
         writeString = writeString + para
     writeString = finish_HTML(writeString)
-    writeFile.write(writeString)
+    writeString = remove_patterns(writeString)
     print(writeString)
+    writeFile.write(writeString)
     readFile.close()
     writeFile.close()
 
