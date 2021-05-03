@@ -8,6 +8,8 @@
 	</head>
 	<body>
 		<div class="essay">
+			<a href="writings/EggEssay.html" class="link-to-essay">Salmon's Essay on Egg</a>
+            <br>
             <a href="writings/highestStratumExample.html" class="link-to-essay">Highest Stratum Example HTML</a>
             <br>
             <a href="highestStratumExample.txt" class="link-to-essay">Highest Stratum Example Raw Text</a>
