@@ -16,6 +16,8 @@
             <br>
 			<a href="writings/imabokuwa.html" class="link-to-essay">Shidbosd :DD</a>
             <br>
+			<a href="writings/shinitaina.html" class="link-to-essay">Yelling is good for you.</a>
+            <br>
 		</div>
 	</body>
 </html> 
