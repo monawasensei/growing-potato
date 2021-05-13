@@ -16,6 +16,8 @@
             <br>
             <a href="writings/BeowulfAndGrendel.html" class="link-to-essay">Beowulf and Grendel</a>
             <br>
+			<a href="writings/imabokuwa.html" class="link-to-essay">Shidbosd :DD</a>
+            <br>
 		</div>
 	</body>
 </html> 

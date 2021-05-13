@@ -1,6 +1,8 @@
 import re
 import os
 
+FILENAME = "imabokuwa"
+
 def split_paragraphs(fileString):
     return fileString.split("\t")
 
@@ -86,8 +88,8 @@ def remove_patterns(documentString, patterns = ["<p class=\"essay-text\">\n<br><
 def main():
     writeString = str()
     writeString = construct_HTML(writeString)
-    readFile = open("highest_stratum/highestStratumExample.txt", "r")
-    writeFile = open("highest_stratum/writings/highestStratumExample.html", "w")
+    readFile = open(FILENAME + ".txt", "r")
+    writeFile = open("writings/" + FILENAME + ".html", "w")
     fileString = readFile.read()
     splitFile = split_paragraphs(fileString)
     splitFile = parse_title(splitFile)
