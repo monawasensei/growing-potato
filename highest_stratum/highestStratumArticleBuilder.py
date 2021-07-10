@@ -1,7 +1,6 @@
 import re
 import os
-
-FILENAME = "imabokuwa"
+FILENAME = "random_adventure" #Without extension
 
 def split_paragraphs(fileString):
     return fileString.split("\t")
@@ -88,8 +87,8 @@ def remove_patterns(documentString, patterns = ["<p class=\"essay-text\">\n<br><
 def main():
     writeString = str()
     writeString = construct_HTML(writeString)
-    readFile = open(FILENAME + ".txt", "r")
-    writeFile = open("writings/" + FILENAME + ".html", "w")
+    readFile = open("G:\\growing-potato\\highest_stratum\\" + FILENAME + ".txt", "r")
+    writeFile = open("G:\\growing-potato\\highest_stratum\\"+ "writings/" + FILENAME + ".html", "w")
     fileString = readFile.read()
     splitFile = split_paragraphs(fileString)
     splitFile = parse_title(splitFile)
