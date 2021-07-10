@@ -8,18 +8,20 @@
 	</head>
 	<body>
 		<div class="essay">
+      <a href="writings/random_adventure.html" class="link-to-essay">Darkf's Random Adventure</a>
+			<br>
 			<a href="writings/EggEssay.html" class="link-to-essay">Salmon's Essay on Egg</a>
-            <br>
-            <a href="writings/highestStratumExample.html" class="link-to-essay">Highest Stratum Example HTML</a>
-            <br>
-            <a href="highestStratumExample.txt" class="link-to-essay">Highest Stratum Example Raw Text</a>
-            <br>
-            <a href="writings/BeowulfAndGrendel.html" class="link-to-essay">Beowulf and Grendel</a>
-            <br>
-			<a href="writings/imabokuwa.html" class="link-to-essay">Shidbosd :DD</a>
-            <br>
-			<a href="writings/shinitaina.html" class="link-to-essay">Yelling is good for you.</a>
-            <br>
+			<br>
+      <a href="writings/highestStratumExample.html" class="link-to-essay">Highest Stratum Example HTML</a>
+      <br>
+      <a href="highestStratumExample.txt" class="link-to-essay">Highest Stratum Example Raw Text</a>
+      <br>
+      <a href="writings/BeowulfAndGrendel.html" class="link-to-essay">Beowulf and Grendel</a>
+      <br>
+<a href="writings/imabokuwa.html" class="link-to-essay">Shidbosd :DD</a>
+      <br>
+<a href="writings/shinitaina.html" class="link-to-essay">Yelling is good for you.</a>
+      <br>
 		</div>
 	</body>
 </html> 
