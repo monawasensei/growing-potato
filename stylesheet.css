@@ -124,7 +124,6 @@ a {
 
 .entry-title:hover {
   color: black;
-  transition: color 0.15s ease-in;
 }
 
 .contents-entry:hover .entry-title {
