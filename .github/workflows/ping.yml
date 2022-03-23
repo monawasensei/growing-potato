@@ -19,5 +19,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: ping droplet server
-        run: ssh monawadeploy@${DROPLET_IP} echo "ping"
+        run: ssh monawadeploy@${{ secrets.DROPLET_IP }} echo "ping"
 
