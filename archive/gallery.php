@@ -17,25 +17,24 @@
 				}
 			}
 			if ($isvalid != 1) {
-					echo("very naughty");
+					echo "very naughty";
 					exit;
 			}
 			$sql = "";
 			$result = pg_query($conn, $sql);
 			if (! $result) {
-				echo("An error occurred.\n", pg_last_error());
+				echo "An error occurred.\n" . pg_last_error();
 				exit;
 			}
 			$rows = pg_fetch_all($result);
 			if (empty($rows)) {
-				echo("0 results.\n");
+				echo "0 results.\n";
 				exit;
 			}
 			foreach ($rows as $row) {
 				$imageRelPath = $row["image_rel_path"];
 				$thumbnailRelPath = $row["thumbnail_rel_path"];
-				echo("<a href=\"${imageRelPath}\" target=\"_blank\"> <image src=\"${thumbnailRelPath}\"></a>");
-				echo("<br>"); //I don't really know why this is here tbh.
+				echo "<a href=\"${imageRelPath}\" target=\"_blank\"> <image src=\"${thumbnailRelPath}\"></a>" . "<br>";
 			}
 		?>
 	</div>
