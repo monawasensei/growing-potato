@@ -7,45 +7,36 @@
 <body>
 	<div>
 		<?php
-
-			$conn = new mysqli("monawasensei56192.domaincommysql.com", "tuber", "Test123!@#","potato_database"); 
-			if ($conn->connect_error) { 
-				die('Could not connect: ' . $conn->connect_error); 
-			}
-
-			$possibledirectory = array("artbook","colours","edits","pics","fanart","misc","screencaps"); //making this array to check that the querystring is not some malicious attempt at SQL code insertion
-
-			$directory = $_GET['directory']; //will hopefully pull the querystring
-
+			$conn = pg_connect("host=localhost dbname=holediggingsql user={$getenv("GALLERY_USER")} password={$getenv("GALLERY_PASSWORD")}")
+				or die("Could not connect: " . pg_last_error() );
+			$possibledirectory = array("artbook","colours","edits","pics","fanart","misc","screencaps");
+			$directory = $_GET['directory'];
 			foreach ($possibledirectory as $potential) {
-
 				if ($directory == "$potential") {
 						$isvalid = 1;
 				}
-
 			}
-
 			if ($isvalid != 1) {
-					echo "very naughty";
+					echo("very naughty");
 					exit;
 			}
-
-			$sql = "SELECT CONCAT('https://holedigging.club/',uniquepath) as 'image',CASE WHEN filetype='gif' THEN CONCAT('https://holedigging.club/',uniquepath) ELSE CONCAT('https://holedigging.club/thumbnails/',subdirectory,filename,'.th.jpg') END as 'thumbnail' from archive_rebuild WHERE origin = '" . $directory. "' AND filetype != 'webm' AND filetype != 'mp4';";
-			$result = $conn->query($sql);
-
-			if ($result->num_rows > 0) {
-				while($row = $result->fetch_assoc()) {
-					$image = $row["image"];
-					$thumbnail = $row["thumbnail"];
-					echo "<a href=\"${image}\" target=\"_blank\"> <image src=\"${thumbnail}\"></a>";
-				"<br>";
-				}
+			$sql = "";
+			$result = pg_query($conn, $sql);
+			if (! $result) {
+				echo("An error occurred.\n", pg_last_error());
+				exit;
 			}
-
-			else {
-				echo "\n0 results";
+			$rows = pg_fetch_all($result);
+			if (empty($rows)) {
+				echo("0 results.\n");
+				exit;
 			}
-
+			foreach ($rows as $row) {
+				$imageRelPath = $row["image_rel_path"];
+				$thumbnailRelPath = $row["thumbnail_rel_path"];
+				echo("<a href=\"${imageRelPath}\" target=\"_blank\"> <image src=\"${thumbnailRelPath}\"></a>");
+				echo("<br>"); //I don't really know why this is here tbh.
+			}
 		?>
 	</div>
 
