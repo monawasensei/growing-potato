@@ -119,11 +119,7 @@ a {
 .entry-title {
   font-family: ralewayBold;
   letter-spacing: 0.2rem;
-  transition: letter-spacing 0.15s ease-in, color 0.15s ease-in;
-}
-
-.entry-title:hover {
-  color: black;
+  transition: letter-spacing 0.15s ease-in;
 }
 
 .contents-entry:hover .entry-title {
