@@ -20,7 +20,7 @@
 					echo "very naughty";
 					exit;
 			}
-			$sql = "SELECT image_path, thumbnail_path FROM archive WHERE image_path LIKE '%archive/images/${directory}/%' ORDER BY image_path";
+			$sql = "SELECT image_path, thumbnail_path FROM archive WHERE image_path LIKE '%/images/${directory}/%' ORDER BY image_path";
 			$result = $sqlite->query($sql);
 			if (! $result) {
 				echo "0 results returned from query";
