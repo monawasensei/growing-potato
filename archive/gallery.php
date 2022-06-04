@@ -28,7 +28,7 @@
 			while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 				$imagePath = $row["image_path"];
 				$thumbnailPath = $row["thumbnail_path"];
-				echo "<a href=\"/archive/${imagePath}\" target=\"_blank\"> <image src=\"/archive/${thumbnailPath}\"></a>" . "<br>";
+				echo "<a href=\"/archive/${imagePath}\" target=\"_blank\"> <image src=\"/archive/${thumbnailPath}\"></a>";
 			}
 			$sqlite->close();
 		?>
