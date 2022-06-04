@@ -7,10 +7,8 @@
 <body>
 	<div>
 		<?php
-			$sqlite = new SQLite3("gallery.db")
+			$sqlite = new SQLite3("archive.db")
 				or die("Could not connect: " . $sqlite->lastErrorMsg());
-			// $conn = pg_connect("host=localhost dbname=holediggingsql user={$getenv("GALLERY_USER")} password={$getenv("GALLERY_PASSWORD")}")
-			// 	or die("Could not connect: " . pg_last_error() );
 			$possibledirectory = array("artbook","colours","edits","pics","fanart","misc","screencaps");
 			$directory = $_GET['directory'];
 			foreach ($possibledirectory as $potential) {
@@ -22,33 +20,18 @@
 					echo "very naughty";
 					exit;
 			}
-			$sql = "SELECT * FROM archive";
+			$sql = "SELECT image_path, thumbnail_path FROM archive WHERE image_path LIKE '%archive/images/${directory}/%' ORDER BY image_path";
 			$result = $sqlite->query($sql);
-			while ($row = $result->fetchArray()) {
-				var_dump($row);
+			if (! $result) {
+				echo "0 results returned from query";
 			}
-			// if (! $result) {
-			// 	echo "An error occurred.\n" . $sqlite->lastErrorMsg();
-			// 	exit;
-			// }
-			// $rows = pg_fetch_all($result);
-			// if (empty($rows)) {
-			// 	echo "0 results.\n";
-			// 	exit;
-			// }
-			// foreach ($rows as $row) {
-			// 	$imageRelPath = $row["image_rel_path"];
-			// 	$thumbnailRelPath = $row["thumbnail_rel_path"];
-			// 	echo "<a href=\"${imageRelPath}\" target=\"_blank\"> <image src=\"${thumbnailRelPath}\"></a>" . "<br>";
-			// }
+			while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+				$imagePath = $row["image_path"];
+				$thumbnailPath = $row["thumbnail_path"];
+				echo "<a href=\"${imagePath}\" target=\"_blank\"> <image src=\"${thumbnailPath}\"></a>" . "<br>";
+			}
 			$sqlite->close();
 		?>
-	</div>
-
-	<div id = "imageDiv">
-	</div>
-
-	<div id = "loadMoreDiv">
 	</div>
 </body>
 </html>
