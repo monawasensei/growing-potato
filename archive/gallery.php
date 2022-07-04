@@ -13,11 +13,11 @@
     <?php
       $defaultImagesPerPage = 15;
       $validDirectories = array("artbook", "colours", "edits", "pics", "fanart", "misc", "screencaps");
-			$directory = $_POST['directory'] ?? $_GET['directory'];
+      $directory = $_POST['directory'] ?? $_GET['directory'];
 
       if (!in_array($directory, $validDirectories)) {
         $directory = $validDirectories[0];
-			}
+      }
 
       $pdo  = new PDO('sqlite:archive.db') or die("cannot open the database");
 
@@ -72,7 +72,7 @@
       if ($rows) {
         foreach ($rows as $row) {
           $imagePath = $row["image_path"];
-					$thumbnailPath = $row["thumbnail_path"];
+          $thumbnailPath = $row["thumbnail_path"];
           echo "<a class=\"image-link\" href=\"archive/${imagePath}\" target=\"_blank\"> <img src=\"archive/${thumbnailPath}\"> </a>";
         }
       } else {
